@@ -236,14 +236,6 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
     }//GEN-LAST:event_estadoTextActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        /** Long id = Long.parseLong(jTextField1.getText());
-        String nombre = jTextField2.getText();
-        String placa = jTextField3.getText();
-        String estado = jTextField4.getText();
-        Carrosolar car = new Carrosolar(id, nombre, placa, estado);
-        * //JOptionPane.showMessageDialog(null, "Guardado!!");
-        */
         try {
            conn=Primavera.Enlace(conn);
            String sqlinsertar="insert into CARROSOLAR values (?,?,?,?)";

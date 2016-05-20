@@ -64,14 +64,14 @@
                           </Group>
                           <EmptySpace pref="101" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTextField24" alignment="1" min="-2" pref="208" max="-2" attributes="0"/>
-                              <Component id="jTextField29" alignment="1" min="-2" pref="208" max="-2" attributes="0"/>
-                              <Component id="jTextField28" alignment="1" min="-2" pref="208" max="-2" attributes="0"/>
+                              <Component id="tasaTxt" alignment="1" min="-2" pref="208" max="-2" attributes="0"/>
+                              <Component id="cantidadTxt" alignment="1" min="-2" pref="208" max="-2" attributes="0"/>
+                              <Component id="cantidadCopTxt" alignment="1" min="-2" pref="208" max="-2" attributes="0"/>
                               <Component id="divisaCb" alignment="1" min="-2" pref="208" max="-2" attributes="0"/>
                               <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="carroCb" alignment="1" pref="208" max="32767" attributes="0"/>
                                   <Component id="patrocinadorCb" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="jTextField22" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="idTxt" alignment="1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace pref="34" max="32767" attributes="0"/>
@@ -86,15 +86,15 @@
                                           <EmptySpace min="-2" pref="164" max="-2" attributes="0"/>
                                           <Component id="jLabel37" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jTextField27" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="diaTxt" min="-2" pref="30" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="jLabel39" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jTextField26" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="mesTxt" min="-2" pref="30" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                           <Component id="jLabel40" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jTextField25" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="anoTxt" min="-2" pref="30" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <Component id="jButton18" min="-2" pref="106" max="-2" attributes="0"/>
@@ -138,7 +138,7 @@
                           <Component id="jLabel36" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="jTextField22" min="-2" max="-2" attributes="0"/>
+                          <Component id="idTxt" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                           <Component id="patrocinadorCb" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -156,25 +156,25 @@
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField29" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cantidadTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField24" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tasaTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField28" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cantidadCopTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField25" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField26" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField27" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="anoTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="mesTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="diaTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel40" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -254,6 +254,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Crear"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton18ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton19">
           <Properties>
@@ -274,18 +277,18 @@
             <Property name="text" type="java.lang.String" value="Cantidad Original"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField22">
+        <Component class="javax.swing.JTextField" name="idTxt">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField22jTextField1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="idTxtjTextField1ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField24">
+        <Component class="javax.swing.JTextField" name="tasaTxt">
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField25">
+        <Component class="javax.swing.JTextField" name="anoTxt">
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField26">
+        <Component class="javax.swing.JTextField" name="mesTxt">
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField27">
+        <Component class="javax.swing.JTextField" name="diaTxt">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel38">
           <Properties>
@@ -335,9 +338,9 @@
             <Property name="text" type="java.lang.String" value="Fecha"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField28">
+        <Component class="javax.swing.JTextField" name="cantidadCopTxt">
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField29">
+        <Component class="javax.swing.JTextField" name="cantidadTxt">
         </Component>
         <Component class="javax.swing.JComboBox" name="patrocinadorCb">
           <Properties>
