@@ -5,18 +5,19 @@
  */
 package Graphic;
 
+import java.awt.Color;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import primavera.*;
-
-
 
 /**
  *
  * @author Daniel
  */
 public class GestionarCarroSolar extends javax.swing.JFrame {
-    static Connection conn=null;
+
+    static Connection conn = null;
+
     /**
      * Creates new form GestionarCarroSolar
      */
@@ -25,6 +26,8 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--GESTIONAR CARRO SOLAR--");
+        crearButton.setEnabled(false);
+        modificarButton.setEnabled(false);
     }
 
     /**
@@ -44,8 +47,8 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         cancelarButton = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        crearButton = new javax.swing.JButton();
+        modificarButton = new javax.swing.JButton();
         idText = new javax.swing.JTextField();
         nombreText = new javax.swing.JTextField();
         placaText = new javax.swing.JTextField();
@@ -79,23 +82,26 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton4.setText("Crear");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        crearButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        crearButton.setText("Crear");
+        crearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                crearButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton3.setText("Modificar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        modificarButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        modificarButton.setText("Modificar");
+        modificarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                modificarButtonActionPerformed(evt);
             }
         });
 
         idText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                idTextFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 idTextFocusLost(evt);
             }
@@ -146,9 +152,9 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
                                     .addComponent(estadoText, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(idText, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(crearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(modificarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(21, 21, 21))
@@ -184,8 +190,8 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelarButton)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(crearButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(modificarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(16, 16, 16))
         );
 
@@ -215,9 +221,17 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_cancelarButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
+        if(estadoText.getText().toUpperCase().equals("ACTIVO")|
+                estadoText.getText().toUpperCase().equals("INACTIVO")){
+            Primavera.update("carrosolar", "nombre_carro", nombreText.getText(), "id_carro", idText.getText());
+            Primavera.update("carrosolar", "placa_carro", placaText.getText(), "id_carro", idText.getText());
+            Primavera.update("carrosolar", "estado_carro", estadoText.getText(), "id_carro", idText.getText());
+            JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
+        }else{
+            JOptionPane.showMessageDialog(null, "Estado debe ser: ACTIVO o INACTIVO");
+        }
+    }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void idTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextActionPerformed
         // TODO add your handling code here:
@@ -235,33 +249,65 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_estadoTextActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
+        if(idText.getText().equals("") | nombreText.getText().equals("")|
+                placaText.getText().equals("") | estadoText.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Por favor completa todas las casillas");
+        }else{
         try {
-           conn=Primavera.Enlace(conn);
-           String sqlinsertar="insert into CARROSOLAR values (?,?,?,?)";
-           PreparedStatement psta=conn.prepareStatement(sqlinsertar);
-           psta.setString(1, idText.getText());
-           psta.setString(2, nombreText.getText());
-           psta.setString(3, placaText.getText());
-           psta.setString(4, estadoText.getText());
-           psta.execute();
-           psta.close();
-           idText.setText("");
-           nombreText.setText("");
-           placaText.setText("");
-           estadoText.setText("");
-           JOptionPane.showMessageDialog(null, "Registro Guardado Satisfactoriamente");
-        }catch (Exception e){
+            conn = Primavera.Enlace(conn);
+            String sqlinsertar = "insert into CARROSOLAR values (?,?,?,?)";
+            PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+            psta.setString(1, idText.getText());
+            psta.setString(2, nombreText.getText());
+            psta.setString(3, placaText.getText());
+            psta.setString(4, estadoText.getText());
+            psta.execute();
+            psta.close();
+            idText.setText("");
+            nombreText.setText("");
+            placaText.setText("");
+            estadoText.setText("");
+            idText.requestFocusInWindow();
+            JOptionPane.showMessageDialog(null, "Registro guardado satisfactoriamente");
+        } catch (Exception e) {
             System.out.println(e);
         }
-
-        
-       
-    }//GEN-LAST:event_jButton4ActionPerformed
+        }
+    }//GEN-LAST:event_crearButtonActionPerformed
 
     private void idTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusLost
-        System.out.println("Buscando..");
+        if (idText.getText().equals("")) {
+            idText.requestFocusInWindow();
+        } else {
+            try {
+                ResultSet result = Primavera.selectAllFrom("carrosolar", "id_carro", idText.getText());
+
+                if (result != null && result.next()) {
+                    nombreText.setText(result.getString(2));
+                    placaText.setText(result.getString(3));
+                    estadoText.setText(result.getString(4));
+                    idText.setBackground(Color.GRAY);
+                    modificarButton.setEnabled(true);
+                    estadoText.setEnabled(true);
+                    crearButton.setEnabled(false);
+                } else {
+                    nombreText.setText("");
+                    placaText.setText("");
+                    estadoText.setText("ACTIVO");
+                    estadoText.setEnabled(false);
+                    modificarButton.setEnabled(false);
+                    crearButton.setEnabled(true);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
     }//GEN-LAST:event_idTextFocusLost
+
+    private void idTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusGained
+        idText.setBackground(Color.WHITE);
+    }//GEN-LAST:event_idTextFocusGained
 
     /**
      * @param args the command line arguments
@@ -300,10 +346,9 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelarButton;
+    private javax.swing.JButton crearButton;
     private javax.swing.JTextField estadoText;
     private javax.swing.JTextField idText;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -311,6 +356,7 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton modificarButton;
     private javax.swing.JTextField nombreText;
     private javax.swing.JTextField placaText;
     // End of variables declaration//GEN-END:variables

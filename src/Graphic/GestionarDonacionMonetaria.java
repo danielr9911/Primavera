@@ -343,14 +343,6 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
            //String date = "to_date('"+diaTxt.getText()+"/"+mesTxt.getText()+"/"+anoTxt.getText()+"','DD/MM/RR')";
            String date = diaTxt.getText()+"/"+mesTxt.getText()+"/"+anoTxt.getText();
            psta.setString(5, date);
-           System.out.println(idTxt.getText());
-           System.out.println(patr);
-           System.out.println(car);
-           System.out.println(cantidadTxt.getText());
-           System.out.println(div);
-           System.out.println(date);
-           System.out.println(tasaTxt.getText());
-           System.out.println(cantidadCopTxt.getText());
            psta.execute();
            psta.close();
            idTxt.setText("");

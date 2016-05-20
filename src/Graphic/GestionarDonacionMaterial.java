@@ -307,16 +307,25 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
            conn=Primavera.Enlace(conn);
-           String sqlinsertar="insert into CARROSOLAR values (?,?,?,?)";
+           String sqlinsertar="insert into Donacion_Material values (?,?,?,?,to_date(?,'DD/MM/RR'),?)";
            PreparedStatement psta=conn.prepareStatement(sqlinsertar);
            psta.setString(1, idText.getText());
            String patr = Primavera.getId("id_patrocinador", "nombre_patr","patrocinador",patrocinadorComboBox.getSelectedItem().toString());
            psta.setString(2, patr);
-           
+           String subs = Primavera.getId("id_subsistema", "nombre_subs","subsistema",subsistemaComboBox.getSelectedItem().toString());
+           psta.setString(3, subs);
+           String mat = Primavera.getId("id_material", "nombre_material","material",materialComboBox.getSelectedItem().toString());
+           psta.setString(6, mat);
+           String date = diaText.getText()+"/"+mesText.getText()+"/"+anoText.getText();
+           psta.setString(5, date);
+           psta.setString(4,cantidadText.getText());
            psta.execute();
            psta.close();
            idText.setText("");
-           
+           cantidadText.setText("");
+           diaText.setText("");
+           mesText.setText("");
+           anoText.setText("");
            JOptionPane.showMessageDialog(null, "Registro Guardado Satisfactoriamente");
         }catch (Exception e){
             System.out.println(e);
