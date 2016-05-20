@@ -69,7 +69,7 @@ public class Primavera {
     
     public static ResultSet selectAllFrom(String tabla,String campoId, String id ){
         String consulta = "select * from "+tabla+" where "+campoId+" = ?";
-        System.out.println(consulta);
+        //System.out.println(consulta);
         try {
            conn=Primavera.Enlace(conn);
            String sqlinsertar=consulta;

@@ -5,11 +5,23 @@
  */
 package Graphic;
 
+import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import primavera.Primavera;
+
 /**
  *
  * @author Daniel
  */
 public class ConsultaPorProfesion extends javax.swing.JFrame {
+    
+    Connection conn = null;
+    DefaultTableModel modelo = new DefaultTableModel();
 
     /**
      * Creates new form ConsultaPorProfesion
@@ -19,6 +31,18 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--CONSULTA POR PROFESION--");
+        this.tablaAMostrar.setModel(modelo);
+        try {
+            conn = Primavera.Enlace(conn);
+            String sqlinsertar = "select nombre_profesion from profesion";
+            PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+            ResultSet rs = psta.executeQuery();
+            while (rs.next()) {
+                profesionCb.addItem(rs.getString(1));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     /**
@@ -36,14 +60,14 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        todosButton = new javax.swing.JButton();
+        profesoresButton = new javax.swing.JButton();
+        estudiantesButton = new javax.swing.JButton();
+        externosButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jButton7 = new javax.swing.JButton();
+        tablaAMostrar = new javax.swing.JTable();
+        cancelarButton = new javax.swing.JButton();
+        profesionCb = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -69,68 +93,45 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel3.setText("Profesión");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        todosButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        todosButton.setText("Todos");
+        todosButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                todosButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton3.setText("Todos");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        profesoresButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        profesoresButton.setText("Profesores");
+        profesoresButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                profesoresButtonActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton4.setText("Profesores");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        estudiantesButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        estudiantesButton.setText("Estudiantes");
+        estudiantesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                estudiantesButtonActionPerformed(evt);
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton5.setText("Estudiantes");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        externosButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        externosButton.setText("Externos");
+        externosButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                externosButtonActionPerformed(evt);
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton6.setText("Externos");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
+        jScrollPane3.setViewportView(tablaAMostrar);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Identificación", "Nombre", "Telefono", "Correo", "Estado", "Subsistema", "Tipo"
-            }
-        ));
-        jScrollPane3.setViewportView(jTable2);
-
-        jButton7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton7.setText("Cancelar");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        cancelarButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        cancelarButton.setText("Cancelar");
+        cancelarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                cancelarButtonActionPerformed(evt);
             }
         });
 
@@ -148,15 +149,15 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(100, 100, 100)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(todosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(profesoresButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(estudiantesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(externosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 92, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -166,7 +167,7 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(161, 161, 161)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(profesionCb, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -175,17 +176,17 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(profesionCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7))
+                    .addComponent(todosButton)
+                    .addComponent(profesoresButton)
+                    .addComponent(estudiantesButton)
+                    .addComponent(externosButton)
+                    .addComponent(cancelarButton))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(298, 298, 298))
@@ -211,31 +212,75 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    private void todosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todosButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        if (profesionCb.getSelectedItem().toString().equals("")) {
+            profesionCb.requestFocusInWindow();
+        } else {
+            try {
+                conn = Primavera.Enlace(conn);
+                String id = Primavera.getId("id_profesion", "nombre_profesion", "Profesion", profesionCb.getSelectedItem().toString());
+                System.out.println(id);
+                ResultSet rs = Primavera.selectAllFrom("personal", "id_profesion", id);
+                ResultSetMetaData rsMd = rs.getMetaData();
+                // Se obtiene el número de columnas.
+                int numeroColumnas = rsMd.getColumnCount();
+                DefaultTableModel modelo = new DefaultTableModel();
+                modelo.addColumn("Identificacion");
+                modelo.addColumn("Nombre");
+                modelo.addColumn("Telefono");
+                modelo.addColumn("Correo");
+                modelo.addColumn("Estado");
+                modelo.addColumn("Subsistema");
+                modelo.addColumn("Tipo");
+                while (rs.next()) {
+                    System.out.println("Entro");
+                    String[] fila = new String[numeroColumnas];
+                    for (int i = 0; i < numeroColumnas; i++) {
+                        fila[i] = rs.getString(i + 1);
+                    }
+                    modelo.addRow(fila);
+                }
+                rs.close();
+                conn.close();
+                this.tablaAMostrar.setModel(modelo);
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+                /**
+                 * if (result != null && result.next()) {
+                 * nombreText.setText(result.getString(2));
+                 * placaText.setText(result.getString(3));
+                 * estadoText.setText(result.getString(4));
+                 * idText.setBackground(Color.GRAY);
+                 * modificarButton.setEnabled(true);
+                 * estadoText.setEnabled(true); crearButton.setEnabled(false); }
+                 * else { nombreText.setText(""); placaText.setText("");
+                 * estadoText.setText("ACTIVO"); estadoText.setEnabled(false);
+                 * modificarButton.setEnabled(false);
+                 * crearButton.setEnabled(true); }
+                 */
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_todosButtonActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void profesoresButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profesoresButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_profesoresButtonActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void estudiantesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estudiantesButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_estudiantesButtonActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void externosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_externosButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_externosButtonActionPerformed
+
+    private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
         MenuPrincipal vent = new MenuPrincipal();
         vent.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_cancelarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,11 +318,9 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton cancelarButton;
+    private javax.swing.JButton estudiantesButton;
+    private javax.swing.JButton externosButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -285,7 +328,9 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JComboBox<String> profesionCb;
+    private javax.swing.JButton profesoresButton;
+    private javax.swing.JTable tablaAMostrar;
+    private javax.swing.JButton todosButton;
     // End of variables declaration//GEN-END:variables
 }
