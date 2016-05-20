@@ -328,7 +328,7 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         try {
            conn=Primavera.Enlace(conn);
-           String sqlinsertar="insert into Donacion_monetaria values (?,?,?,?,?,?,?,?)";
+           String sqlinsertar="insert into Donacion_monetaria values (?,?,?,?,to_date(?,'DD/MM/RR'),?,?,?)";
            PreparedStatement psta=conn.prepareStatement(sqlinsertar);
            psta.setString(1, idTxt.getText());
            String patr = Primavera.getId("id_patrocinador","nombre_patr","patrocinador",patrocinadorCb.getSelectedItem().toString());
@@ -336,12 +336,21 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
            String car = Primavera.getId("id_carro","nombre_carro","carrosolar",carroCb.getSelectedItem().toString());
            psta.setString(3, car);
            String div = Primavera.getId("id_tipomoneda","nombre_tipomoneda","tipo_moneda",divisaCb.getSelectedItem().toString());
-           psta.setString(5, div);
+           psta.setString(6, div);
            psta.setString(4, cantidadTxt.getText());
            psta.setString(7, tasaTxt.getText());
            psta.setString(8, cantidadCopTxt.getText());
-           String date = "to_date("+diaTxt.getText()+"/"+mesTxt.getText()+"/"+anoTxt.getText()+",'DD/MM/RR')";
-           psta.setString(6, date);
+           //String date = "to_date('"+diaTxt.getText()+"/"+mesTxt.getText()+"/"+anoTxt.getText()+"','DD/MM/RR')";
+           String date = diaTxt.getText()+"/"+mesTxt.getText()+"/"+anoTxt.getText();
+           psta.setString(5, date);
+           System.out.println(idTxt.getText());
+           System.out.println(patr);
+           System.out.println(car);
+           System.out.println(cantidadTxt.getText());
+           System.out.println(div);
+           System.out.println(date);
+           System.out.println(tasaTxt.getText());
+           System.out.println(cantidadCopTxt.getText());
            psta.execute();
            psta.close();
            idTxt.setText("");

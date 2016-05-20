@@ -74,8 +74,8 @@
                               <Component id="idText" alignment="0" max="32767" attributes="0"/>
                               <Component id="NombreText" alignment="0" max="32767" attributes="0"/>
                               <Component id="EstadoText" alignment="0" max="32767" attributes="0"/>
-                              <Component id="CarroComboBox" alignment="0" max="32767" attributes="0"/>
-                              <Component id="LabComboBox" alignment="0" pref="188" max="32767" attributes="0"/>
+                              <Component id="carroComboBox" alignment="0" max="32767" attributes="0"/>
+                              <Component id="labComboBox" alignment="0" pref="188" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -104,7 +104,7 @@
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel36" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="CarroComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="carroComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -114,7 +114,7 @@
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="LabComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -229,32 +229,20 @@
         </Component>
         <Component class="javax.swing.JTextField" name="EstadoText">
         </Component>
-        <Component class="javax.swing.JComboBox" name="CarroComboBox">
+        <Component class="javax.swing.JComboBox" name="carroComboBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="--SELECCIONAR--"/>
-                <StringItem index="1" value="PRIMAVERA 1"/>
-                <StringItem index="2" value="PRIMAVERA 2"/>
-                <StringItem index="3" value="PRIMAVERA 3"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="LabComboBox">
+        <Component class="javax.swing.JComboBox" name="labComboBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="6">
-                <StringItem index="0" value="--SELECCIONAR--"/>
-                <StringItem index="1" value="MATERIALES"/>
-                <StringItem index="2" value="MADERA"/>
-                <StringItem index="3" value="ELECTRONICA"/>
-                <StringItem index="4" value="SOLDADURA"/>
-                <StringItem index="5" value="INFORMATICA"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
