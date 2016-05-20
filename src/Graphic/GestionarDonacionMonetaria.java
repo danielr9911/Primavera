@@ -146,7 +146,7 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
         jLabel39.setText("MM");
 
         jLabel40.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel40.setText("AAAA");
+        jLabel40.setText("AA");
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel11.setText("Tasa de cambio");
@@ -211,7 +211,7 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
                                         .addComponent(mesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(12, 12, 12)
                                         .addComponent(jLabel40)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGap(27, 27, 27)
                                         .addComponent(anoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -336,17 +336,21 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
            String car = Primavera.getId("id_carro","nombre_carro","carrosolar",carroCb.getSelectedItem().toString());
            psta.setString(3, car);
            String div = Primavera.getId("id_tipomoneda","nombre_tipomoneda","tipo_moneda",divisaCb.getSelectedItem().toString());
-           psta.setString(4, div);
-           psta.setString(5, cantidadTxt.getText());
-           psta.setString(6, idTxt.getText());
-           psta.setString(7, idTxt.getText());
-           psta.setString(8, idTxt.getText());
+           psta.setString(5, div);
+           psta.setString(4, cantidadTxt.getText());
+           psta.setString(7, tasaTxt.getText());
+           psta.setString(8, cantidadCopTxt.getText());
+           String date = "to_date("+diaTxt.getText()+"/"+mesTxt.getText()+"/"+anoTxt.getText()+",'DD/MM/RR')";
+           psta.setString(6, date);
            psta.execute();
            psta.close();
-           idText.setText("");
-           nombreText.setText("");
-           placaText.setText("");
-           estadoText.setText("");
+           idTxt.setText("");
+           cantidadTxt.setText("");
+           tasaTxt.setText("");
+           cantidadCopTxt.setText("");
+           diaTxt.setText("");
+           mesTxt.setText("");
+           anoTxt.setText("");
            JOptionPane.showMessageDialog(null, "Registro Guardado Satisfactoriamente");
         }catch (Exception e){
             System.out.println(e);
