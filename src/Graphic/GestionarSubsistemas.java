@@ -5,12 +5,19 @@
  */
 package Graphic;
 
+import static Graphic.GestionarDonacionMaterial.conn;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import primavera.Primavera;
+
 /**
  *
  * @author Daniel
  */
 public class GestionarSubsistemas extends javax.swing.JFrame {
-
+    static Connection conn=null;
     /**
      * Creates new form GestionarSubsistemas
      */
@@ -41,11 +48,11 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
         jButton18 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jTextField22 = new javax.swing.JTextField();
-        jTextField24 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        idText = new javax.swing.JTextField();
+        NombreText = new javax.swing.JTextField();
+        EstadoText = new javax.swing.JTextField();
+        CarroComboBox = new javax.swing.JComboBox<String>();
+        LabComboBox = new javax.swing.JComboBox<String>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,6 +84,11 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
 
         jButton18.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jButton18.setText("Crear");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
 
         jButton19.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jButton19.setText("Modificar");
@@ -89,15 +101,15 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel10.setText("Estado");
 
-        jTextField22.addActionListener(new java.awt.event.ActionListener() {
+        idText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField22jTextField1ActionPerformed(evt);
+                idTextjTextField1ActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONAR--", "PRIMAVERA 1", "PRIMAVERA 2", "PRIMAVERA 3" }));
+        CarroComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--SELECCIONAR--", "PRIMAVERA 1", "PRIMAVERA 2", "PRIMAVERA 3" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONAR--", "MATERIALES", "MADERA", "ELECTRONICA", "SOLDADURA", "INFORMATICA" }));
+        LabComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--SELECCIONAR--", "MATERIALES", "MADERA", "ELECTRONICA", "SOLDADURA", "INFORMATICA" }));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -121,11 +133,11 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
                             .addComponent(jLabel10))
                         .addGap(127, 127, 127)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField22)
-                            .addComponent(jTextField24)
-                            .addComponent(jTextField5)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, 0, 188, Short.MAX_VALUE))))
+                            .addComponent(idText)
+                            .addComponent(NombreText)
+                            .addComponent(EstadoText)
+                            .addComponent(CarroComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(LabComboBox, 0, 188, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,23 +154,23 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel34)
-                    .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(idText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CarroComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel35)
-                    .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NombreText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel37)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LabComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EstadoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton17)
@@ -197,9 +209,33 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton19jButton3ActionPerformed
 
-    private void jTextField22jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField22jTextField1ActionPerformed
+    private void idTextjTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextjTextField1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField22jTextField1ActionPerformed
+    }//GEN-LAST:event_idTextjTextField1ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        try {
+           conn=Primavera.Enlace(conn);
+           String sqlinsertar="insert into SUBSISTEMA values (?,?,?,?,?)";
+           PreparedStatement psta=conn.prepareStatement(sqlinsertar);
+           psta.setString(1, idText.getText());
+           String patr = Primavera.getId("id_carro", "nombre_carro","carro_solar",CarroComboBox.getSelectedItem().toString());
+           psta.setString(2, patr);
+           psta.setString(3, NombreText.getText());
+           String patr1 = Primavera.getId("id_laboratorio", "nombre_lab","laboratorios",LabComboBox.getSelectedItem().toString());
+           psta.setString(4, patr1);
+           psta.setString(5, EstadoText.getText());
+           psta.execute();
+           psta.close();
+           idText.setText("");
+           NombreText.setText("");
+           EstadoText.setText("");
+           
+           JOptionPane.showMessageDialog(null, "Registro Guardado Satisfactoriamente");
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_jButton18ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,11 +273,14 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> CarroComboBox;
+    private javax.swing.JTextField EstadoText;
+    private javax.swing.JComboBox<String> LabComboBox;
+    private javax.swing.JTextField NombreText;
+    private javax.swing.JTextField idText;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
@@ -250,8 +289,5 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JTextField jTextField22;
-    private javax.swing.JTextField jTextField24;
-    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }
