@@ -271,16 +271,15 @@ public class GestionarGastos extends javax.swing.JFrame {
         }else{
           try {
            conn=Primavera.Enlace(conn);
-           String sqlinsertar="insert into Gastos values (?,?,?,?,?,?,?)";
+           String sqlinsertar="insert into Gastos values (?,?,?,to_date(?,'DD/MM/RR'),?)";
            PreparedStatement psta=conn.prepareStatement(sqlinsertar);
            psta.setString(1, idText.getText());
            String patr = Primavera.getId("id_carro", "nombre_carro","carro_solar",CarroComboBox.getSelectedItem().toString());
            psta.setString(2, patr);
            psta.setString(3, cantidadText.getText());
-           psta.setString(4, diaText.getText());
-           psta.setString(5, mesText.getText());
-           psta.setString(6, añoText.getText());
-           psta.setString(7, descripcionText.getText());
+           String date = diaText.getText()+"/"+mesText.getText()+"/"+añoText.getText();
+           psta.setString(4, date);
+           psta.setString(5, descripcionText.getText());
            psta.execute();
            psta.close();
            idText.setText("");

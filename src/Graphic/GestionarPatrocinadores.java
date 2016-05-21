@@ -244,7 +244,7 @@ public class GestionarPatrocinadores extends javax.swing.JFrame {
         }else{
         try {
             conn = Primavera.Enlace(conn);
-            String sqlinsertar = "insert into PATROCINADORES values (?,?,?,?,?)";
+            String sqlinsertar = "insert into PATROCINADOR values (?,?,?,?,?)";
             PreparedStatement psta = conn.prepareStatement(sqlinsertar);
             psta.setString(1, idText.getText());
             psta.setString(2, nombreText.getText());

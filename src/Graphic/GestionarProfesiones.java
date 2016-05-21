@@ -199,7 +199,7 @@ public class GestionarProfesiones extends javax.swing.JFrame {
         }else{
         try {
             conn = Primavera.Enlace(conn);
-            String sqlinsertar = "insert into PROFESIONES values (?,?,?)";
+            String sqlinsertar = "insert into PROFESION values (?,?,?)";
             PreparedStatement psta = conn.prepareStatement(sqlinsertar);
             psta.setString(1, idText.getText());
             psta.setString(2, nombreText.getText());

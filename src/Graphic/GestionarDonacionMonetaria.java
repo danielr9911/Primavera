@@ -328,7 +328,7 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         try {
            conn=Primavera.Enlace(conn);
-           String sqlinsertar="insert into Donacion_monetaria values (?,?,?,?,to_date(?,'DD/MM/RR'),?,?,?)";
+           String sqlinsertar="insert into DONACION_MONETARIA values (?,?,?,?,to_date(?,'DD/MM/RR'),?,?,?)";
            PreparedStatement psta=conn.prepareStatement(sqlinsertar);
            psta.setString(1, idTxt.getText());
            String patr = Primavera.getId("id_patrocinador","nombre_patr","patrocinador",patrocinadorCb.getSelectedItem().toString());

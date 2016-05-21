@@ -5,7 +5,6 @@
  */
 package Graphic;
 
-import static Graphic.GestionarDonacionMaterial.conn;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -236,8 +235,8 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
            psta.setString(2, patr);
            psta.setString(3, NombreText.getText());
            String patr1 = Primavera.getId("id_laboratorio", "nombre_lab","laboratorios",labComboBox.getSelectedItem().toString());
-           psta.setString(4, patr1);
-           psta.setString(5, EstadoText.getText());
+           psta.setString(5, patr1);
+           psta.setString(4, EstadoText.getText());
            psta.execute();
            psta.close();
            idText.setText("");

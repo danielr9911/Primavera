@@ -224,13 +224,13 @@ public class GestionarEPS extends javax.swing.JFrame {
         }else{
         try {
             conn = Primavera.Enlace(conn);
-            String sqlinsertar = "insert into EPS values (?,?,?,?,?)";
+            String sqlinsertar = "insert into EPS values (?,?,?,?)";
             PreparedStatement psta = conn.prepareStatement(sqlinsertar);
             psta.setString(1, idText.getText());
-            psta.setString(2, nombreText.getText());
-            psta.setString(3, tipoText.getText());
+            String eps = nombreText.getText()+" - "+tipoText.getText();
+            psta.setString(2, eps);
             psta.setString(3, telefonoText.getText());
-            psta.setString(3, ciudadText.getText());
+            psta.setString(4, ciudadText.getText());
             psta.execute();
             psta.close();
             idText.setText("");
