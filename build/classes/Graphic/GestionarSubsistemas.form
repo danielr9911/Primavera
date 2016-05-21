@@ -57,7 +57,7 @@
                       <Group type="102" attributes="0">
                           <Component id="jButton18" min="-2" pref="106" max="-2" attributes="0"/>
                           <EmptySpace pref="38" max="32767" attributes="0"/>
-                          <Component id="jButton19" min="-2" pref="107" max="-2" attributes="0"/>
+                          <Component id="modificarButton" min="-2" pref="107" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="jButton17" min="-2" pref="107" max="-2" attributes="0"/>
                       </Group>
@@ -73,9 +73,9 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="idText" alignment="0" max="32767" attributes="0"/>
                               <Component id="NombreText" alignment="0" max="32767" attributes="0"/>
-                              <Component id="carroComboBox" alignment="0" max="32767" attributes="0"/>
-                              <Component id="labComboBox" alignment="0" pref="188" max="32767" attributes="0"/>
-                              <Component id="estadoComboBox" alignment="0" max="32767" attributes="0"/>
+                              <Component id="carroCb" alignment="0" max="32767" attributes="0"/>
+                              <Component id="labCb" alignment="0" pref="188" max="32767" attributes="0"/>
+                              <Component id="estadoCb" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -104,7 +104,7 @@
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel36" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="carroComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="carroCb" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -114,18 +114,18 @@
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labCb" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="estadoComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="estadoCb" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton17" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton18" alignment="3" max="32767" attributes="0"/>
-                      <Component id="jButton19" alignment="3" max="32767" attributes="0"/>
+                      <Component id="modificarButton" alignment="3" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
@@ -201,7 +201,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton18ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton19">
+        <Component class="javax.swing.JButton" name="modificarButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="14" style="0"/>
@@ -209,7 +209,7 @@
             <Property name="text" type="java.lang.String" value="Modificar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton19jButton3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modificarButtonjButton3ActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
@@ -227,7 +227,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="NombreText">
         </Component>
-        <Component class="javax.swing.JComboBox" name="carroComboBox">
+        <Component class="javax.swing.JComboBox" name="carroCb">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
@@ -237,7 +237,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="labComboBox">
+        <Component class="javax.swing.JComboBox" name="labCb">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
@@ -247,7 +247,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="estadoComboBox">
+        <Component class="javax.swing.JComboBox" name="estadoCb">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>

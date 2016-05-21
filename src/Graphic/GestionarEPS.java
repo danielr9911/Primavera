@@ -205,7 +205,11 @@ public class GestionarEPS extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        Primavera.update("profesion", "nombre_eps", nombreText.getText(), "id_eps", idText.getText());
+        Primavera.update("profesion", "tipo_eps", tipoText.getText(), "id_eps", idText.getText());
+        Primavera.update("profesion", "telefono_eps", telefonoText.getText(), "id_eps", idText.getText());
+        Primavera.update("profesion", "ciudad_eps", ciudadText.getText(), "id_eps", idText.getText());
+        JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

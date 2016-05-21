@@ -194,6 +194,7 @@ public class GestionarLaboratorios extends javax.swing.JFrame {
     private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
         Primavera.update("laboratorios", "nombre_lab", nombreText.getText(), "id_laboratorio", idText.getText());
         Primavera.update("laboratorios", "tamaño_lab", tamañoText.getText(), "id_laboratorio", idText.getText());
+        JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
     }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

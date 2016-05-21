@@ -43,7 +43,7 @@ public class GestionarMateriales extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         nombreText = new javax.swing.JTextField();
         idText = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        modificarButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         crearButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -78,11 +78,11 @@ public class GestionarMateriales extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton1.setText("Modificar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        modificarButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        modificarButton.setText("Modificar");
+        modificarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                modificarButtonActionPerformed(evt);
             }
         });
 
@@ -118,7 +118,7 @@ public class GestionarMateriales extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(crearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(modificarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(36, 36, 36)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -155,7 +155,7 @@ public class GestionarMateriales extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(modificarButton)
                     .addComponent(jButton2)
                     .addComponent(crearButton))
                 .addContainerGap())
@@ -189,9 +189,11 @@ public class GestionarMateriales extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_idTextActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
+       Primavera.update("material", "nombre_material", nombreText.getText(), "id_material", idText.getText());
+       Primavera.update("material", "desc_material", descripcionText.getText(), "id_material", idText.getText());
+       JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
+    }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         MenuPrincipal vent = new MenuPrincipal();
@@ -264,7 +266,6 @@ public class GestionarMateriales extends javax.swing.JFrame {
     private javax.swing.JButton crearButton;
     private javax.swing.JTextArea descripcionText;
     private javax.swing.JTextField idText;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -273,6 +274,7 @@ public class GestionarMateriales extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton modificarButton;
     private javax.swing.JTextField nombreText;
     // End of variables declaration//GEN-END:variables
 }

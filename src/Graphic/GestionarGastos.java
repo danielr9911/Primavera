@@ -261,6 +261,7 @@ public class GestionarGastos extends javax.swing.JFrame {
        Primavera.update("gastos", "id_carro", CarroCb.getSelectedItem().toString(), "id_gasto", idText.getText());
        Primavera.update("gastos", "desc_gasto", descripcionText.getText(), "id_gasto", idText.getText());
        Primavera.update("gastos", "fecha_gasto", diaText.getText()+"/"+mesText.getText()+"/"+añoText.getText(), "id_gasto", idText.getText());
+       JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
     }//GEN-LAST:event_modificarButtonjButton3ActionPerformed
 
     private void idTextjTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextjTextField1ActionPerformed

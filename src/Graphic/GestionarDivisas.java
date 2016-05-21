@@ -176,6 +176,7 @@ public class GestionarDivisas extends javax.swing.JFrame {
 
     private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
         Primavera.update("tipo_moneda", "nombre_tipomoneda", nombreText.getText(), "id_tipomoneda", codigoText.getText());
+        JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
     }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void nombreTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreTextActionPerformed

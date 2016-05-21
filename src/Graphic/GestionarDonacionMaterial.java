@@ -300,6 +300,7 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
        Primavera.update("donacion_material", "id_subsistema", subsistemaCb.getSelectedItem().toString(), "id_donmaterial", idText.getText());
        Primavera.update("donacion_material", "id_material", materialCb.getSelectedItem().toString(), "id_donmaterial", idText.getText());
        Primavera.update("donacion_material", "fecha_donmat", diaText.getText()+"/"+mesText.getText()+"/"+anoText.getText(), "id_donmaterial", idText.getText());
+       JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
     }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

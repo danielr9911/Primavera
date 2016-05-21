@@ -27,8 +27,8 @@ public class GestionarPatrocinadores extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--GESTIONAR PATROCINADORES--");
-        estadoComboBox.addItem("ACTIVO");
-        estadoComboBox.addItem("INACTIVO");
+        estadoCb.addItem("ACTIVO");
+        estadoCb.addItem("INACTIVO");
     }
 
     /**
@@ -55,7 +55,7 @@ public class GestionarPatrocinadores extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         correoText = new javax.swing.JTextField();
-        estadoComboBox = new javax.swing.JComboBox<>();
+        estadoCb = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -155,7 +155,7 @@ public class GestionarPatrocinadores extends javax.swing.JFrame {
                             .addComponent(nombreText)
                             .addComponent(telefonoText)
                             .addComponent(correoText)
-                            .addComponent(estadoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(estadoCb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(28, 28, 28))
@@ -185,7 +185,7 @@ public class GestionarPatrocinadores extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(estadoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(estadoCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(modificarButton)
@@ -223,7 +223,10 @@ public class GestionarPatrocinadores extends javax.swing.JFrame {
     }//GEN-LAST:event_idTextActionPerformed
 
     private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
-        // TODO add your handling code here:
+       Primavera.update("patrocinador", "nombre_patr", nombreText.getText(), "id_patrocinador", idText.getText());
+       Primavera.update("patrocinador", "tel_patr", telefonoText.getText(), "id_patrocinador", idText.getText());
+       Primavera.update("patrocinador", "correo_patr", correoText.getText(), "id_patrocinador", idText.getText());
+       Primavera.update("patrocinador", "estado_patr", estadoCb.getSelectedItem().toString(), "id_patrocinador", idText.getText());
     }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -236,7 +239,7 @@ public class GestionarPatrocinadores extends javax.swing.JFrame {
         if (idText.getText().equals("")
                 | nombreText.getText().equals("")
                 | telefonoText.getText().equals("")
-                | estadoComboBox.getSelectedItem().toString().equals("")
+                | estadoCb.getSelectedItem().toString().equals("")
                 | correoText.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Por favor completa todas las casillas");
         } else {
@@ -248,14 +251,14 @@ public class GestionarPatrocinadores extends javax.swing.JFrame {
                 psta.setString(2, nombreText.getText());
                 psta.setString(3, telefonoText.getText());
                 psta.setString(4, correoText.getText());
-                psta.setString(5, estadoComboBox.getSelectedItem().toString());
+                psta.setString(5, estadoCb.getSelectedItem().toString());
                 psta.execute();
                 psta.close();
                 idText.setText("");
                 nombreText.setText("");
                 telefonoText.setText("");
                 correoText.setText("");
-                estadoComboBox.setSelectedIndex(0);
+                estadoCb.setSelectedIndex(0);
                 idText.requestFocusInWindow();
                 JOptionPane.showMessageDialog(null, "Registro guardado satisfactoriamente");
             } catch (Exception e) {
@@ -310,7 +313,7 @@ public class GestionarPatrocinadores extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField correoText;
     private javax.swing.JButton crearButton;
-    private javax.swing.JComboBox<String> estadoComboBox;
+    private javax.swing.JComboBox<String> estadoCb;
     private javax.swing.JTextField idText;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

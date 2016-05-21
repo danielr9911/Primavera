@@ -395,6 +395,7 @@ public class GestionarPersonal extends javax.swing.JFrame {
        Primavera.update("personal", "id_tipomoneda", subsistemaCb.getSelectedItem().toString(), "identificacion", idText.getText());
        Primavera.update("personal", "id_tipomoneda", estadoCb.getSelectedItem().toString(), "identificacion", idText.getText());
        Primavera.update("personal", "id_tipomoneda", profesionCb.getSelectedItem().toString(), "identificacion", idText.getText());
+       JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
        
     }//GEN-LAST:event_modificarButtonActionPerformed
 

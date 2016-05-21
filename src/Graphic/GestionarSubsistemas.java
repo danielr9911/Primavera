@@ -25,21 +25,21 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--GESTIONAR SUBSISTEMAS--");
-        estadoComboBox.addItem("ACTIVO");
-        estadoComboBox.addItem("INACTIVO");
+        estadoCb.addItem("ACTIVO");
+        estadoCb.addItem("INACTIVO");
         try {
            conn=Primavera.Enlace(conn);
            String sqlinsertar="select nombre_carro from carrosolar";
            PreparedStatement psta=conn.prepareStatement(sqlinsertar);
            ResultSet rs = psta.executeQuery();
            while(rs.next()){
-              carroComboBox.addItem(rs.getString(1));
+              carroCb.addItem(rs.getString(1));
            }
            sqlinsertar="select nombre_lab from laboratorios";
            psta=conn.prepareStatement(sqlinsertar);
            rs = psta.executeQuery();
            while(rs.next()){
-              labComboBox.addItem(rs.getString(1));
+              labCb.addItem(rs.getString(1));
            }
         } catch(Exception e){
             System.out.println(e);
@@ -64,13 +64,13 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         jButton17 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
-        jButton19 = new javax.swing.JButton();
+        modificarButton = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         idText = new javax.swing.JTextField();
         NombreText = new javax.swing.JTextField();
-        carroComboBox = new javax.swing.JComboBox<>();
-        labComboBox = new javax.swing.JComboBox<>();
-        estadoComboBox = new javax.swing.JComboBox<>();
+        carroCb = new javax.swing.JComboBox<>();
+        labCb = new javax.swing.JComboBox<>();
+        estadoCb = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,11 +108,11 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
             }
         });
 
-        jButton19.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton19.setText("Modificar");
-        jButton19.addActionListener(new java.awt.event.ActionListener() {
+        modificarButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        modificarButton.setText("Modificar");
+        modificarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton19jButton3ActionPerformed(evt);
+                modificarButtonjButton3ActionPerformed(evt);
             }
         });
 
@@ -135,7 +135,7 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                        .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(modificarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -149,9 +149,9 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(idText)
                             .addComponent(NombreText)
-                            .addComponent(carroComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(labComboBox, 0, 188, Short.MAX_VALUE)
-                            .addComponent(estadoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(carroCb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labCb, 0, 188, Short.MAX_VALUE)
+                            .addComponent(estadoCb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +172,7 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36)
-                    .addComponent(carroComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(carroCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel35)
@@ -180,16 +180,16 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel37)
-                    .addComponent(labComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(estadoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(estadoCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton17)
                     .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(modificarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
 
@@ -219,9 +219,13 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton17jButton2ActionPerformed
 
-    private void jButton19jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton19jButton3ActionPerformed
+    private void modificarButtonjButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonjButton3ActionPerformed
+       Primavera.update("subsistema", "nombre_subs", NombreText.getText(), "id_subsistema", idText.getText());
+       Primavera.update("subsistema", "id_carro", carroCb.getSelectedItem().toString(), "id_subsistema", idText.getText());
+       Primavera.update("subsistema", "id_laboratorio", labCb.getSelectedItem().toString(), "id_subsistema", idText.getText());
+       Primavera.update("subsistema", "estado_subs", estadoCb.getSelectedItem().toString(), "id_subsistema", idText.getText());
+       JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
+    }//GEN-LAST:event_modificarButtonjButton3ActionPerformed
 
     private void idTextjTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextjTextField1ActionPerformed
         // TODO add your handling code here:
@@ -233,19 +237,19 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
            String sqlinsertar="insert into SUBSISTEMA values (?,?,?,?,?)";
            PreparedStatement psta=conn.prepareStatement(sqlinsertar);
            psta.setString(1, idText.getText());
-           String patr = Primavera.getId("id_carro", "nombre_carro","carrosolar",carroComboBox.getSelectedItem().toString());
+           String patr = Primavera.getId("id_carro", "nombre_carro","carrosolar",carroCb.getSelectedItem().toString());
            psta.setString(2, patr);
            psta.setString(3, NombreText.getText());
-           String patr1 = Primavera.getId("id_laboratorio", "nombre_lab","laboratorios",labComboBox.getSelectedItem().toString());
+           String patr1 = Primavera.getId("id_laboratorio", "nombre_lab","laboratorios",labCb.getSelectedItem().toString());
            psta.setString(5, patr1);
-           psta.setString(4, estadoComboBox.getSelectedItem().toString());
+           psta.setString(4, estadoCb.getSelectedItem().toString());
            psta.execute();
            psta.close();
            idText.setText("");
            NombreText.setText("");
-           estadoComboBox.setSelectedIndex(0);
-           carroComboBox.setSelectedIndex(0);
-           labComboBox.setSelectedIndex(0);
+           estadoCb.setSelectedIndex(0);
+           carroCb.setSelectedIndex(0);
+           labCb.setSelectedIndex(0);
            
            JOptionPane.showMessageDialog(null, "Registro Guardado Satisfactoriamente");
         }catch (Exception e){
@@ -290,12 +294,11 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField NombreText;
-    private javax.swing.JComboBox<String> carroComboBox;
-    private javax.swing.JComboBox<String> estadoComboBox;
+    private javax.swing.JComboBox<String> carroCb;
+    private javax.swing.JComboBox<String> estadoCb;
     private javax.swing.JTextField idText;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
@@ -304,6 +307,7 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JComboBox<String> labComboBox;
+    private javax.swing.JComboBox<String> labCb;
+    private javax.swing.JButton modificarButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -196,6 +196,7 @@ public class GestionarTiposDeSangre extends javax.swing.JFrame {
     private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
         Primavera.update("tipo_sangre", "gs", gsText.getText(), "id_sangre", idText.getText());
         Primavera.update("tipo_sangre", "rh", rhText.getText(), "id_sangre", idText.getText());
+        JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
     }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
