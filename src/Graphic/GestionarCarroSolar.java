@@ -276,7 +276,7 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
                     nombreText.setText(result.getString(2));
                     placaText.setText(result.getString(3));
                     estadoComboBox.setSelectedItem(result.getString(4));
-                    idText.setBackground(Color.GRAY);
+                    idText.setBackground(Color.LIGHT_GRAY);
                     modificarButton.setEnabled(true);
                     estadoComboBox.setEnabled(true);
                     crearButton.setEnabled(false);

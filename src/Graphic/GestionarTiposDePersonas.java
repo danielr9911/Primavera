@@ -5,8 +5,10 @@
  */
 package Graphic;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import primavera.Primavera;
 
@@ -24,6 +26,8 @@ public class GestionarTiposDePersonas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--GESTIONAR TIPOS DE PERSONAS--");
+        crearButton.setEnabled(false);
+        modificarButton.setEnabled(false);
     }
 
     /**
@@ -43,7 +47,7 @@ public class GestionarTiposDePersonas extends javax.swing.JFrame {
         tipoText = new javax.swing.JTextField();
         idText = new javax.swing.JTextField();
         modificarButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        cancelarButton = new javax.swing.JButton();
         crearButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
@@ -59,12 +63,22 @@ public class GestionarTiposDePersonas extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setText("Tipo de persona");
 
+        tipoText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tipoTextFocusGained(evt);
+            }
+        });
         tipoText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tipoTextActionPerformed(evt);
             }
         });
 
+        idText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                idTextFocusLost(evt);
+            }
+        });
         idText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idTextActionPerformed(evt);
@@ -79,11 +93,11 @@ public class GestionarTiposDePersonas extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cancelarButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        cancelarButton.setText("Cancelar");
+        cancelarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                cancelarButtonActionPerformed(evt);
             }
         });
 
@@ -111,7 +125,7 @@ public class GestionarTiposDePersonas extends javax.swing.JFrame {
                                 .addGap(47, 47, 47)
                                 .addComponent(modificarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +163,7 @@ public class GestionarTiposDePersonas extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(modificarButton)
-                    .addComponent(jButton2)
+                    .addComponent(cancelarButton)
                     .addComponent(crearButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -184,13 +198,14 @@ public class GestionarTiposDePersonas extends javax.swing.JFrame {
 
     private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
         Primavera.update("tipo_persona", "nomb_tipopersona", tipoText.getText(), "id_tipopersona", idText.getText());
+        JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
     }//GEN-LAST:event_modificarButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
         MenuPrincipal vent = new MenuPrincipal();
         vent.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_cancelarButtonActionPerformed
 
     private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
         if(idText.getText().equals("") | tipoText.getText().equals("")){
@@ -214,6 +229,33 @@ public class GestionarTiposDePersonas extends javax.swing.JFrame {
         }
         }
     }//GEN-LAST:event_crearButtonActionPerformed
+
+    private void idTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusLost
+        if (idText.getText().equals("")) {
+            idText.requestFocusInWindow();
+        } else {
+            try {
+                ResultSet result = Primavera.selectAllFrom("Tipo_persona", "id_tipopersona", idText.getText());
+
+                if (result != null && result.next()) {
+                    tipoText.setText(result.getString(2));
+                    idText.setBackground(Color.LIGHT_GRAY);
+                    modificarButton.setEnabled(true);
+                    crearButton.setEnabled(false);
+                } else {
+                    tipoText.setText("");
+                    modificarButton.setEnabled(false);
+                    crearButton.setEnabled(true);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_idTextFocusLost
+
+    private void tipoTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tipoTextFocusGained
+        idText.setBackground(Color.WHITE);
+    }//GEN-LAST:event_tipoTextFocusGained
 
     /**
      * @param args the command line arguments
@@ -251,9 +293,9 @@ public class GestionarTiposDePersonas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelarButton;
     private javax.swing.JButton crearButton;
     private javax.swing.JTextField idText;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
