@@ -5,7 +5,6 @@
  */
 package Graphic;
 
-import static Graphic.GestionarPersonal.conn;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +26,7 @@ public class Gastos extends javax.swing.JFrame {
         setTitle("--PRIMAVERA--GASTOS--");
         try {
            conn=Primavera.Enlace(conn);
-           String sqlinsertar="select nombre_carro from carro_solar";
+           String sqlinsertar="select nombre_carro from carrosolar";
            PreparedStatement psta=conn.prepareStatement(sqlinsertar);
            ResultSet rs = psta.executeQuery();
            while(rs.next()){
