@@ -16,7 +16,9 @@ import primavera.Primavera;
  * @author Daniel
  */
 public class GestionarPersonal extends javax.swing.JFrame {
+
     static Connection conn = null;
+
     /**
      * Creates new form GestionarPersonal
      */
@@ -25,54 +27,50 @@ public class GestionarPersonal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--GESTIONAR PERSONAL--");
-        crearButton.setEnabled(false);
-        modificarButton.setEnabled(false);
-         try {
-           conn=Primavera.Enlace(conn);
-           String sqlinsertar="select nomb_tipopersona from tipo_persona";
-           PreparedStatement psta=conn.prepareStatement(sqlinsertar);
-           ResultSet rs = psta.executeQuery();
-           while(rs.next()){
-              tipoComboBox.addItem(rs.getString(1));
-           }
-           sqlinsertar="select gs from tipo_sangre";
-           psta=conn.prepareStatement(sqlinsertar);
-           rs = psta.executeQuery();
-           while(rs.next()){
-              gsComboBox.addItem(rs.getString(1));
-           }
-           sqlinsertar="select nombre_eps from eps";
-           psta=conn.prepareStatement(sqlinsertar);
-           rs = psta.executeQuery();
-           while(rs.next()){
-              epsComboBox.addItem(rs.getString(1));
-           }
-           sqlinsertar="select rh from tipo_sangre";
-           psta=conn.prepareStatement(sqlinsertar);
-           rs = psta.executeQuery();
-           while(rs.next()){
-              rhComboBox.addItem(rs.getString(1));
-           }
-           sqlinsertar="select nombre_profesion from profesion";
-           psta=conn.prepareStatement(sqlinsertar);
-           rs = psta.executeQuery();
-           while(rs.next()){
-              profesionComboBox.addItem(rs.getString(1));
-           }
-           sqlinsertar="select nombre_subs from subsistema";
-           psta=conn.prepareStatement(sqlinsertar);
-           rs = psta.executeQuery();
-           while(rs.next()){
-              subsistemaComboBox.addItem(rs.getString(1));
-           }
-           sqlinsertar="select estado_pers from personal";
-           psta=conn.prepareStatement(sqlinsertar);
-           rs = psta.executeQuery();
-           while(rs.next()){
-              estadoComboBox.addItem(rs.getString(1));
-           }
-           //System.out.println(Primavera.getId("id_patrocinador", "nombre_patr","PATROCINADOR","ADDICT"));
-        } catch(Exception e){
+        //crearButton.setEnabled(false);
+        //modificarButton.setEnabled(false);
+        try {
+            conn = Primavera.Enlace(conn);
+            String sqlinsertar = "select nomb_tipopersona from tipo_persona";
+            PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+            ResultSet rs = psta.executeQuery();
+            while (rs.next()) {
+                tipoComboBox.addItem(rs.getString(1));
+            }
+            sqlinsertar = "select gs from tipo_sangre";
+            psta = conn.prepareStatement(sqlinsertar);
+            rs = psta.executeQuery();
+            while (rs.next()) {
+                gsComboBox.addItem(rs.getString(1));
+            }
+            sqlinsertar = "select nombre_eps from eps";
+            psta = conn.prepareStatement(sqlinsertar);
+            rs = psta.executeQuery();
+            while (rs.next()) {
+                epsComboBox.addItem(rs.getString(1));
+            }
+            sqlinsertar = "select rh from tipo_sangre";
+            psta = conn.prepareStatement(sqlinsertar);
+            rs = psta.executeQuery();
+            while (rs.next()) {
+                rhComboBox.addItem(rs.getString(1));
+            }
+            sqlinsertar = "select nombre_profesion from profesion";
+            psta = conn.prepareStatement(sqlinsertar);
+            rs = psta.executeQuery();
+            while (rs.next()) {
+                profesionComboBox.addItem(rs.getString(1));
+            }
+            sqlinsertar = "select nombre_subs from subsistema";
+            psta = conn.prepareStatement(sqlinsertar);
+            rs = psta.executeQuery();
+            while (rs.next()) {
+                subsistemaComboBox.addItem(rs.getString(1));
+            }
+            estadoComboBox.addItem("ACTIVO");
+            estadoComboBox.addItem("INACTIVO");
+            //System.out.println(Primavera.getId("id_patrocinador", "nombre_patr","PATROCINADOR","ADDICT"));
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
@@ -422,45 +420,53 @@ public class GestionarPersonal extends javax.swing.JFrame {
     }//GEN-LAST:event_gsComboBoxActionPerformed
 
     private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
-        if(idText.getText().equals("") | nombreText.getText().equals("")|
-                telefonoText.getText().equals("") | correoText.getText().equals("")| salarioText.getText().equals("")){
+        if (idText.getText().equals("") | nombreText.getText().equals("")
+                | telefonoText.getText().equals("") | correoText.getText().equals("") | salarioText.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Por favor completa todas las casillas");
-        }else{
-           try {
-           conn=Primavera.Enlace(conn);
-           String sqlinsertar="insert into Personal values (?,?,?,?,?,?,?,?,?,?,?,?)";
-           PreparedStatement psta=conn.prepareStatement(sqlinsertar);
-           psta.setString(1, idText.getText());
-           psta.setString(3, nombreText.getText());
-           psta.setString(4, telefonoText.getText());
-           psta.setString(5, correoText.getText());
-           String patr = Primavera.getId("id_tipopersona", "nomb_tipopersona","tipo_persona",tipoComboBox.getSelectedItem().toString());
-           psta.setString(5, patr);
-           String patr1 = Primavera.getId("id_sangre", "gs","tipo_sangre",gsComboBox.getSelectedItem().toString());
-           psta.setString(6, patr1);
-           String patr2 = Primavera.getId("id_sangre", "rh","tipo_sangre",rhComboBox.getSelectedItem().toString());
-           psta.setString(7, patr2);
-           String patr3 = Primavera.getId("id_profesion", "nombre_profesion","profesion",profesionComboBox.getSelectedItem().toString());
-           psta.setString(8, patr3);
-           psta.setString(7, salarioText.getText());
-           String patr4 = Primavera.getId("id_eps", "nombre_eps","eps",epsComboBox.getSelectedItem().toString());
-           psta.setString(9, patr4);
-           String patr5 = Primavera.getId("id_subsistema", "nombre_subs","subsistema",subsistemaComboBox.getSelectedItem().toString());
-           psta.setString(2, patr5);
-           String patr6 = Primavera.getId("identificacion", "estado_pers","personal",estadoComboBox.getSelectedItem().toString());
-           psta.setString(12, patr6);
-           psta.execute();
-           psta.close();
-           idText.setText("");
-           nombreText.setText("");
-           telefonoText.setText("");
-           correoText.setText("");
-           salarioText.setText("");
-           
-           JOptionPane.showMessageDialog(null, "Registro Guardado Satisfactoriamente");
-        }catch (Exception e){
-            System.out.println(e);
-        } 
+        } else {
+            try {
+                conn = Primavera.Enlace(conn);
+                String sqlinsertar = "insert into Personal values (?,?,?,?,?,?,?,?,?,?,?)";
+                PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+                psta.setString(1, idText.getText());
+                String idSubs = Primavera.getId("id_subsistema", "nombre_subs", "subsistema", subsistemaComboBox.getSelectedItem().toString());
+                psta.setString(2, idSubs);
+                psta.setString(3, nombreText.getText());
+                psta.setString(4, telefonoText.getText());
+                psta.setString(5, correoText.getText());
+                psta.setString(6, estadoComboBox.getSelectedItem().toString());
+                psta.setString(7, salarioText.getText());
+                String idProf = Primavera.getId("id_profesion", "nombre_profesion", "profesion", profesionComboBox.getSelectedItem().toString());
+                psta.setString(8, idProf);
+                String idEps = Primavera.getId("id_eps", "nombre_eps", "eps", epsComboBox.getSelectedItem().toString());
+                psta.setString(9, idEps);
+                String idPers = Primavera.getId("id_tipopersona", "nomb_tipopersona", "tipo_persona", tipoComboBox.getSelectedItem().toString());
+                psta.setString(11, idPers);
+                String consulta = "select id_sangre from tipo_sangre "
+                        + "where GS = ? "
+                        + "and RH = ?";
+                conn = Primavera.Enlace(conn);
+                String idSangre = "";
+                PreparedStatement psta2 = conn.prepareStatement(consulta);
+                psta2.setString(1, gsComboBox.getSelectedItem().toString());
+                psta2.setString(2, rhComboBox.getSelectedItem().toString());
+                ResultSet rs = psta2.executeQuery();
+                if (rs.next()) {
+                    idSangre = rs.getString(1);
+                }
+                psta.setString(10, idSangre);
+                psta.execute();
+                psta.close();
+                idText.setText("");
+                nombreText.setText("");
+                telefonoText.setText("");
+                correoText.setText("");
+                salarioText.setText("");
+
+                JOptionPane.showMessageDialog(null, "Registro Guardado Satisfactoriamente");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }//GEN-LAST:event_crearButtonActionPerformed
 
