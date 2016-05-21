@@ -231,7 +231,7 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
            String sqlinsertar="insert into SUBSISTEMA values (?,?,?,?,?)";
            PreparedStatement psta=conn.prepareStatement(sqlinsertar);
            psta.setString(1, idText.getText());
-           String patr = Primavera.getId("id_carro", "nombre_carro","carro_solar",carroComboBox.getSelectedItem().toString());
+           String patr = Primavera.getId("id_carro", "nombre_carro","carrosolar",carroComboBox.getSelectedItem().toString());
            psta.setString(2, patr);
            psta.setString(3, NombreText.getText());
            String patr1 = Primavera.getId("id_laboratorio", "nombre_lab","laboratorios",labComboBox.getSelectedItem().toString());
