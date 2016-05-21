@@ -8,6 +8,8 @@ package Graphic;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import javax.swing.table.DefaultTableModel;
 import primavera.Primavera;
 
 /**
@@ -15,7 +17,10 @@ import primavera.Primavera;
  * @author Daniel
  */
 public class Gastos extends javax.swing.JFrame {
-    static Connection conn = null;
+
+    Connection conn = null;
+    DefaultTableModel modelo = new DefaultTableModel();
+
     /**
      * Creates new form Gastos
      */
@@ -24,19 +29,19 @@ public class Gastos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--GASTOS--");
+        this.tablaAMostrar.setModel(modelo);
         try {
-           conn=Primavera.Enlace(conn);
-           String sqlinsertar="select nombre_carro from carrosolar";
-           PreparedStatement psta=conn.prepareStatement(sqlinsertar);
-           ResultSet rs = psta.executeQuery();
-           while(rs.next()){
-              carroComboBox.addItem(rs.getString(1));
-           }
-        }catch(Exception e){
+            conn = Primavera.Enlace(conn);
+            String sqlinsertar = "select nombre_carro from carrosolar";
+            PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+            ResultSet rs = psta.executeQuery();
+            while (rs.next()) {
+                carroComboBox.addItem(rs.getString(1));
+            }
+        } catch (Exception e) {
             System.out.println(e);
         }
-        }
-    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,7 +60,7 @@ public class Gastos extends javax.swing.JFrame {
         consultarButton = new javax.swing.JButton();
         cancelarButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaAMostrar = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -104,24 +109,7 @@ public class Gastos extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Fecha", "Carro", "Cantidad", "Descripción"
-            }
-        ));
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(tablaAMostrar);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel4.setText("Fecha final:");
@@ -328,7 +316,62 @@ public class Gastos extends javax.swing.JFrame {
     }//GEN-LAST:event_carroComboBoxActionPerformed
 
     private void consultarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarButtonActionPerformed
-        // TODO add your handling code here:
+        modelo = new DefaultTableModel();
+        try {
+            conn = Primavera.Enlace(conn);
+            String consulta = "select Gastos.id_gasto, Gastos.cantidad_gasto, Gastos.fecha_gasto, Gastos.desc_gasto "
+                    + "from Gastos, CarroSolar "
+                    + "Where Gastos.ID_CARRO = CarroSolar.ID_CARRO "
+                    + "and CarroSolar.ID_CARRO = ? "
+                    + "AND Gastos.FECHA_GASTO >= ? "
+                    + "AND Gastos.FECHA_GASTO <= ? ";
+            String sqlinsertar = consulta;
+            String fechaIni = diaIniText.getText()+"/"+mesIniText.getText()+"/"+anoIniText.getText();
+            String fechaFin= diaFinText.getText()+"/"+mesFinText.getText()+"/"+anoFinText.getText();
+            PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+            String idCarro = Primavera.getId("id_carro", "nombre_carro", "carrosolar", carroComboBox.getSelectedItem().toString());
+            psta.setString(1, idCarro);
+            psta.setString(2, fechaIni);
+            psta.setString(3, fechaFin);
+            ResultSet rs = psta.executeQuery();
+            ResultSetMetaData rsMd = rs.getMetaData();
+            // Se obtiene el número de columnas.
+            int numeroColumnas = rsMd.getColumnCount();
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("ID");
+            modelo.addColumn("Cantidad");
+            modelo.addColumn("Fecha");
+            modelo.addColumn("Descripcion");
+            while (rs.next()) {
+                //System.out.println("Entro");
+                String[] fila = new String[numeroColumnas];
+                for (int i = 0; i < numeroColumnas; i++) {
+                    fila[0] = rs.getString(1);
+                    fila[1] = rs.getString(2);
+                    fila[2] = rs.getString(3);
+                    fila[3] = rs.getString(4);
+                }
+                modelo.addRow(fila);
+            }
+            rs.close();
+            conn.close();
+            this.tablaAMostrar.setModel(modelo);
+
+            /**
+             * if (result != null && result.next()) {
+             * nombreText.setText(result.getString(2));
+             * placaText.setText(result.getString(3));
+             * estadoText.setText(result.getString(4));
+             * idText.setBackground(Color.GRAY);
+             * modificarButton.setEnabled(true); estadoText.setEnabled(true);
+             * crearButton.setEnabled(false); } else { nombreText.setText("");
+             * placaText.setText(""); estadoText.setText("ACTIVO");
+             * estadoText.setEnabled(false); modificarButton.setEnabled(false);
+             * crearButton.setEnabled(true); }
+             */
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }//GEN-LAST:event_consultarButtonActionPerformed
 
     /**
@@ -387,8 +430,8 @@ public class Gastos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField mesFinText;
     private javax.swing.JTextField mesIniText;
+    private javax.swing.JTable tablaAMostrar;
     // End of variables declaration//GEN-END:variables
 }
