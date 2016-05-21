@@ -83,6 +83,23 @@ public class Primavera {
         return null;
     }
     
+    public static ResultSet selectAllWhere(String tabla,String campoId, String id,String campoCond, String cond){
+        String consulta = "select * from "+tabla+" where "+campoId+" = ? AND "+campoCond+" = ?";
+        //System.out.println(consulta);
+        try {
+           conn=Primavera.Enlace(conn);
+           String sqlinsertar=consulta;
+           PreparedStatement psta=conn.prepareStatement(sqlinsertar);
+           psta.setString(1, id);
+           psta.setString(2, cond);
+           ResultSet rs = psta.executeQuery();
+           return rs;
+        } catch(Exception e){
+            System.out.println(e);
+        }
+        return null;
+    }
+    
     public static boolean update(String tabla, String columnaUp, String value, String columnaId, String id){
         boolean updated = false;
         String consulta = "update "+tabla+" set "+columnaUp+" = ? where "+columnaId+" = ?";

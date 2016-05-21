@@ -213,7 +213,8 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void todosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todosButtonActionPerformed
-
+        modelo = new DefaultTableModel();
+        System.out.println("todos finding...");
         if (profesionCb.getSelectedItem().toString().equals("")) {
             profesionCb.requestFocusInWindow();
         } else {
@@ -230,14 +231,29 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
                 modelo.addColumn("Nombre");
                 modelo.addColumn("Telefono");
                 modelo.addColumn("Correo");
-                modelo.addColumn("Estado");
                 modelo.addColumn("Subsistema");
+                modelo.addColumn("Estado");
                 modelo.addColumn("Tipo");
                 while (rs.next()) {
-                    System.out.println("Entro");
+                    //System.out.println("Entro");
                     String[] fila = new String[numeroColumnas];
                     for (int i = 0; i < numeroColumnas; i++) {
                         fila[i] = rs.getString(i + 1);
+                        fila[0] = rs.getString(1);
+                        fila[1] = rs.getString(3);
+                        fila[2] = rs.getString(4);
+                        fila[3] = rs.getString(5);
+                        //ResultSet nombrSubs = Primavera.selectAllFrom("subsistema","id_subsistema",rs.getString(2));
+                        //if(nombrSubs.next()){
+                        //    fila[4] = nombrSubs.getString(3);
+                        //}
+                        fila[4] = rs.getString(2);
+                        fila[5] = rs.getString(6);
+                        fila[6] = rs.getString(11);
+                        //ResultSet nombrTipoPers = Primavera.selectAllFrom("tipo_persona","id_tipopersona",rs.getString(11));
+                        //if(nombrTipoPers.next()){
+                        //    fila[6] = nombrTipoPers.getString(2);
+                        //}
                     }
                     modelo.addRow(fila);
                 }
@@ -265,15 +281,201 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
     }//GEN-LAST:event_todosButtonActionPerformed
 
     private void profesoresButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profesoresButtonActionPerformed
-        // TODO add your handling code here:
+        modelo = new DefaultTableModel();
+        if (profesionCb.getSelectedItem().toString().equals("")) {
+            profesionCb.requestFocusInWindow();
+        } else {
+            try {
+                conn = Primavera.Enlace(conn);
+                String id = Primavera.getId("id_profesion", "nombre_profesion", "Profesion", profesionCb.getSelectedItem().toString());
+                ResultSet rs = Primavera.selectAllWhere("personal", "id_profesion", id,"id_tipopersona","3");
+                ResultSetMetaData rsMd = rs.getMetaData();
+                // Se obtiene el número de columnas.
+                int numeroColumnas = rsMd.getColumnCount();
+                DefaultTableModel modelo = new DefaultTableModel();
+                modelo.addColumn("Identificacion");
+                modelo.addColumn("Nombre");
+                modelo.addColumn("Telefono");
+                modelo.addColumn("Correo");
+                modelo.addColumn("Subsistema");
+                modelo.addColumn("Estado");
+                modelo.addColumn("Tipo");
+                while (rs.next()) {
+                    //System.out.println("Entro");
+                    String[] fila = new String[numeroColumnas];
+                    for (int i = 0; i < numeroColumnas; i++) {
+                        fila[i] = rs.getString(i + 1);
+                        fila[0] = rs.getString(1);
+                        fila[1] = rs.getString(3);
+                        fila[2] = rs.getString(4);
+                        fila[3] = rs.getString(5);
+                        //ResultSet nombrSubs = Primavera.selectAllFrom("subsistema","id_subsistema",rs.getString(2));
+                        //if(nombrSubs.next()){
+                        //    fila[4] = nombrSubs.getString(3);
+                        //}
+                        fila[4] = rs.getString(2);
+                        fila[5] = rs.getString(6);
+                        fila[6] = rs.getString(11);
+                        //ResultSet nombrTipoPers = Primavera.selectAllFrom("tipo_persona","id_tipopersona",rs.getString(11));
+                        //if(nombrTipoPers.next()){
+                        //    fila[6] = nombrTipoPers.getString(2);
+                        //}
+                    }
+                    modelo.addRow(fila);
+                }
+                rs.close();
+                conn.close();
+                this.tablaAMostrar.setModel(modelo);
+
+                /**
+                 * if (result != null && result.next()) {
+                 * nombreText.setText(result.getString(2));
+                 * placaText.setText(result.getString(3));
+                 * estadoText.setText(result.getString(4));
+                 * idText.setBackground(Color.GRAY);
+                 * modificarButton.setEnabled(true);
+                 * estadoText.setEnabled(true); crearButton.setEnabled(false); }
+                 * else { nombreText.setText(""); placaText.setText("");
+                 * estadoText.setText("ACTIVO"); estadoText.setEnabled(false);
+                 * modificarButton.setEnabled(false);
+                 * crearButton.setEnabled(true); }
+                 */
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
     }//GEN-LAST:event_profesoresButtonActionPerformed
 
     private void estudiantesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estudiantesButtonActionPerformed
-        // TODO add your handling code here:
+         modelo = new DefaultTableModel();
+        if (profesionCb.getSelectedItem().toString().equals("")) {
+            profesionCb.requestFocusInWindow();
+        } else {
+            try {
+                conn = Primavera.Enlace(conn);
+                String id = Primavera.getId("id_profesion", "nombre_profesion", "Profesion", profesionCb.getSelectedItem().toString());
+                ResultSet rs = Primavera.selectAllWhere("personal", "id_profesion", id,"id_tipopersona","1");
+                ResultSetMetaData rsMd = rs.getMetaData();
+                // Se obtiene el número de columnas.
+                int numeroColumnas = rsMd.getColumnCount();
+                DefaultTableModel modelo = new DefaultTableModel();
+                modelo.addColumn("Identificacion");
+                modelo.addColumn("Nombre");
+                modelo.addColumn("Telefono");
+                modelo.addColumn("Correo");
+                modelo.addColumn("Subsistema");
+                modelo.addColumn("Estado");
+                modelo.addColumn("Tipo");
+                while (rs.next()) {
+                    //System.out.println("Entro");
+                    String[] fila = new String[numeroColumnas];
+                    for (int i = 0; i < numeroColumnas; i++) {
+                        fila[i] = rs.getString(i + 1);
+                        fila[0] = rs.getString(1);
+                        fila[1] = rs.getString(3);
+                        fila[2] = rs.getString(4);
+                        fila[3] = rs.getString(5);
+                        //ResultSet nombrSubs = Primavera.selectAllFrom("subsistema","id_subsistema",rs.getString(2));
+                        //if(nombrSubs.next()){
+                        //    fila[4] = nombrSubs.getString(3);
+                        //}
+                        fila[4] = rs.getString(2);
+                        fila[5] = rs.getString(6);
+                        fila[6] = rs.getString(11);
+                        //ResultSet nombrTipoPers = Primavera.selectAllFrom("tipo_persona","id_tipopersona",rs.getString(11));
+                        //if(nombrTipoPers.next()){
+                        //    fila[6] = nombrTipoPers.getString(2);
+                        //}
+                    }
+                    modelo.addRow(fila);
+                }
+                rs.close();
+                conn.close();
+                this.tablaAMostrar.setModel(modelo);
+
+                /**
+                 * if (result != null && result.next()) {
+                 * nombreText.setText(result.getString(2));
+                 * placaText.setText(result.getString(3));
+                 * estadoText.setText(result.getString(4));
+                 * idText.setBackground(Color.GRAY);
+                 * modificarButton.setEnabled(true);
+                 * estadoText.setEnabled(true); crearButton.setEnabled(false); }
+                 * else { nombreText.setText(""); placaText.setText("");
+                 * estadoText.setText("ACTIVO"); estadoText.setEnabled(false);
+                 * modificarButton.setEnabled(false);
+                 * crearButton.setEnabled(true); }
+                 */
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
     }//GEN-LAST:event_estudiantesButtonActionPerformed
 
     private void externosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_externosButtonActionPerformed
-        // TODO add your handling code here:
+         modelo = new DefaultTableModel();
+        if (profesionCb.getSelectedItem().toString().equals("")) {
+            profesionCb.requestFocusInWindow();
+        } else {
+            try {
+                conn = Primavera.Enlace(conn);
+                String id = Primavera.getId("id_profesion", "nombre_profesion", "Profesion", profesionCb.getSelectedItem().toString());
+                ResultSet rs = Primavera.selectAllWhere("personal", "id_profesion", id,"id_tipopersona","4");
+                ResultSetMetaData rsMd = rs.getMetaData();
+                // Se obtiene el número de columnas.
+                int numeroColumnas = rsMd.getColumnCount();
+                DefaultTableModel modelo = new DefaultTableModel();
+                modelo.addColumn("Identificacion");
+                modelo.addColumn("Nombre");
+                modelo.addColumn("Telefono");
+                modelo.addColumn("Correo");
+                modelo.addColumn("Subsistema");
+                modelo.addColumn("Estado");
+                modelo.addColumn("Tipo");
+                while (rs.next()) {
+                    //System.out.println("Entro");
+                    String[] fila = new String[numeroColumnas];
+                    for (int i = 0; i < numeroColumnas; i++) {
+                        fila[i] = rs.getString(i + 1);
+                        fila[0] = rs.getString(1);
+                        fila[1] = rs.getString(3);
+                        fila[2] = rs.getString(4);
+                        fila[3] = rs.getString(5);
+                        //ResultSet nombrSubs = Primavera.selectAllFrom("subsistema","id_subsistema",rs.getString(2));
+                        //if(nombrSubs.next()){
+                        //    fila[4] = nombrSubs.getString(3);
+                        //}
+                        fila[4] = rs.getString(2);
+                        fila[5] = rs.getString(6);
+                        fila[6] = rs.getString(11);
+                        //ResultSet nombrTipoPers = Primavera.selectAllFrom("tipo_persona","id_tipopersona",rs.getString(11));
+                        //if(nombrTipoPers.next()){
+                        //    fila[6] = nombrTipoPers.getString(2);
+                        //}
+                    }
+                    modelo.addRow(fila);
+                }
+                rs.close();
+                conn.close();
+                this.tablaAMostrar.setModel(modelo);
+
+                /**
+                 * if (result != null && result.next()) {
+                 * nombreText.setText(result.getString(2));
+                 * placaText.setText(result.getString(3));
+                 * estadoText.setText(result.getString(4));
+                 * idText.setBackground(Color.GRAY);
+                 * modificarButton.setEnabled(true);
+                 * estadoText.setEnabled(true); crearButton.setEnabled(false); }
+                 * else { nombreText.setText(""); placaText.setText("");
+                 * estadoText.setText("ACTIVO"); estadoText.setEnabled(false);
+                 * modificarButton.setEnabled(false);
+                 * crearButton.setEnabled(true); }
+                 */
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
     }//GEN-LAST:event_externosButtonActionPerformed
 
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
