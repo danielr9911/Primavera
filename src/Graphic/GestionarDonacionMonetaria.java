@@ -404,6 +404,7 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
                     cantidadText.setText(result.getString(4));
                     tasaText.setText(result.getString(5));
                     cantidadCopText.setText(result.getString(6));
+                    System.out.println();
                     String dia = result.getString(7).substring(0, 2);
                     diaText.setText(dia);
                     String mes = result.getString(7).substring(3, 5);
