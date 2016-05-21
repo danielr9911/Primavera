@@ -25,8 +25,8 @@ public class GestionarGastos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--GESTIONAR GASTOS--");
-        crearButton.setEnabled(false);
-        modificarButton.setEnabled(false);
+        //crearButton.setEnabled(false);
+        //modificarButton.setEnabled(false);
         
         try {
            conn=Primavera.Enlace(conn);
