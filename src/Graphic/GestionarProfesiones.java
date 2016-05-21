@@ -27,6 +27,8 @@ public class GestionarProfesiones extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--GESTIONAR PROFESIONES--");
+        crearButton.setEnabled(false);
+        modificarButton.setEnabled(false);
     }
 
     /**
@@ -240,6 +242,14 @@ public class GestionarProfesiones extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void nombreTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreTextActionPerformed
+       
+    }//GEN-LAST:event_nombreTextActionPerformed
+
+    private void idTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusGained
+        idText.setBackground(Color.WHITE);
+    }//GEN-LAST:event_idTextFocusGained
+
+    private void idTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusLost
         if (idText.getText().equals("")) {
             idText.requestFocusInWindow();
         } else {
@@ -262,14 +272,6 @@ public class GestionarProfesiones extends javax.swing.JFrame {
                 System.out.println(e);
             }
         }
-    }//GEN-LAST:event_nombreTextActionPerformed
-
-    private void idTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusGained
-        idText.setBackground(Color.WHITE);
-    }//GEN-LAST:event_idTextFocusGained
-
-    private void idTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusLost
-        // TODO add your handling code here:
     }//GEN-LAST:event_idTextFocusLost
 
     /**

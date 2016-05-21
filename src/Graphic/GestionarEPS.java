@@ -43,7 +43,6 @@ public class GestionarEPS extends javax.swing.JFrame {
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jButton17 = new javax.swing.JButton();
@@ -52,7 +51,6 @@ public class GestionarEPS extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         idText = new javax.swing.JTextField();
         nombreText = new javax.swing.JTextField();
-        tipoText = new javax.swing.JTextField();
         telefonoText = new javax.swing.JTextField();
         ciudadText = new javax.swing.JTextField();
 
@@ -66,9 +64,6 @@ public class GestionarEPS extends javax.swing.JFrame {
 
         jLabel34.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel34.setText("ID");
-
-        jLabel35.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel35.setText("Tipo");
 
         jLabel36.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel36.setText("Nombre");
@@ -145,7 +140,6 @@ public class GestionarEPS extends javax.swing.JFrame {
                                         .addGap(138, 138, 138))
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel35)
                                             .addComponent(jLabel36)
                                             .addComponent(jLabel34)
                                             .addComponent(jLabel37))
@@ -153,7 +147,6 @@ public class GestionarEPS extends javax.swing.JFrame {
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(idText)
                                     .addComponent(nombreText)
-                                    .addComponent(tipoText)
                                     .addComponent(telefonoText)
                                     .addComponent(ciudadText, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(29, Short.MAX_VALUE))
@@ -172,11 +165,7 @@ public class GestionarEPS extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36)
                     .addComponent(nombreText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel35)
-                    .addComponent(tipoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel37)
                     .addComponent(telefonoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -217,8 +206,7 @@ public class GestionarEPS extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Primavera.update("profesion", "nombre_eps", nombreText.getText(), "id_eps", idText.getText());
-        Primavera.update("profesion", "tipo_eps", tipoText.getText(), "id_eps", idText.getText());
+        Primavera.update("profesion", "nombre_eps", nombreText.getText(), "id_eps", idText.getText()); 
         Primavera.update("profesion", "telefono_eps", telefonoText.getText(), "id_eps", idText.getText());
         Primavera.update("profesion", "ciudad_eps", ciudadText.getText(), "id_eps", idText.getText());
         JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
@@ -233,7 +221,6 @@ public class GestionarEPS extends javax.swing.JFrame {
     private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
         if(idText.getText().equals("")
                | nombreText.getText().equals("")
-               | tipoText.getText().equals("")
                | telefonoText.getText().equals("")
                | ciudadText.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Por favor completa todas las casillas");
@@ -243,7 +230,7 @@ public class GestionarEPS extends javax.swing.JFrame {
             String sqlinsertar = "insert into EPS values (?,?,?,?)";
             PreparedStatement psta = conn.prepareStatement(sqlinsertar);
             psta.setString(1, idText.getText());
-            String eps = nombreText.getText()+" - "+tipoText.getText();
+            String eps = nombreText.getText();
             psta.setString(2, eps);
             psta.setString(3, telefonoText.getText());
             psta.setString(4, ciudadText.getText());
@@ -251,7 +238,6 @@ public class GestionarEPS extends javax.swing.JFrame {
             psta.close();
             idText.setText("");
             nombreText.setText("");
-            tipoText.setText("");
             telefonoText.setText("");
             ciudadText.setText("");
             idText.requestFocusInWindow();
@@ -275,15 +261,13 @@ public class GestionarEPS extends javax.swing.JFrame {
 
                 if (result != null && result.next()) {
                     nombreText.setText(result.getString(2));
-                    tipoText.setText(result.getString(3));
-                    telefonoText.setText(result.getString(4));
-                    ciudadText.setText(result.getString(5));
+                    telefonoText.setText(result.getString(3));
+                    ciudadText.setText(result.getString(4));
                     idText.setBackground(Color.LIGHT_GRAY);
                     modificarButton.setEnabled(true);
                     crearButton.setEnabled(false);
                 } else {
                     nombreText.setText("");
-                    tipoText.setText("");
                     telefonoText.setText("");
                     ciudadText.setText("");
                     modificarButton.setEnabled(false);
@@ -339,13 +323,11 @@ public class GestionarEPS extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JButton modificarButton;
     private javax.swing.JTextField nombreText;
     private javax.swing.JTextField telefonoText;
-    private javax.swing.JTextField tipoText;
     // End of variables declaration//GEN-END:variables
 }
