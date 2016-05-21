@@ -5,9 +5,9 @@
  */
 package Graphic;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import primavera.Primavera;
 
@@ -16,7 +16,9 @@ import primavera.Primavera;
  * @author dsernae
  */
 public class GestionarPatrocinadores extends javax.swing.JFrame {
-    static Connection conn = null;
+
+    Connection conn = null;
+
     /**
      * Creates new form GestionarPatrocinadores
      */
@@ -25,6 +27,8 @@ public class GestionarPatrocinadores extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--GESTIONAR PATROCINADORES--");
+        estadoComboBox.addItem("ACTIVO");
+        estadoComboBox.addItem("INACTIVO");
     }
 
     /**
@@ -49,9 +53,9 @@ public class GestionarPatrocinadores extends javax.swing.JFrame {
         crearButton = new javax.swing.JButton();
         telefonoText = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        estadoText = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         correoText = new javax.swing.JTextField();
+        estadoComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,12 +119,6 @@ public class GestionarPatrocinadores extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel6.setText("Estado");
 
-        estadoText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                estadoTextActionPerformed(evt);
-            }
-        });
-
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel7.setText("Correo");
 
@@ -156,8 +154,8 @@ public class GestionarPatrocinadores extends javax.swing.JFrame {
                             .addComponent(idText)
                             .addComponent(nombreText)
                             .addComponent(telefonoText)
-                            .addComponent(estadoText)
-                            .addComponent(correoText)))
+                            .addComponent(correoText)
+                            .addComponent(estadoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(28, 28, 28))
@@ -186,8 +184,8 @@ public class GestionarPatrocinadores extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE))
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(estadoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(estadoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(modificarButton)
@@ -235,45 +233,40 @@ public class GestionarPatrocinadores extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
-       if(idText.getText().equals("") 
-               | nombreText.getText().equals("") 
-               | telefonoText.getText().equals("") 
-               | estadoText.getText().equals("") 
-               | correoText.getText().equals("")){
+        if (idText.getText().equals("")
+                | nombreText.getText().equals("")
+                | telefonoText.getText().equals("")
+                | estadoComboBox.getSelectedItem().toString().equals("")
+                | correoText.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Por favor completa todas las casillas");
-        }else{
-        try {
-            conn = Primavera.Enlace(conn);
-            String sqlinsertar = "insert into PATROCINADOR values (?,?,?,?,?)";
-            PreparedStatement psta = conn.prepareStatement(sqlinsertar);
-            psta.setString(1, idText.getText());
-            psta.setString(2, nombreText.getText());
-            psta.setString(3, telefonoText.getText());
-            psta.setString(4, correoText.getText());
-            psta.setString(5, estadoText.getText());
-            psta.execute();
-            psta.close();
-            idText.setText("");
-            nombreText.setText("");
-            telefonoText.setText("");
-            correoText.setText("");
-            estadoText.setText("");
-            
-            idText.requestFocusInWindow();
-            JOptionPane.showMessageDialog(null, "Registro guardado satisfactoriamente");
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        } else {
+            try {
+                conn = Primavera.Enlace(conn);
+                String sqlinsertar = "insert into PATROCINADOR values (?,?,?,?,?)";
+                PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+                psta.setString(1, idText.getText());
+                psta.setString(2, nombreText.getText());
+                psta.setString(3, telefonoText.getText());
+                psta.setString(4, correoText.getText());
+                psta.setString(5, estadoComboBox.getSelectedItem().toString());
+                psta.execute();
+                psta.close();
+                idText.setText("");
+                nombreText.setText("");
+                telefonoText.setText("");
+                correoText.setText("");
+                estadoComboBox.setSelectedIndex(0);
+                idText.requestFocusInWindow();
+                JOptionPane.showMessageDialog(null, "Registro guardado satisfactoriamente");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }//GEN-LAST:event_crearButtonActionPerformed
 
     private void telefonoTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonoTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_telefonoTextActionPerformed
-
-    private void estadoTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_estadoTextActionPerformed
 
     private void correoTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoTextActionPerformed
         // TODO add your handling code here:
@@ -317,7 +310,7 @@ public class GestionarPatrocinadores extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField correoText;
     private javax.swing.JButton crearButton;
-    private javax.swing.JTextField estadoText;
+    private javax.swing.JComboBox<String> estadoComboBox;
     private javax.swing.JTextField idText;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

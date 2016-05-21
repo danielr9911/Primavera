@@ -5,11 +5,21 @@
  */
 package Graphic;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import javax.swing.table.DefaultTableModel;
+import primavera.Primavera;
+
 /**
  *
  * @author dsernae
  */
 public class ClasificacionDePatrocinadores extends javax.swing.JFrame {
+
+    Connection conn = null;
+    DefaultTableModel modelo = new DefaultTableModel();
 
     /**
      * Creates new form ClasificaciónDePatrocinadores
@@ -19,6 +29,7 @@ public class ClasificacionDePatrocinadores extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA-- CLASIFICACION DE PATROCINADORES--");
+        this.tablaAMostrar.setModel(modelo);
     }
 
     /**
@@ -33,25 +44,25 @@ public class ClasificacionDePatrocinadores extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        menorButton = new javax.swing.JButton();
+        mayorButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        diaIniText = new javax.swing.JTextField();
+        mesIniText = new javax.swing.JTextField();
+        anoIniText = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        diaFinText = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        mesFinText = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        anoFinText = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        tablaAMostrar = new javax.swing.JTable();
+        cancelarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,19 +72,19 @@ public class ClasificacionDePatrocinadores extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ClasificacionPatrocinadores.png"))); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton1.setText("Menor patrocinador");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        menorButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        menorButton.setText("Menor patrocinador");
+        menorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                menorButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton3.setText("Mayor patrocinador");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        mayorButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        mayorButton.setText("Mayor patrocinador");
+        mayorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                mayorButtonActionPerformed(evt);
             }
         });
 
@@ -90,77 +101,60 @@ public class ClasificacionDePatrocinadores extends javax.swing.JFrame {
         jLabel8.setText("MM");
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel9.setText("AAAA");
+        jLabel9.setText("AA");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        diaIniText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                diaIniTextActionPerformed(evt);
             }
         });
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        mesIniText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                mesIniTextActionPerformed(evt);
             }
         });
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        anoIniText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                anoIniTextActionPerformed(evt);
             }
         });
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel10.setText("DD");
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        diaFinText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                diaFinTextActionPerformed(evt);
             }
         });
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel11.setText("MM");
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        mesFinText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                mesFinTextActionPerformed(evt);
             }
         });
 
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel12.setText("AAAA");
+        jLabel12.setText("AA");
 
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        anoFinText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                anoFinTextActionPerformed(evt);
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Patrocinador", "Teléfono", "Correo", "Estado"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tablaAMostrar);
 
-        jButton2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cancelarButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        cancelarButton.setText("Cancelar");
+        cancelarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                cancelarButtonActionPerformed(evt);
             }
         });
 
@@ -181,32 +175,32 @@ public class ClasificacionDePatrocinadores extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(diaFinText, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(mesFinText, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(24, 24, 24)
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(anoFinText, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(diaIniText, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(mesIniText, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(22, 22, 22)
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(anoIniText, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(cancelarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mayorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(menorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(97, 97, 97))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,26 +218,26 @@ public class ClasificacionDePatrocinadores extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                    .addComponent(mayorButton)
                     .addComponent(jLabel5)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(diaIniText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(anoIniText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mesIniText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(menorButton)
                     .addComponent(jLabel6)
                     .addComponent(jLabel10)
                     .addComponent(jLabel11)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(diaFinText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(anoFinText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mesFinText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(cancelarButton)
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(21, Short.MAX_VALUE))
@@ -269,43 +263,153 @@ public class ClasificacionDePatrocinadores extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void menorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menorButtonActionPerformed
+        modelo = new DefaultTableModel();
+        try {
+            conn = Primavera.Enlace(conn);
+            String consulta = "select Patrocinador.nombre_patr, Sum(cantidad_cop), PATROCINADOR.ESTADO_PATR  "
+                    + "from donacion_monetaria,PATROCINADOR "
+                    + "where donacion_monetaria.ID_PATROCINADOR = PATROCINADOR.ID_PATROCINADOR "
+                    + "AND donacion_monetaria.FECHA_MONE >= ? "
+                    + "AND donacion_monetaria.FECHA_MONE <= ? "
+                    + "group by Patrocinador.nombre_patr, PATROCINADOR.ESTADO_PATR "
+                    + "order by sum(cantidad_cop) ASC ";
+            String sqlinsertar = consulta;
+            String fechaIni = diaIniText.getText() + "/" + mesIniText.getText() + "/" + anoIniText.getText();
+            String fechaFin = diaFinText.getText() + "/" + mesFinText.getText() + "/" + anoFinText.getText();
+            PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+            psta.setString(1, fechaIni);
+            psta.setString(2, fechaFin);
+            ResultSet rs = psta.executeQuery();
+            ResultSetMetaData rsMd = rs.getMetaData();
+            // Se obtiene el número de columnas.
+            int numeroColumnas = rsMd.getColumnCount();
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Patrocinador");
+            modelo.addColumn("Cantidad total");
+            modelo.addColumn("Estado");
+            
+            while (rs.next()) {
+                
+                //System.out.println("Entro");
+                String[] fila = new String[numeroColumnas];
+                for (int i = 0; i < numeroColumnas; i++) {
+                    fila[0] = rs.getString(1);
+                    fila[1] = rs.getString(2);
+                    fila[2] = rs.getString(3);
+                }
+                modelo.addRow(fila);
+            }
+            rs.close();
+            conn.close();
+            this.tablaAMostrar.setModel(modelo);
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+            /**
+             * if (result != null && result.next()) {
+             * nombreText.setText(result.getString(2));
+             * placaText.setText(result.getString(3));
+             * estadoText.setText(result.getString(4));
+             * idText.setBackground(Color.GRAY);
+             * modificarButton.setEnabled(true); estadoText.setEnabled(true);
+             * crearButton.setEnabled(false); } else { nombreText.setText("");
+             * placaText.setText(""); estadoText.setText("ACTIVO");
+             * estadoText.setEnabled(false); modificarButton.setEnabled(false);
+             * crearButton.setEnabled(true); }
+             */
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_menorButtonActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    private void mayorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mayorButtonActionPerformed
+        modelo = new DefaultTableModel();
+        try {
+            conn = Primavera.Enlace(conn);
+            String consulta = "select Patrocinador.nombre_patr, Sum(cantidad_cop), PATROCINADOR.ESTADO_PATR  "
+                    + "from donacion_monetaria,PATROCINADOR "
+                    + "where donacion_monetaria.ID_PATROCINADOR = PATROCINADOR.ID_PATROCINADOR "
+                    + "AND donacion_monetaria.FECHA_MONE >= ? "
+                    + "AND donacion_monetaria.FECHA_MONE <= ? "
+                    + "group by Patrocinador.nombre_patr, PATROCINADOR.ESTADO_PATR "
+                    + "order by sum(cantidad_cop) DESC ";
+            String sqlinsertar = consulta;
+            String fechaIni = diaIniText.getText() + "/" + mesIniText.getText() + "/" + anoIniText.getText();
+            String fechaFin = diaFinText.getText() + "/" + mesFinText.getText() + "/" + anoFinText.getText();
+            PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+            psta.setString(1, fechaIni);
+            psta.setString(2, fechaFin);
+            ResultSet rs = psta.executeQuery();
+            ResultSetMetaData rsMd = rs.getMetaData();
+            // Se obtiene el número de columnas.
+            int numeroColumnas = rsMd.getColumnCount();
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Posicion");
+            modelo.addColumn("Patrocinador");
+            modelo.addColumn("Cantidad total");
+            modelo.addColumn("Estado");
+            int cont=1;
+            while (rs.next()) {
+                //System.out.println("Entro");
+                String[] fila = new String[numeroColumnas+1];
+                for (int i = 0; i < numeroColumnas; i++) {
+                    fila[0] = Integer.toString(cont);
+                    fila[1] = rs.getString(1);
+                    fila[2] = rs.getString(2);
+                    fila[3] = rs.getString(3);
+                }
+                modelo.addRow(fila);
+                cont++;
+            }
+            rs.close();
+            conn.close();
+            this.tablaAMostrar.setModel(modelo);
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+            /**
+             * if (result != null && result.next()) {
+             * nombreText.setText(result.getString(2));
+             * placaText.setText(result.getString(3));
+             * estadoText.setText(result.getString(4));
+             * idText.setBackground(Color.GRAY);
+             * modificarButton.setEnabled(true); estadoText.setEnabled(true);
+             * crearButton.setEnabled(false); } else { nombreText.setText("");
+             * placaText.setText(""); estadoText.setText("ACTIVO");
+             * estadoText.setEnabled(false); modificarButton.setEnabled(false);
+             * crearButton.setEnabled(true); }
+             */
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_mayorButtonActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void diaIniTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diaIniTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_diaIniTextActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void mesIniTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mesIniTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_mesIniTextActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void anoIniTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anoIniTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_anoIniTextActionPerformed
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void diaFinTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diaFinTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    }//GEN-LAST:event_diaFinTextActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void mesFinTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mesFinTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mesFinTextActionPerformed
+
+    private void anoFinTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anoFinTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_anoFinTextActionPerformed
+
+    private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
         MenuPrincipal vent = new MenuPrincipal();
         vent.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_cancelarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -343,9 +447,11 @@ public class ClasificacionDePatrocinadores extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JTextField anoFinText;
+    private javax.swing.JTextField anoIniText;
+    private javax.swing.JButton cancelarButton;
+    private javax.swing.JTextField diaFinText;
+    private javax.swing.JTextField diaIniText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -358,12 +464,10 @@ public class ClasificacionDePatrocinadores extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JButton mayorButton;
+    private javax.swing.JButton menorButton;
+    private javax.swing.JTextField mesFinText;
+    private javax.swing.JTextField mesIniText;
+    private javax.swing.JTable tablaAMostrar;
     // End of variables declaration//GEN-END:variables
 }

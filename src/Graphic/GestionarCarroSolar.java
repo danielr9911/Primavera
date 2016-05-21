@@ -26,6 +26,8 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--GESTIONAR CARRO SOLAR--");
+        estadoComboBox.addItem("ACTIVO");
+        estadoComboBox.addItem("INACTIVO");
         crearButton.setEnabled(false);
         modificarButton.setEnabled(false);
     }
@@ -52,7 +54,7 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
         idText = new javax.swing.JTextField();
         nombreText = new javax.swing.JTextField();
         placaText = new javax.swing.JTextField();
-        estadoText = new javax.swing.JTextField();
+        estadoComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,12 +126,6 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
             }
         });
 
-        estadoText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                estadoTextActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -146,11 +142,11 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel9))
                                 .addGap(127, 127, 127)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nombreText, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(placaText, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(estadoText, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(idText, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(nombreText, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                    .addComponent(placaText, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                    .addComponent(idText, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                    .addComponent(estadoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(crearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
@@ -186,7 +182,7 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(estadoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(estadoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelarButton)
@@ -222,15 +218,12 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelarButtonActionPerformed
 
     private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
-        if(estadoText.getText().toUpperCase().equals("ACTIVO")|
-                estadoText.getText().toUpperCase().equals("INACTIVO")){
+        
             Primavera.update("carrosolar", "nombre_carro", nombreText.getText(), "id_carro", idText.getText());
             Primavera.update("carrosolar", "placa_carro", placaText.getText(), "id_carro", idText.getText());
-            Primavera.update("carrosolar", "estado_carro", estadoText.getText(), "id_carro", idText.getText());
+            Primavera.update("carrosolar", "estado_carro", estadoComboBox.getSelectedItem().toString(), "id_carro", idText.getText());
             JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
-        }else{
-            JOptionPane.showMessageDialog(null, "Estado debe ser: ACTIVO o INACTIVO");
-        }
+        
     }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void idTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextActionPerformed
@@ -245,13 +238,9 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_placaTextActionPerformed
 
-    private void estadoTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_estadoTextActionPerformed
-
     private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
         if(idText.getText().equals("") | nombreText.getText().equals("")|
-                placaText.getText().equals("") | estadoText.getText().equals("")){
+                placaText.getText().equals("") | estadoComboBox.getSelectedItem().toString().equals("")){
             JOptionPane.showMessageDialog(null, "Por favor completa todas las casillas");
         }else{
         try {
@@ -261,13 +250,13 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
             psta.setString(1, idText.getText());
             psta.setString(2, nombreText.getText());
             psta.setString(3, placaText.getText());
-            psta.setString(4, estadoText.getText());
+            psta.setString(4, estadoComboBox.getSelectedItem().toString());
             psta.execute();
             psta.close();
             idText.setText("");
             nombreText.setText("");
             placaText.setText("");
-            estadoText.setText("");
+            estadoComboBox.setSelectedIndex(0);
             idText.requestFocusInWindow();
             JOptionPane.showMessageDialog(null, "Registro guardado satisfactoriamente");
         } catch (Exception e) {
@@ -286,16 +275,16 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
                 if (result != null && result.next()) {
                     nombreText.setText(result.getString(2));
                     placaText.setText(result.getString(3));
-                    estadoText.setText(result.getString(4));
+                    estadoComboBox.setSelectedItem(result.getString(4));
                     idText.setBackground(Color.GRAY);
                     modificarButton.setEnabled(true);
-                    estadoText.setEnabled(true);
+                    estadoComboBox.setEnabled(true);
                     crearButton.setEnabled(false);
                 } else {
                     nombreText.setText("");
                     placaText.setText("");
-                    estadoText.setText("ACTIVO");
-                    estadoText.setEnabled(false);
+                    estadoComboBox.setSelectedItem(0);
+                    estadoComboBox.setEnabled(false);
                     modificarButton.setEnabled(false);
                     crearButton.setEnabled(true);
                 }
@@ -347,7 +336,7 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelarButton;
     private javax.swing.JButton crearButton;
-    private javax.swing.JTextField estadoText;
+    private javax.swing.JComboBox<String> estadoComboBox;
     private javax.swing.JTextField idText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

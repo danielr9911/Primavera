@@ -25,6 +25,8 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--GESTIONAR SUBSISTEMAS--");
+        estadoComboBox.addItem("ACTIVO");
+        estadoComboBox.addItem("INACTIVO");
         try {
            conn=Primavera.Enlace(conn);
            String sqlinsertar="select nombre_carro from carrosolar";
@@ -66,9 +68,9 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         idText = new javax.swing.JTextField();
         NombreText = new javax.swing.JTextField();
-        EstadoText = new javax.swing.JTextField();
         carroComboBox = new javax.swing.JComboBox<>();
         labComboBox = new javax.swing.JComboBox<>();
+        estadoComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -147,9 +149,9 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(idText)
                             .addComponent(NombreText)
-                            .addComponent(EstadoText)
                             .addComponent(carroComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(labComboBox, 0, 188, Short.MAX_VALUE))))
+                            .addComponent(labComboBox, 0, 188, Short.MAX_VALUE)
+                            .addComponent(estadoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,7 +184,7 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(EstadoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(estadoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton17)
@@ -236,12 +238,14 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
            psta.setString(3, NombreText.getText());
            String patr1 = Primavera.getId("id_laboratorio", "nombre_lab","laboratorios",labComboBox.getSelectedItem().toString());
            psta.setString(5, patr1);
-           psta.setString(4, EstadoText.getText());
+           psta.setString(4, estadoComboBox.getSelectedItem().toString());
            psta.execute();
            psta.close();
            idText.setText("");
            NombreText.setText("");
-           EstadoText.setText("");
+           estadoComboBox.setSelectedIndex(0);
+           carroComboBox.setSelectedIndex(0);
+           labComboBox.setSelectedIndex(0);
            
            JOptionPane.showMessageDialog(null, "Registro Guardado Satisfactoriamente");
         }catch (Exception e){
@@ -285,9 +289,9 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField EstadoText;
     private javax.swing.JTextField NombreText;
     private javax.swing.JComboBox<String> carroComboBox;
+    private javax.swing.JComboBox<String> estadoComboBox;
     private javax.swing.JTextField idText;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
