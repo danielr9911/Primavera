@@ -34,7 +34,7 @@ public class GestionarGastos extends javax.swing.JFrame {
            PreparedStatement psta=conn.prepareStatement(sqlinsertar);
            ResultSet rs = psta.executeQuery();
            while(rs.next()){
-              CarroComboBox.addItem(rs.getString(1));
+              CarroCb.addItem(rs.getString(1));
            }
            } catch(Exception e){
             System.out.println(e);
@@ -70,7 +70,7 @@ public class GestionarGastos extends javax.swing.JFrame {
         jLabel40 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         descripcionText = new javax.swing.JTextArea();
-        CarroComboBox = new javax.swing.JComboBox<>();
+        CarroCb = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -177,7 +177,7 @@ public class GestionarGastos extends javax.swing.JFrame {
                                         .addComponent(jLabel40)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(añoText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(CarroComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(CarroCb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
                                 .addComponent(crearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,7 +204,7 @@ public class GestionarGastos extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36)
-                    .addComponent(CarroComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CarroCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel35)
@@ -257,7 +257,10 @@ public class GestionarGastos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton17jButton2ActionPerformed
 
     private void modificarButtonjButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonjButton3ActionPerformed
-        // TODO add your handling code here:
+       Primavera.update("gastos", "cantidad_gasto", cantidadText.getText(), "id_gasto", idText.getText());
+       Primavera.update("gastos", "id_carro", CarroCb.getSelectedItem().toString(), "id_gasto", idText.getText());
+       Primavera.update("gastos", "desc_gasto", descripcionText.getText(), "id_gasto", idText.getText());
+       Primavera.update("gastos", "fecha_gasto", diaText.getText()+"/"+mesText.getText()+"/"+añoText.getText(), "id_gasto", idText.getText());
     }//GEN-LAST:event_modificarButtonjButton3ActionPerformed
 
     private void idTextjTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextjTextField1ActionPerformed
@@ -274,7 +277,7 @@ public class GestionarGastos extends javax.swing.JFrame {
            String sqlinsertar="insert into Gastos values (?,?,?,?,to_date(?,'DD/MM/RR'))";
            PreparedStatement psta=conn.prepareStatement(sqlinsertar);
            psta.setString(1, idText.getText());
-           String patr = Primavera.getId("id_carro", "nombre_carro","carrosolar",CarroComboBox.getSelectedItem().toString());
+           String patr = Primavera.getId("id_carro", "nombre_carro","carrosolar",CarroCb.getSelectedItem().toString());
            psta.setString(2, patr);
            psta.setString(3, cantidadText.getText());
            String date = diaText.getText()+"/"+mesText.getText()+"/"+añoText.getText();
@@ -332,7 +335,7 @@ public class GestionarGastos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> CarroComboBox;
+    private javax.swing.JComboBox<String> CarroCb;
     private javax.swing.JTextField añoText;
     private javax.swing.JTextField cantidadText;
     private javax.swing.JButton crearButton;

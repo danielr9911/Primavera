@@ -183,7 +183,7 @@ public class GestionarTiposDePersonas extends javax.swing.JFrame {
     }//GEN-LAST:event_idTextActionPerformed
 
     private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
-        // TODO add your handling code here:
+        Primavera.update("tipo_persona", "nomb_tipopersona", tipoText.getText(), "id_tipopersona", idText.getText());
     }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

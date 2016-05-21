@@ -44,7 +44,7 @@ public class GestionarLaboratorios extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         nombreText = new javax.swing.JTextField();
         idText = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        modificarButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         crearButton = new javax.swing.JButton();
         tamañoText = new javax.swing.JTextField();
@@ -78,11 +78,11 @@ public class GestionarLaboratorios extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton1.setText("Modificar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        modificarButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        modificarButton.setText("Modificar");
+        modificarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                modificarButtonActionPerformed(evt);
             }
         });
 
@@ -120,7 +120,7 @@ public class GestionarLaboratorios extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(crearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(47, 47, 47)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(modificarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -157,7 +157,7 @@ public class GestionarLaboratorios extends javax.swing.JFrame {
                     .addComponent(tamañoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(modificarButton)
                     .addComponent(jButton2)
                     .addComponent(crearButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -191,9 +191,10 @@ public class GestionarLaboratorios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_idTextActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
+        Primavera.update("laboratorios", "nombre_lab", nombreText.getText(), "id_laboratorio", idText.getText());
+        Primavera.update("laboratorios", "tamaño_lab", tamañoText.getText(), "id_laboratorio", idText.getText());
+    }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         MenuPrincipal vent = new MenuPrincipal();
@@ -269,7 +270,6 @@ public class GestionarLaboratorios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton crearButton;
     private javax.swing.JTextField idText;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -277,6 +277,7 @@ public class GestionarLaboratorios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton modificarButton;
     private javax.swing.JTextField nombreText;
     private javax.swing.JTextField tamañoText;
     // End of variables declaration//GEN-END:variables

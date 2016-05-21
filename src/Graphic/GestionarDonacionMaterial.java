@@ -31,19 +31,19 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
            PreparedStatement psta=conn.prepareStatement(sqlinsertar);
            ResultSet rs = psta.executeQuery();
            while(rs.next()){
-              patrocinadorComboBox.addItem(rs.getString(1));
+              patrocinadorCb.addItem(rs.getString(1));
            }
            sqlinsertar="select nombre_subs from subsistema";
            psta=conn.prepareStatement(sqlinsertar);
            rs = psta.executeQuery();
            while(rs.next()){
-              subsistemaComboBox.addItem(rs.getString(1));
+              subsistemaCb.addItem(rs.getString(1));
            }
            sqlinsertar="select nombre_material from material";
            psta=conn.prepareStatement(sqlinsertar);
            rs = psta.executeQuery();
            while(rs.next()){
-              materialComboBox.addItem(rs.getString(1));
+              materialCb.addItem(rs.getString(1));
            }
            //System.out.println(Primavera.getId("id_patrocinador", "nombre_patr","PATROCINADOR","ADDICT"));
         } catch(Exception e){
@@ -67,7 +67,7 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         idText = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        modificarButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -80,9 +80,9 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
         mesText = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         anoText = new javax.swing.JTextField();
-        patrocinadorComboBox = new javax.swing.JComboBox();
-        materialComboBox = new javax.swing.JComboBox();
-        subsistemaComboBox = new javax.swing.JComboBox();
+        patrocinadorCb = new javax.swing.JComboBox();
+        materialCb = new javax.swing.JComboBox();
+        subsistemaCb = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,11 +107,11 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton1.setText("Modificar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        modificarButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        modificarButton.setText("Modificar");
+        modificarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                modificarButtonActionPerformed(evt);
             }
         });
 
@@ -181,7 +181,7 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(modificarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -222,9 +222,9 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(cantidadText, javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(idText)
-                                        .addComponent(patrocinadorComboBox, 0, 289, Short.MAX_VALUE)
-                                        .addComponent(materialComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(subsistemaComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(patrocinadorCb, 0, 289, Short.MAX_VALUE)
+                                        .addComponent(materialCb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(subsistemaCb, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(28, 28, 28))
         );
         jPanel1Layout.setVerticalGroup(
@@ -240,14 +240,14 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(patrocinadorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(patrocinadorCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(subsistemaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(subsistemaCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(materialComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(materialCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -264,7 +264,7 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
                     .addComponent(mesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(modificarButton)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
                 .addGap(22, 22, 22))
@@ -294,9 +294,13 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_idTextActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
+       Primavera.update("donacion_material", "cantidad_mat", cantidadText.getText(), "id_donmaterial", idText.getText());
+       Primavera.update("donacion_material", "id_patrocinador", patrocinadorCb.getSelectedItem().toString(), "id_donmaterial", idText.getText());
+       Primavera.update("donacion_material", "id_subsistema", subsistemaCb.getSelectedItem().toString(), "id_donmaterial", idText.getText());
+       Primavera.update("donacion_material", "id_material", materialCb.getSelectedItem().toString(), "id_donmaterial", idText.getText());
+       Primavera.update("donacion_material", "fecha_donmat", diaText.getText()+"/"+mesText.getText()+"/"+anoText.getText(), "id_donmaterial", idText.getText());
+    }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         MenuPrincipal vent = new MenuPrincipal();
@@ -305,16 +309,23 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
+        if(idText.getText().equals("") 
+                | cantidadText.getText().equals("")
+                | diaText.getText().equals("") 
+                | mesText.getText().equals("")
+                | anoText.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Por favor completa todas las casillas");
+        }else{
+            try {
            conn=Primavera.Enlace(conn);
            String sqlinsertar="insert into Donacion_Material values (?,?,?,?,to_date(?,'DD/MM/RR'),?)";
            PreparedStatement psta=conn.prepareStatement(sqlinsertar);
            psta.setString(1, idText.getText());
-           String patr = Primavera.getId("id_patrocinador", "nombre_patr","patrocinador",patrocinadorComboBox.getSelectedItem().toString());
+           String patr = Primavera.getId("id_patrocinador", "nombre_patr","patrocinador",patrocinadorCb.getSelectedItem().toString());
            psta.setString(2, patr);
-           String subs = Primavera.getId("id_subsistema", "nombre_subs","subsistema",subsistemaComboBox.getSelectedItem().toString());
+           String subs = Primavera.getId("id_subsistema", "nombre_subs","subsistema",subsistemaCb.getSelectedItem().toString());
            psta.setString(3, subs);
-           String mat = Primavera.getId("id_material", "nombre_material","material",materialComboBox.getSelectedItem().toString());
+           String mat = Primavera.getId("id_material", "nombre_material","material",materialCb.getSelectedItem().toString());
            psta.setString(6, mat);
            String date = diaText.getText()+"/"+mesText.getText()+"/"+anoText.getText();
            psta.setString(5, date);
@@ -329,6 +340,7 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null, "Registro Guardado Satisfactoriamente");
         }catch (Exception e){
             System.out.println(e);
+        }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -388,7 +400,6 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
     private javax.swing.JTextField cantidadText;
     private javax.swing.JTextField diaText;
     private javax.swing.JTextField idText;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -403,9 +414,10 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JComboBox materialComboBox;
+    private javax.swing.JComboBox materialCb;
     private javax.swing.JTextField mesText;
-    private javax.swing.JComboBox patrocinadorComboBox;
-    private javax.swing.JComboBox subsistemaComboBox;
+    private javax.swing.JButton modificarButton;
+    private javax.swing.JComboBox patrocinadorCb;
+    private javax.swing.JComboBox subsistemaCb;
     // End of variables declaration//GEN-END:variables
 }

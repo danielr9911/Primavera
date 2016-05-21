@@ -35,40 +35,40 @@ public class GestionarPersonal extends javax.swing.JFrame {
             PreparedStatement psta = conn.prepareStatement(sqlinsertar);
             ResultSet rs = psta.executeQuery();
             while (rs.next()) {
-                tipoComboBox.addItem(rs.getString(1));
+                tipoCb.addItem(rs.getString(1));
             }
             sqlinsertar = "select gs from tipo_sangre";
             psta = conn.prepareStatement(sqlinsertar);
             rs = psta.executeQuery();
             while (rs.next()) {
-                gsComboBox.addItem(rs.getString(1));
+                gsCb.addItem(rs.getString(1));
             }
             sqlinsertar = "select nombre_eps from eps";
             psta = conn.prepareStatement(sqlinsertar);
             rs = psta.executeQuery();
             while (rs.next()) {
-                epsComboBox.addItem(rs.getString(1));
+                epsCb.addItem(rs.getString(1));
             }
             sqlinsertar = "select rh from tipo_sangre";
             psta = conn.prepareStatement(sqlinsertar);
             rs = psta.executeQuery();
             while (rs.next()) {
-                rhComboBox.addItem(rs.getString(1));
+                rhCb.addItem(rs.getString(1));
             }
             sqlinsertar = "select nombre_profesion from profesion";
             psta = conn.prepareStatement(sqlinsertar);
             rs = psta.executeQuery();
             while (rs.next()) {
-                profesionComboBox.addItem(rs.getString(1));
+                profesionCb.addItem(rs.getString(1));
             }
             sqlinsertar = "select nombre_subs from subsistema";
             psta = conn.prepareStatement(sqlinsertar);
             rs = psta.executeQuery();
             while (rs.next()) {
-                subsistemaComboBox.addItem(rs.getString(1));
+                subsistemaCb.addItem(rs.getString(1));
             }
-            estadoComboBox.addItem("ACTIVO");
-            estadoComboBox.addItem("INACTIVO");
+            estadoCb.addItem("ACTIVO");
+            estadoCb.addItem("INACTIVO");
             //System.out.println(Primavera.getId("id_patrocinador", "nombre_patr","PATROCINADOR","ADDICT"));
         } catch (Exception e) {
             System.out.println(e);
@@ -107,13 +107,13 @@ public class GestionarPersonal extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        tipoComboBox = new javax.swing.JComboBox<>();
-        epsComboBox = new javax.swing.JComboBox<>();
-        profesionComboBox = new javax.swing.JComboBox<>();
-        subsistemaComboBox = new javax.swing.JComboBox<>();
-        estadoComboBox = new javax.swing.JComboBox<>();
-        rhComboBox = new javax.swing.JComboBox<>();
-        gsComboBox = new javax.swing.JComboBox<>();
+        tipoCb = new javax.swing.JComboBox<>();
+        epsCb = new javax.swing.JComboBox<>();
+        profesionCb = new javax.swing.JComboBox<>();
+        subsistemaCb = new javax.swing.JComboBox<>();
+        estadoCb = new javax.swing.JComboBox<>();
+        rhCb = new javax.swing.JComboBox<>();
+        gsCb = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -189,45 +189,45 @@ public class GestionarPersonal extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel16.setText("GS");
 
-        tipoComboBox.addActionListener(new java.awt.event.ActionListener() {
+        tipoCb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipoComboBoxActionPerformed(evt);
+                tipoCbActionPerformed(evt);
             }
         });
 
-        epsComboBox.addActionListener(new java.awt.event.ActionListener() {
+        epsCb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                epsComboBoxActionPerformed(evt);
+                epsCbActionPerformed(evt);
             }
         });
 
-        profesionComboBox.addActionListener(new java.awt.event.ActionListener() {
+        profesionCb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                profesionComboBoxActionPerformed(evt);
+                profesionCbActionPerformed(evt);
             }
         });
 
-        subsistemaComboBox.addActionListener(new java.awt.event.ActionListener() {
+        subsistemaCb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                subsistemaComboBoxActionPerformed(evt);
+                subsistemaCbActionPerformed(evt);
             }
         });
 
-        estadoComboBox.addActionListener(new java.awt.event.ActionListener() {
+        estadoCb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                estadoComboBoxActionPerformed(evt);
+                estadoCbActionPerformed(evt);
             }
         });
 
-        rhComboBox.addActionListener(new java.awt.event.ActionListener() {
+        rhCb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rhComboBoxActionPerformed(evt);
+                rhCbActionPerformed(evt);
             }
         });
 
-        gsComboBox.addActionListener(new java.awt.event.ActionListener() {
+        gsCb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gsComboBoxActionPerformed(evt);
+                gsCbActionPerformed(evt);
             }
         });
 
@@ -249,7 +249,7 @@ public class GestionarPersonal extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addGap(18, 18, 18)
-                        .addComponent(gsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(gsCb, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -260,8 +260,8 @@ public class GestionarPersonal extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel15)
                             .addGap(18, 18, 18)
-                            .addComponent(rhComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(tipoComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(rhCb, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(tipoCb, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
@@ -272,10 +272,10 @@ public class GestionarPersonal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(salarioText)
-                    .addComponent(profesionComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, 188, Short.MAX_VALUE)
-                    .addComponent(subsistemaComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(epsComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(estadoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(profesionCb, javax.swing.GroupLayout.Alignment.TRAILING, 0, 188, Short.MAX_VALUE)
+                    .addComponent(subsistemaCb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(epsCb, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(estadoCb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(31, 31, 31))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(248, 248, 248)
@@ -333,25 +333,25 @@ public class GestionarPersonal extends javax.swing.JFrame {
                                         .addComponent(jLabel12)
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabel11))
-                                    .addComponent(tipoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(tipoCb, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel16)
-                                .addComponent(gsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(rhComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(gsCb, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rhCb, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(7, 7, 7)
-                        .addComponent(profesionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(profesionCb, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(salarioText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19)
-                        .addComponent(epsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(epsCb, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(subsistemaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(subsistemaCb, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15)
-                        .addComponent(estadoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(estadoCb, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -384,40 +384,51 @@ public class GestionarPersonal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
-        // TODO add your handling code here:
+       Primavera.update("personal", "nombre_pers", nombreText.getText(), "identificacion", idText.getText());
+       Primavera.update("personal", "telefono_pers", telefonoText.getText(), "identificacion", idText.getText());
+       Primavera.update("personal", "correo_pers", correoText.getText(), "identificacion", idText.getText());
+       Primavera.update("personal", "salario_pers", salarioText.getText(), "identificacion", idText.getText());
+       Primavera.update("personal", "id_patrocinador", tipoCb.getSelectedItem().toString(), "identificacion", idText.getText());
+       Primavera.update("personal", "id_carro", gsCb.getSelectedItem().toString(), "identificacion", idText.getText());
+       Primavera.update("personal", "id_tipomoneda", rhCb.getSelectedItem().toString(), "identificacion", idText.getText());
+       Primavera.update("personal", "id_tipomoneda", epsCb.getSelectedItem().toString(), "identificacion", idText.getText());
+       Primavera.update("personal", "id_tipomoneda", subsistemaCb.getSelectedItem().toString(), "identificacion", idText.getText());
+       Primavera.update("personal", "id_tipomoneda", estadoCb.getSelectedItem().toString(), "identificacion", idText.getText());
+       Primavera.update("personal", "id_tipomoneda", profesionCb.getSelectedItem().toString(), "identificacion", idText.getText());
+       
     }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void idTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idTextActionPerformed
 
-    private void tipoComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoComboBoxActionPerformed
+    private void tipoCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoCbActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tipoComboBoxActionPerformed
+    }//GEN-LAST:event_tipoCbActionPerformed
 
-    private void epsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_epsComboBoxActionPerformed
+    private void epsCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_epsCbActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_epsComboBoxActionPerformed
+    }//GEN-LAST:event_epsCbActionPerformed
 
-    private void profesionComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profesionComboBoxActionPerformed
+    private void profesionCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profesionCbActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_profesionComboBoxActionPerformed
+    }//GEN-LAST:event_profesionCbActionPerformed
 
-    private void subsistemaComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subsistemaComboBoxActionPerformed
+    private void subsistemaCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subsistemaCbActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_subsistemaComboBoxActionPerformed
+    }//GEN-LAST:event_subsistemaCbActionPerformed
 
-    private void estadoComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoComboBoxActionPerformed
+    private void estadoCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoCbActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_estadoComboBoxActionPerformed
+    }//GEN-LAST:event_estadoCbActionPerformed
 
-    private void rhComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rhComboBoxActionPerformed
+    private void rhCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rhCbActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rhComboBoxActionPerformed
+    }//GEN-LAST:event_rhCbActionPerformed
 
-    private void gsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gsComboBoxActionPerformed
+    private void gsCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gsCbActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_gsComboBoxActionPerformed
+    }//GEN-LAST:event_gsCbActionPerformed
 
     private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
         if (idText.getText().equals("") | nombreText.getText().equals("")
@@ -429,18 +440,18 @@ public class GestionarPersonal extends javax.swing.JFrame {
                 String sqlinsertar = "insert into Personal values (?,?,?,?,?,?,?,?,?,?,?)";
                 PreparedStatement psta = conn.prepareStatement(sqlinsertar);
                 psta.setString(1, idText.getText());
-                String idSubs = Primavera.getId("id_subsistema", "nombre_subs", "subsistema", subsistemaComboBox.getSelectedItem().toString());
+                String idSubs = Primavera.getId("id_subsistema", "nombre_subs", "subsistema", subsistemaCb.getSelectedItem().toString());
                 psta.setString(2, idSubs);
                 psta.setString(3, nombreText.getText());
                 psta.setString(4, telefonoText.getText());
                 psta.setString(5, correoText.getText());
-                psta.setString(6, estadoComboBox.getSelectedItem().toString());
+                psta.setString(6, estadoCb.getSelectedItem().toString());
                 psta.setString(7, salarioText.getText());
-                String idProf = Primavera.getId("id_profesion", "nombre_profesion", "profesion", profesionComboBox.getSelectedItem().toString());
+                String idProf = Primavera.getId("id_profesion", "nombre_profesion", "profesion", profesionCb.getSelectedItem().toString());
                 psta.setString(8, idProf);
-                String idEps = Primavera.getId("id_eps", "nombre_eps", "eps", epsComboBox.getSelectedItem().toString());
+                String idEps = Primavera.getId("id_eps", "nombre_eps", "eps", epsCb.getSelectedItem().toString());
                 psta.setString(9, idEps);
-                String idPers = Primavera.getId("id_tipopersona", "nomb_tipopersona", "tipo_persona", tipoComboBox.getSelectedItem().toString());
+                String idPers = Primavera.getId("id_tipopersona", "nomb_tipopersona", "tipo_persona", tipoCb.getSelectedItem().toString());
                 psta.setString(11, idPers);
                 String consulta = "select id_sangre from tipo_sangre "
                         + "where GS = ? "
@@ -448,8 +459,8 @@ public class GestionarPersonal extends javax.swing.JFrame {
                 conn = Primavera.Enlace(conn);
                 String idSangre = "";
                 PreparedStatement psta2 = conn.prepareStatement(consulta);
-                psta2.setString(1, gsComboBox.getSelectedItem().toString());
-                psta2.setString(2, rhComboBox.getSelectedItem().toString());
+                psta2.setString(1, gsCb.getSelectedItem().toString());
+                psta2.setString(2, rhCb.getSelectedItem().toString());
                 ResultSet rs = psta2.executeQuery();
                 if (rs.next()) {
                     idSangre = rs.getString(1);
@@ -508,9 +519,9 @@ public class GestionarPersonal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField correoText;
     private javax.swing.JButton crearButton;
-    private javax.swing.JComboBox<String> epsComboBox;
-    private javax.swing.JComboBox<String> estadoComboBox;
-    private javax.swing.JComboBox<String> gsComboBox;
+    private javax.swing.JComboBox<String> epsCb;
+    private javax.swing.JComboBox<String> estadoCb;
+    private javax.swing.JComboBox<String> gsCb;
     private javax.swing.JTextField idText;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -530,11 +541,11 @@ public class GestionarPersonal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton modificarButton;
     private javax.swing.JTextField nombreText;
-    private javax.swing.JComboBox<String> profesionComboBox;
-    private javax.swing.JComboBox<String> rhComboBox;
+    private javax.swing.JComboBox<String> profesionCb;
+    private javax.swing.JComboBox<String> rhCb;
     private javax.swing.JTextField salarioText;
-    private javax.swing.JComboBox<String> subsistemaComboBox;
+    private javax.swing.JComboBox<String> subsistemaCb;
     private javax.swing.JTextField telefonoText;
-    private javax.swing.JComboBox<String> tipoComboBox;
+    private javax.swing.JComboBox<String> tipoCb;
     // End of variables declaration//GEN-END:variables
 }

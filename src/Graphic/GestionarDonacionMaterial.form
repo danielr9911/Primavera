@@ -55,7 +55,7 @@
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="jButton3" min="-2" pref="107" max="-2" attributes="0"/>
                   <EmptySpace pref="62" max="32767" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="107" max="-2" attributes="0"/>
+                  <Component id="modificarButton" min="-2" pref="107" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                   <Component id="jButton2" min="-2" pref="107" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -101,10 +101,10 @@
                                       <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="cantidadText" alignment="1" max="32767" attributes="0"/>
                                           <Component id="idText" max="32767" attributes="0"/>
-                                          <Component id="patrocinadorComboBox" alignment="0" pref="289" max="32767" attributes="0"/>
-                                          <Component id="materialComboBox" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="patrocinadorCb" alignment="0" pref="289" max="32767" attributes="0"/>
+                                          <Component id="materialCb" alignment="0" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="subsistemaComboBox" alignment="1" min="-2" pref="289" max="-2" attributes="0"/>
+                                      <Component id="subsistemaCb" alignment="1" min="-2" pref="289" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -128,16 +128,16 @@
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="patrocinadorComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="patrocinadorCb" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="subsistemaComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="subsistemaCb" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="materialComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="materialCb" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -157,7 +157,7 @@
                   </Group>
                   <EmptySpace pref="29" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="modificarButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -210,7 +210,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="idTextActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="modificarButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="14" style="0"/>
@@ -218,7 +218,7 @@
             <Property name="text" type="java.lang.String" value="Modificar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modificarButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton2">
@@ -311,21 +311,21 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="anoTextActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JComboBox" name="patrocinadorComboBox">
+        <Component class="javax.swing.JComboBox" name="patrocinadorCb">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="materialComboBox">
+        <Component class="javax.swing.JComboBox" name="materialCb">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="subsistemaComboBox">
+        <Component class="javax.swing.JComboBox" name="subsistemaCb">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>

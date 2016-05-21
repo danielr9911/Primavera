@@ -67,7 +67,7 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         jButton17 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
-        jButton19 = new javax.swing.JButton();
+        modificarButton = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         idTxt = new javax.swing.JTextField();
         tasaTxt = new javax.swing.JTextField();
@@ -122,11 +122,11 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
             }
         });
 
-        jButton19.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton19.setText("Modificar");
-        jButton19.addActionListener(new java.awt.event.ActionListener() {
+        modificarButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        modificarButton.setText("Modificar");
+        modificarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton19jButton3ActionPerformed(evt);
+                modificarButtonjButton3ActionPerformed(evt);
             }
         });
 
@@ -216,7 +216,7 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
                                     .addGroup(jPanel6Layout.createSequentialGroup()
                                         .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(modificarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(43, 43, 43)
                                         .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jLabel12)
@@ -279,7 +279,7 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton17)
                     .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(modificarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(23, 23, 23))
         );
 
@@ -309,9 +309,15 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton17jButton2ActionPerformed
 
-    private void jButton19jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton19jButton3ActionPerformed
+    private void modificarButtonjButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonjButton3ActionPerformed
+       Primavera.update("donacion_monetaria", "cantidad_mone_original", cantidadTxt.getText(), "id_monetaria", idTxt.getText());
+       Primavera.update("donacion_monetaria", "tasa_cambio", tasaTxt.getText(), "id_monetaria", idTxt.getText());
+       Primavera.update("donacion_monetaria", "cantidad_cop", cantidadCopTxt.getText(), "id_monetaria", idTxt.getText());
+       Primavera.update("donacion_monetaria", "id_patrocinador", patrocinadorCb.getSelectedItem().toString(), "id_monetaria", idTxt.getText());
+       Primavera.update("donacion_monetaria", "id_carro", carroCb.getSelectedItem().toString(), "id_monetaria", idTxt.getText());
+       Primavera.update("donacion_monetaria", "id_tipomoneda", divisaCb.getSelectedItem().toString(), "id_monetaria", idTxt.getText());
+       Primavera.update("donacion_monetaria", "fecha_mone", diaTxt.getText()+"/"+mesTxt.getText()+"/"+anoTxt.getText(), "id_monetaria", idTxt.getText());
+    }//GEN-LAST:event_modificarButtonjButton3ActionPerformed
 
     private void idTxtjTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTxtjTextField1ActionPerformed
         // TODO add your handling code here:
@@ -403,7 +409,6 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
     private javax.swing.JTextField idTxt;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -419,6 +424,7 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel40;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JTextField mesTxt;
+    private javax.swing.JButton modificarButton;
     private javax.swing.JComboBox<String> patrocinadorCb;
     private javax.swing.JTextField tasaTxt;
     // End of variables declaration//GEN-END:variables
