@@ -41,6 +41,12 @@ public class GestionarPersonal extends javax.swing.JFrame {
            while(rs.next()){
               gsComboBox.addItem(rs.getString(1));
            }
+           sqlinsertar="select nombre_eps from eps";
+           psta=conn.prepareStatement(sqlinsertar);
+           rs = psta.executeQuery();
+           while(rs.next()){
+              epsComboBox.addItem(rs.getString(1));
+           }
            sqlinsertar="select rh from tipo_sangre";
            psta=conn.prepareStatement(sqlinsertar);
            rs = psta.executeQuery();
