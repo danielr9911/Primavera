@@ -214,7 +214,7 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
 
     private void todosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todosButtonActionPerformed
         modelo = new DefaultTableModel();
-        System.out.println("todos finding...");
+        //System.out.println("todos finding...");
         if (profesionCb.getSelectedItem().toString().equals("")) {
             profesionCb.requestFocusInWindow();
         } else {

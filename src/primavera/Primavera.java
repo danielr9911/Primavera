@@ -51,7 +51,7 @@ public class Primavera {
     public static String getId(String campoId,String campoNombre,String tabla, String nombre) {
         String id= "1110";
         String consulta = "select "+campoId+" from "+tabla+" where "+campoNombre+" = ?";
-        System.out.println(consulta);
+        //System.out.println(consulta);
         try {
            conn=Primavera.Enlace(conn);
            String sqlinsertar=consulta;
@@ -103,7 +103,7 @@ public class Primavera {
     public static boolean update(String tabla, String columnaUp, String value, String columnaId, String id){
         boolean updated = false;
         String consulta = "update "+tabla+" set "+columnaUp+" = ? where "+columnaId+" = ?";
-        System.out.println(consulta);
+        //System.out.println(consulta);
         try {
            conn=Primavera.Enlace(conn);
            String sqlinsertar=consulta;
