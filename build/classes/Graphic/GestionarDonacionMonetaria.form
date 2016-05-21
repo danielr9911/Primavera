@@ -64,14 +64,14 @@
                           </Group>
                           <EmptySpace pref="101" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="tasaTxt" alignment="1" min="-2" pref="208" max="-2" attributes="0"/>
-                              <Component id="cantidadTxt" alignment="1" min="-2" pref="208" max="-2" attributes="0"/>
-                              <Component id="cantidadCopTxt" alignment="1" min="-2" pref="208" max="-2" attributes="0"/>
+                              <Component id="tasaText" alignment="1" min="-2" pref="208" max="-2" attributes="0"/>
+                              <Component id="cantidadText" alignment="1" min="-2" pref="208" max="-2" attributes="0"/>
+                              <Component id="cantidadCopText" alignment="1" min="-2" pref="208" max="-2" attributes="0"/>
                               <Component id="divisaCb" alignment="1" min="-2" pref="208" max="-2" attributes="0"/>
                               <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="carroCb" alignment="1" pref="208" max="32767" attributes="0"/>
                                   <Component id="patrocinadorCb" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="idTxt" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="idText" alignment="1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace pref="34" max="32767" attributes="0"/>
@@ -86,22 +86,22 @@
                                           <EmptySpace min="-2" pref="164" max="-2" attributes="0"/>
                                           <Component id="jLabel37" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="diaTxt" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="diaText" min="-2" pref="30" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="jLabel39" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="mesTxt" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="mesText" min="-2" pref="30" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                           <Component id="jLabel40" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                          <Component id="anoTxt" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="anoText" min="-2" pref="30" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
-                                          <Component id="jButton18" min="-2" pref="106" max="-2" attributes="0"/>
+                                          <Component id="crearButton" min="-2" pref="106" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Component id="modificarButton" min="-2" pref="107" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                                          <Component id="jButton17" min="-2" pref="107" max="-2" attributes="0"/>
+                                          <Component id="cancelarButton" min="-2" pref="107" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -138,7 +138,7 @@
                           <Component id="jLabel36" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="idTxt" min="-2" max="-2" attributes="0"/>
+                          <Component id="idText" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                           <Component id="patrocinadorCb" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -156,32 +156,32 @@
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cantidadTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cantidadText" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tasaTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tasaText" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cantidadCopTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cantidadCopText" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="anoTxt" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="mesTxt" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="diaTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="anoText" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="mesText" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="diaText" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel40" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton17" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton18" alignment="3" max="32767" attributes="0"/>
+                      <Component id="cancelarButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="crearButton" alignment="3" max="32767" attributes="0"/>
                       <Component id="modificarButton" alignment="3" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
@@ -236,7 +236,7 @@
             <Property name="text" type="java.lang.String" value="DD"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton17">
+        <Component class="javax.swing.JButton" name="cancelarButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="14" style="0"/>
@@ -244,10 +244,10 @@
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton17jButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelarButtonjButton2ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton18">
+        <Component class="javax.swing.JButton" name="crearButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="14" style="0"/>
@@ -255,7 +255,7 @@
             <Property name="text" type="java.lang.String" value="Crear"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton18ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="crearButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="modificarButton">
@@ -277,18 +277,20 @@
             <Property name="text" type="java.lang.String" value="Cantidad Original"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="idTxt">
+        <Component class="javax.swing.JTextField" name="idText">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="idTxtjTextField1ActionPerformed"/>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="idTextFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="idTextFocusLost"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="idTextjTextField1ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="tasaTxt">
+        <Component class="javax.swing.JTextField" name="tasaText">
         </Component>
-        <Component class="javax.swing.JTextField" name="anoTxt">
+        <Component class="javax.swing.JTextField" name="anoText">
         </Component>
-        <Component class="javax.swing.JTextField" name="mesTxt">
+        <Component class="javax.swing.JTextField" name="mesText">
         </Component>
-        <Component class="javax.swing.JTextField" name="diaTxt">
+        <Component class="javax.swing.JTextField" name="diaText">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel38">
           <Properties>
@@ -338,9 +340,9 @@
             <Property name="text" type="java.lang.String" value="Fecha"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="cantidadCopTxt">
+        <Component class="javax.swing.JTextField" name="cantidadCopText">
         </Component>
-        <Component class="javax.swing.JTextField" name="cantidadTxt">
+        <Component class="javax.swing.JTextField" name="cantidadText">
         </Component>
         <Component class="javax.swing.JComboBox" name="patrocinadorCb">
           <Properties>

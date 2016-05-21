@@ -5,6 +5,7 @@
  */
 package Graphic;
 
+import java.awt.Color;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import primavera.Primavera;
@@ -14,7 +15,9 @@ import primavera.Primavera;
  * @author Daniel
  */
 public class GestionarDonacionMonetaria extends javax.swing.JFrame {
-    static Connection conn=null;
+
+    static Connection conn = null;
+
     /**
      * Creates new form GestionarDonacionMonetaria
      */
@@ -24,27 +27,27 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
         setResizable(false);
         setTitle("--PRIMAVERA--GESTIONAR DONACIONES MONETARIAS--");
         try {
-           conn=Primavera.Enlace(conn);
-           String sqlinsertar="select nombre_patr from patrocinador";
-           PreparedStatement psta=conn.prepareStatement(sqlinsertar);
-           ResultSet rs = psta.executeQuery();
-           while(rs.next()){
-              patrocinadorCb.addItem(rs.getString(1));
-           }
-           sqlinsertar="select nombre_carro from carrosolar";
-           psta=conn.prepareStatement(sqlinsertar);
-           rs = psta.executeQuery();
-           while(rs.next()){
-              carroCb.addItem(rs.getString(1));
-           }
-           sqlinsertar="select nombre_tipomoneda from tipo_moneda";
-           psta=conn.prepareStatement(sqlinsertar);
-           rs = psta.executeQuery();
-           while(rs.next()){
-              divisaCb.addItem(rs.getString(1));
-           }
-           //System.out.println(Primavera.getId("id_patrocinador", "nombre_patr","PATROCINADOR","ADDICT"));
-        } catch(Exception e){
+            conn = Primavera.Enlace(conn);
+            String sqlinsertar = "select nombre_patr from patrocinador";
+            PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+            ResultSet rs = psta.executeQuery();
+            while (rs.next()) {
+                patrocinadorCb.addItem(rs.getString(1));
+            }
+            sqlinsertar = "select nombre_carro from carrosolar";
+            psta = conn.prepareStatement(sqlinsertar);
+            rs = psta.executeQuery();
+            while (rs.next()) {
+                carroCb.addItem(rs.getString(1));
+            }
+            sqlinsertar = "select nombre_tipomoneda from tipo_moneda";
+            psta = conn.prepareStatement(sqlinsertar);
+            rs = psta.executeQuery();
+            while (rs.next()) {
+                divisaCb.addItem(rs.getString(1));
+            }
+            //System.out.println(Primavera.getId("id_patrocinador", "nombre_patr","PATROCINADOR","ADDICT"));
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
@@ -65,23 +68,23 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
-        jButton17 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
+        cancelarButton = new javax.swing.JButton();
+        crearButton = new javax.swing.JButton();
         modificarButton = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        idTxt = new javax.swing.JTextField();
-        tasaTxt = new javax.swing.JTextField();
-        anoTxt = new javax.swing.JTextField();
-        mesTxt = new javax.swing.JTextField();
-        diaTxt = new javax.swing.JTextField();
+        idText = new javax.swing.JTextField();
+        tasaText = new javax.swing.JTextField();
+        anoText = new javax.swing.JTextField();
+        mesText = new javax.swing.JTextField();
+        diaText = new javax.swing.JTextField();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        cantidadCopTxt = new javax.swing.JTextField();
-        cantidadTxt = new javax.swing.JTextField();
+        cantidadCopText = new javax.swing.JTextField();
+        cantidadText = new javax.swing.JTextField();
         patrocinadorCb = new javax.swing.JComboBox<>();
         divisaCb = new javax.swing.JComboBox<>();
         carroCb = new javax.swing.JComboBox<>();
@@ -106,19 +109,19 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
         jLabel37.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel37.setText("DD");
 
-        jButton17.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton17.setText("Cancelar");
-        jButton17.addActionListener(new java.awt.event.ActionListener() {
+        cancelarButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        cancelarButton.setText("Cancelar");
+        cancelarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton17jButton2ActionPerformed(evt);
+                cancelarButtonjButton2ActionPerformed(evt);
             }
         });
 
-        jButton18.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton18.setText("Crear");
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
+        crearButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        crearButton.setText("Crear");
+        crearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
+                crearButtonActionPerformed(evt);
             }
         });
 
@@ -133,9 +136,17 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel10.setText("Cantidad Original");
 
-        idTxt.addActionListener(new java.awt.event.ActionListener() {
+        idText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                idTextFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                idTextFocusLost(evt);
+            }
+        });
+        idText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idTxtjTextField1ActionPerformed(evt);
+                idTextjTextField1ActionPerformed(evt);
             }
         });
 
@@ -185,14 +196,14 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
                             .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tasaTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cantidadTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cantidadCopTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tasaText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cantidadText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cantidadCopText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(divisaCb, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(carroCb, javax.swing.GroupLayout.Alignment.TRAILING, 0, 208, Short.MAX_VALUE)
                                 .addComponent(patrocinadorCb, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(idTxt, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                .addComponent(idText, javax.swing.GroupLayout.Alignment.TRAILING)))
                         .addContainerGap(34, Short.MAX_VALUE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,21 +215,21 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
                                         .addGap(164, 164, 164)
                                         .addComponent(jLabel37)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(diaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(diaText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel39)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(mesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(mesText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(12, 12, 12)
                                         .addComponent(jLabel40)
                                         .addGap(27, 27, 27)
-                                        .addComponent(anoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(anoText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(crearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(modificarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(43, 43, 43)
-                                        .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jLabel12)
                             .addComponent(jLabel11))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -243,7 +254,7 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
                         .addGap(21, 21, 21)
                         .addComponent(jLabel36))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(idText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19)
                         .addComponent(patrocinadorCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(21, 21, 21)
@@ -257,28 +268,28 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(cantidadTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cantidadText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(tasaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tasaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(cantidadCopTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cantidadCopText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel37)
-                    .addComponent(anoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(diaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(anoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(diaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel39)
                     .addComponent(jLabel40))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton17)
-                    .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cancelarButton)
+                    .addComponent(crearButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(modificarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(23, 23, 23))
         );
@@ -303,26 +314,26 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton17jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17jButton2ActionPerformed
+    private void cancelarButtonjButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonjButton2ActionPerformed
         MenuPrincipal vent = new MenuPrincipal();
         vent.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton17jButton2ActionPerformed
+    }//GEN-LAST:event_cancelarButtonjButton2ActionPerformed
 
     private void modificarButtonjButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonjButton3ActionPerformed
-       Primavera.update("donacion_monetaria", "cantidad_mone_original", cantidadTxt.getText(), "id_monetaria", idTxt.getText());
-       Primavera.update("donacion_monetaria", "tasa_cambio", tasaTxt.getText(), "id_monetaria", idTxt.getText());
-       Primavera.update("donacion_monetaria", "cantidad_cop", cantidadCopTxt.getText(), "id_monetaria", idTxt.getText());
-       Primavera.update("donacion_monetaria", "id_patrocinador", patrocinadorCb.getSelectedItem().toString(), "id_monetaria", idTxt.getText());
-       Primavera.update("donacion_monetaria", "id_carro", carroCb.getSelectedItem().toString(), "id_monetaria", idTxt.getText());
-       Primavera.update("donacion_monetaria", "id_tipomoneda", divisaCb.getSelectedItem().toString(), "id_monetaria", idTxt.getText());
-       Primavera.update("donacion_monetaria", "fecha_mone", diaTxt.getText()+"/"+mesTxt.getText()+"/"+anoTxt.getText(), "id_monetaria", idTxt.getText());
-       JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
+        Primavera.update("donacion_monetaria", "cantidad_mone_original", cantidadText.getText(), "id_monetaria", idText.getText());
+        Primavera.update("donacion_monetaria", "tasa_cambio", tasaText.getText(), "id_monetaria", idText.getText());
+        Primavera.update("donacion_monetaria", "cantidad_cop", cantidadCopText.getText(), "id_monetaria", idText.getText());
+        Primavera.update("donacion_monetaria", "id_patrocinador", patrocinadorCb.getSelectedItem().toString(), "id_monetaria", idText.getText());
+        Primavera.update("donacion_monetaria", "id_carro", carroCb.getSelectedItem().toString(), "id_monetaria", idText.getText());
+        Primavera.update("donacion_monetaria", "id_tipomoneda", divisaCb.getSelectedItem().toString(), "id_monetaria", idText.getText());
+        Primavera.update("donacion_monetaria", "fecha_mone", diaText.getText() + "/" + mesText.getText() + "/" + anoText.getText(), "id_monetaria", idText.getText());
+        JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
     }//GEN-LAST:event_modificarButtonjButton3ActionPerformed
 
-    private void idTxtjTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTxtjTextField1ActionPerformed
+    private void idTextjTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextjTextField1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_idTxtjTextField1ActionPerformed
+    }//GEN-LAST:event_idTextjTextField1ActionPerformed
 
     private void patrocinadorCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patrocinadorCbActionPerformed
         // TODO add your handling code here:
@@ -332,38 +343,95 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_carroCbActionPerformed
 
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+    private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
         try {
-           conn=Primavera.Enlace(conn);
-           String sqlinsertar="insert into DONACION_MONETARIA values (?,?,?,?,to_date(?,'DD/MM/RR'),?,?,?)";
-           PreparedStatement psta=conn.prepareStatement(sqlinsertar);
-           psta.setString(1, idTxt.getText());
-           String patr = Primavera.getId("id_patrocinador","nombre_patr","patrocinador",patrocinadorCb.getSelectedItem().toString());
-           psta.setString(2, patr);
-           String car = Primavera.getId("id_carro","nombre_carro","carrosolar",carroCb.getSelectedItem().toString());
-           psta.setString(3, car);
-           String div = Primavera.getId("id_tipomoneda","nombre_tipomoneda","tipo_moneda",divisaCb.getSelectedItem().toString());
-           psta.setString(6, div);
-           psta.setString(4, cantidadTxt.getText());
-           psta.setString(7, tasaTxt.getText());
-           psta.setString(8, cantidadCopTxt.getText());
-           //String date = "to_date('"+diaTxt.getText()+"/"+mesTxt.getText()+"/"+anoTxt.getText()+"','DD/MM/RR')";
-           String date = diaTxt.getText()+"/"+mesTxt.getText()+"/"+anoTxt.getText();
-           psta.setString(5, date);
-           psta.execute();
-           psta.close();
-           idTxt.setText("");
-           cantidadTxt.setText("");
-           tasaTxt.setText("");
-           cantidadCopTxt.setText("");
-           diaTxt.setText("");
-           mesTxt.setText("");
-           anoTxt.setText("");
-           JOptionPane.showMessageDialog(null, "Registro Guardado Satisfactoriamente");
-        }catch (Exception e){
+            conn = Primavera.Enlace(conn);
+            String sqlinsertar = "insert into DONACION_MONETARIA values (?,?,?,?,to_date(?,'DD/MM/RR'),?,?,?)";
+            PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+            psta.setString(1, idText.getText());
+            String patr = Primavera.getId("id_patrocinador", "nombre_patr", "patrocinador", patrocinadorCb.getSelectedItem().toString());
+            psta.setString(2, patr);
+            String car = Primavera.getId("id_carro", "nombre_carro", "carrosolar", carroCb.getSelectedItem().toString());
+            psta.setString(3, car);
+            String div = Primavera.getId("id_tipomoneda", "nombre_tipomoneda", "tipo_moneda", divisaCb.getSelectedItem().toString());
+            psta.setString(6, div);
+            psta.setString(4, cantidadText.getText());
+            psta.setString(7, tasaText.getText());
+            psta.setString(8, cantidadCopText.getText());
+            //String date = "to_date('"+diaTxt.getText()+"/"+mesTxt.getText()+"/"+anoTxt.getText()+"','DD/MM/RR')";
+            String date = diaText.getText() + "/" + mesText.getText() + "/" + anoText.getText();
+            psta.setString(5, date);
+            psta.execute();
+            psta.close();
+            idText.setText("");
+            cantidadText.setText("");
+            tasaText.setText("");
+            cantidadCopText.setText("");
+            diaText.setText("");
+            mesText.setText("");
+            anoText.setText("");
+            JOptionPane.showMessageDialog(null, "Registro Guardado Satisfactoriamente");
+        } catch (Exception e) {
             System.out.println(e);
         }
-    }//GEN-LAST:event_jButton18ActionPerformed
+    }//GEN-LAST:event_crearButtonActionPerformed
+
+    private void idTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusGained
+        idText.setBackground(Color.WHITE);
+    }//GEN-LAST:event_idTextFocusGained
+
+    private void idTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusLost
+        if (idText.getText().equals("")) {
+            idText.requestFocusInWindow();
+        } else {
+            try {
+                conn = Primavera.Enlace(conn);
+                String consulta = "select patrocinador.nombre_patr, carrosolar.nombre_carro, tipo_moneda.nombre_tipomoneda, donacion_monetaria.cantidad_mone_original, donacion_monetaria.tasa_cambio, donacion_monetaria.cantidad_cop, donacion_monetaria.fecha_mone "
+                        + "from PATROCINADOR, CARROSOLAR,TIPO_MONEDA, DONACION_MONETARIA "
+                        + "where DONACION_MONETARIA.ID_PATROCINADOR = PATROCINADOR.ID_PATROCINADOR "
+                        + "AND DONACION_MONETARIA.ID_CARRO = CARROSOLAR.ID_CARRO "
+                        + "AND DONACION_MONETARIA.ID_TIPOMONEDA = TIPO_MONEDA.ID_TIPOMONEDA "
+                        + "AND PATROCINADOR.ID_PATROCINADOR = ?";
+                String sqlinsertar = consulta;
+                PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+                psta.setString(1,idText.getText());
+                ResultSet result = psta.executeQuery();
+                
+                if (result != null && result.next()) {
+                    patrocinadorCb.setSelectedItem(result.getString(1));
+                    carroCb.setSelectedItem(result.getString(2));
+                    divisaCb.setSelectedItem(result.getString(3));
+                    cantidadText.setText(result.getString(4));
+                    tasaText.setText(result.getString(5));
+                    cantidadCopText.setText(result.getString(6));
+                    String dia = result.getString(7).substring(0, 2);
+                    diaText.setText(dia);
+                    String mes = result.getString(7).substring(3, 5);
+                    mesText.setText(mes);
+                    String ano = result.getString(7).substring(6);
+                    anoText.setText(ano);
+                    idText.setBackground(Color.LIGHT_GRAY);
+                    modificarButton.setEnabled(true);
+                    crearButton.setEnabled(false);
+                } else {
+                    patrocinadorCb.setSelectedItem(0);
+                    carroCb.setSelectedItem(0);
+                    divisaCb.setSelectedItem(0);
+                    cantidadText.setText("");
+                    tasaText.setText("");
+                    cantidadCopText.setText("");
+                    diaText.setText("");
+                    mesText.setText("");
+                    anoText.setText("");
+                    idText.setBackground(Color.WHITE);
+                    modificarButton.setEnabled(false);
+                    crearButton.setEnabled(true);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_idTextFocusLost
 
     /**
      * @param args the command line arguments
@@ -401,15 +469,15 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField anoTxt;
-    private javax.swing.JTextField cantidadCopTxt;
-    private javax.swing.JTextField cantidadTxt;
+    private javax.swing.JTextField anoText;
+    private javax.swing.JButton cancelarButton;
+    private javax.swing.JTextField cantidadCopText;
+    private javax.swing.JTextField cantidadText;
     private javax.swing.JComboBox<String> carroCb;
-    private javax.swing.JTextField diaTxt;
+    private javax.swing.JButton crearButton;
+    private javax.swing.JTextField diaText;
     private javax.swing.JComboBox<String> divisaCb;
-    private javax.swing.JTextField idTxt;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
+    private javax.swing.JTextField idText;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -424,9 +492,9 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JTextField mesTxt;
+    private javax.swing.JTextField mesText;
     private javax.swing.JButton modificarButton;
     private javax.swing.JComboBox<String> patrocinadorCb;
-    private javax.swing.JTextField tasaTxt;
+    private javax.swing.JTextField tasaText;
     // End of variables declaration//GEN-END:variables
 }
