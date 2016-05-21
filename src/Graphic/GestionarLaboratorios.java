@@ -6,8 +6,10 @@
 package Graphic;
 
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import primavera.Primavera;
 
@@ -72,6 +74,14 @@ public class GestionarLaboratorios extends javax.swing.JFrame {
             }
         });
 
+        idText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                idTextFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                idTextFocusLost(evt);
+            }
+        });
         idText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idTextActionPerformed(evt);
@@ -232,6 +242,38 @@ public class GestionarLaboratorios extends javax.swing.JFrame {
     private void tamañoTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tamañoTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tamañoTextActionPerformed
+
+    private void idTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusGained
+        idText.setBackground(Color.WHITE);
+    }//GEN-LAST:event_idTextFocusGained
+
+    private void idTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusLost
+        if (idText.getText().equals("")) {
+            idText.requestFocusInWindow();
+        } else {
+            try {
+                ResultSet result = Primavera.selectAllFrom("laboratorios", "id_laboratorio", idText.getText());
+
+                if (result != null && result.next()) {
+                    nombreText.setText(result.getString(2));
+                    tamañoText.setText(result.getString(3));
+                   
+                    idText.setBackground(Color.LIGHT_GRAY);
+                    modificarButton.setEnabled(true);
+                    
+                    crearButton.setEnabled(false);
+                } else {
+                    nombreText.setText("");
+                    tamañoText.setText("");
+                    
+                    modificarButton.setEnabled(false);
+                    crearButton.setEnabled(true);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_idTextFocusLost
 
     /**
      * @param args the command line arguments

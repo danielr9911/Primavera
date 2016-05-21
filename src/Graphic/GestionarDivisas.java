@@ -6,6 +6,7 @@
 package Graphic;
 
 import static Graphic.GestionarCarroSolar.conn;
+import java.awt.Color;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import primavera.*;
@@ -23,6 +24,8 @@ public class GestionarDivisas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--GESTIONAR DIVISAS--");
+        crearButton.setEnabled(false);
+        modificarButton.setEnabled(false);
     }
 
     /**
@@ -40,7 +43,7 @@ public class GestionarDivisas extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        crearButton = new javax.swing.JButton();
         modificarButton = new javax.swing.JButton();
         nombreText = new javax.swing.JTextField();
         codigoText = new javax.swing.JTextField();
@@ -67,11 +70,11 @@ public class GestionarDivisas extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton4.setText("Crear");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        crearButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        crearButton.setText("Crear");
+        crearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                crearButtonActionPerformed(evt);
             }
         });
 
@@ -89,6 +92,14 @@ public class GestionarDivisas extends javax.swing.JFrame {
             }
         });
 
+        codigoText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                codigoTextFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                codigoTextFocusLost(evt);
+            }
+        });
         codigoText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 codigoTextActionPerformed(evt);
@@ -116,7 +127,7 @@ public class GestionarDivisas extends javax.swing.JFrame {
                                     .addComponent(nombreText, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(codigoText, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(crearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(modificarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
@@ -143,7 +154,7 @@ public class GestionarDivisas extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(crearButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(modificarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
@@ -187,7 +198,7 @@ public class GestionarDivisas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_codigoTextActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
         try{
             conn = Primavera.Enlace(conn);
             String sqlinsertar = "insert into Tipo_Moneda values (?,?)";
@@ -202,7 +213,34 @@ public class GestionarDivisas extends javax.swing.JFrame {
         }catch (Exception e){
             System.out.println(e);
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_crearButtonActionPerformed
+
+    private void codigoTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_codigoTextFocusGained
+        codigoText.setBackground(Color.WHITE);
+    }//GEN-LAST:event_codigoTextFocusGained
+
+    private void codigoTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_codigoTextFocusLost
+        if (codigoText.getText().equals("")) {
+            codigoText.requestFocusInWindow();
+        } else {
+            try {
+                ResultSet result = Primavera.selectAllFrom("tipo_moneda", "id_tipomoneda", codigoText.getText());
+
+                if (result != null && result.next()) {
+                    nombreText.setText(result.getString(2));
+                    codigoText.setBackground(Color.LIGHT_GRAY);
+                    modificarButton.setEnabled(true);
+                    crearButton.setEnabled(false);
+                } else {
+                    nombreText.setText("");
+                    modificarButton.setEnabled(false);
+                    crearButton.setEnabled(true);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_codigoTextFocusLost
 
     /**
      * @param args the command line arguments
@@ -241,8 +279,8 @@ public class GestionarDivisas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField codigoText;
+    private javax.swing.JButton crearButton;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

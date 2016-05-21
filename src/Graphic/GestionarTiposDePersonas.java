@@ -75,6 +75,9 @@ public class GestionarTiposDePersonas extends javax.swing.JFrame {
         });
 
         idText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                idTextFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 idTextFocusLost(evt);
             }
@@ -254,8 +257,12 @@ public class GestionarTiposDePersonas extends javax.swing.JFrame {
     }//GEN-LAST:event_idTextFocusLost
 
     private void tipoTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tipoTextFocusGained
-        idText.setBackground(Color.WHITE);
+
     }//GEN-LAST:event_tipoTextFocusGained
+
+    private void idTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusGained
+        idText.setBackground(Color.WHITE);
+    }//GEN-LAST:event_idTextFocusGained
 
     /**
      * @param args the command line arguments
