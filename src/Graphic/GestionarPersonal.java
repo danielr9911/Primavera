@@ -425,9 +425,9 @@ public class GestionarPersonal extends javax.swing.JFrame {
            String sqlinsertar="insert into Personal values (?,?,?,?,?,?,?,?,?,?,?,?)";
            PreparedStatement psta=conn.prepareStatement(sqlinsertar);
            psta.setString(1, idText.getText());
-           psta.setString(2, nombreText.getText());
-           psta.setString(3, telefonoText.getText());
-           psta.setString(4, correoText.getText());
+           psta.setString(3, nombreText.getText());
+           psta.setString(4, telefonoText.getText());
+           psta.setString(5, correoText.getText());
            String patr = Primavera.getId("id_tipopersona", "nomb_tipopersona","tipo_persona",tipoComboBox.getSelectedItem().toString());
            psta.setString(5, patr);
            String patr1 = Primavera.getId("id_sangre", "gs","tipo_sangre",gsComboBox.getSelectedItem().toString());
@@ -436,11 +436,11 @@ public class GestionarPersonal extends javax.swing.JFrame {
            psta.setString(7, patr2);
            String patr3 = Primavera.getId("id_profesion", "nombre_profesion","profesion",profesionComboBox.getSelectedItem().toString());
            psta.setString(8, patr3);
-           psta.setString(9, salarioText.getText());
+           psta.setString(7, salarioText.getText());
            String patr4 = Primavera.getId("id_eps", "nombre_eps","eps",epsComboBox.getSelectedItem().toString());
-           psta.setString(10, patr4);
+           psta.setString(9, patr4);
            String patr5 = Primavera.getId("id_subsistema", "nombre_subs","subsistema",subsistemaComboBox.getSelectedItem().toString());
-           psta.setString(11, patr5);
+           psta.setString(2, patr5);
            String patr6 = Primavera.getId("identificacion", "estado_pers","personal",estadoComboBox.getSelectedItem().toString());
            psta.setString(12, patr6);
            psta.execute();
