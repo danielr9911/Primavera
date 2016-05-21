@@ -5,8 +5,9 @@
  */
 package Graphic;
 
-import static Graphic.GestionarSubsistemas.conn;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import primavera.Primavera;
 
@@ -15,7 +16,7 @@ import primavera.Primavera;
  * @author Daniel
  */
 public class GestionarPersonal extends javax.swing.JFrame {
-
+    static Connection conn = null;
     /**
      * Creates new form GestionarPersonal
      */
@@ -26,6 +27,48 @@ public class GestionarPersonal extends javax.swing.JFrame {
         setTitle("--PRIMAVERA--GESTIONAR PERSONAL--");
         crearButton.setEnabled(false);
         modificarButton.setEnabled(false);
+         try {
+           conn=Primavera.Enlace(conn);
+           String sqlinsertar="select nomb_tipopersona from tipo_persona";
+           PreparedStatement psta=conn.prepareStatement(sqlinsertar);
+           ResultSet rs = psta.executeQuery();
+           while(rs.next()){
+              tipoComboBox.addItem(rs.getString(1));
+           }
+           sqlinsertar="select gs from tipo_sangre";
+           psta=conn.prepareStatement(sqlinsertar);
+           rs = psta.executeQuery();
+           while(rs.next()){
+              gsComboBox.addItem(rs.getString(1));
+           }
+           sqlinsertar="select rh from tipo_sangre";
+           psta=conn.prepareStatement(sqlinsertar);
+           rs = psta.executeQuery();
+           while(rs.next()){
+              rhComboBox.addItem(rs.getString(1));
+           }
+           sqlinsertar="select nombre_profesion from profesion";
+           psta=conn.prepareStatement(sqlinsertar);
+           rs = psta.executeQuery();
+           while(rs.next()){
+              profesionComboBox.addItem(rs.getString(1));
+           }
+           sqlinsertar="select nombre_subs from subsistema";
+           psta=conn.prepareStatement(sqlinsertar);
+           rs = psta.executeQuery();
+           while(rs.next()){
+              subsistemaComboBox.addItem(rs.getString(1));
+           }
+           sqlinsertar="select estado_pers from personal";
+           psta=conn.prepareStatement(sqlinsertar);
+           rs = psta.executeQuery();
+           while(rs.next()){
+              estadoComboBox.addItem(rs.getString(1));
+           }
+           //System.out.println(Primavera.getId("id_patrocinador", "nombre_patr","PATROCINADOR","ADDICT"));
+        } catch(Exception e){
+            System.out.println(e);
+        }
     }
 
     /**
@@ -288,11 +331,12 @@ public class GestionarPersonal extends javax.swing.JFrame {
                                         .addComponent(jLabel11))
                                     .addComponent(tipoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel16)
-                            .addComponent(gsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rhComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel16)
+                                .addComponent(gsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rhComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addComponent(profesionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
