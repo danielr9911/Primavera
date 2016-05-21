@@ -5,12 +5,18 @@
  */
 package Graphic;
 
+import static Graphic.GestionarPersonal.conn;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import primavera.Primavera;
+
 /**
  *
  * @author Daniel
  */
 public class Gastos extends javax.swing.JFrame {
-
+    static Connection conn = null;
     /**
      * Creates new form Gastos
      */
@@ -19,8 +25,19 @@ public class Gastos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--GASTOS--");
-        
-    }
+        try {
+           conn=Primavera.Enlace(conn);
+           String sqlinsertar="select nombre_carro from carro_solar";
+           PreparedStatement psta=conn.prepareStatement(sqlinsertar);
+           ResultSet rs = psta.executeQuery();
+           while(rs.next()){
+              carroComboBox.addItem(rs.getString(1));
+           }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,7 +70,7 @@ public class Gastos extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        carroComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -161,10 +178,9 @@ public class Gastos extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel11.setText("DD");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONAR--", "PRIMAVERA 1", "PRIMAVERA 2", "PRIMAVERA 3" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        carroComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                carroComboBoxActionPerformed(evt);
             }
         });
 
@@ -219,7 +235,7 @@ public class Gastos extends javax.swing.JFrame {
                                 .addGap(43, 43, 43)
                                 .addComponent(jLabel6)))
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(carroComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(68, 68, 68))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel2)
@@ -241,7 +257,7 @@ public class Gastos extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(carroComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -308,9 +324,9 @@ public class Gastos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField8ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void carroComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carroComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_carroComboBoxActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -352,9 +368,9 @@ public class Gastos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> carroComboBox;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
