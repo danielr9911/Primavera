@@ -26,6 +26,8 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--GESTIONAR DONACIONES MONETARIAS--");
+        crearButton.setEnabled(false);
+        modificarButton.setEnabled(false);
         try {
             conn = Primavera.Enlace(conn);
             String sqlinsertar = "select nombre_patr from patrocinador";
@@ -391,7 +393,7 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
                         + "where DONACION_MONETARIA.ID_PATROCINADOR = PATROCINADOR.ID_PATROCINADOR "
                         + "AND DONACION_MONETARIA.ID_CARRO = CARROSOLAR.ID_CARRO "
                         + "AND DONACION_MONETARIA.ID_TIPOMONEDA = TIPO_MONEDA.ID_TIPOMONEDA "
-                        + "AND PATROCINADOR.ID_PATROCINADOR = ?";
+                        + "AND DONACION_MONETARIA.ID_MONETARIA = ?";
                 String sqlinsertar = consulta;
                 PreparedStatement psta = conn.prepareStatement(sqlinsertar);
                 psta.setString(1,idText.getText());

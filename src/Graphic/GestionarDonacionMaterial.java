@@ -5,6 +5,7 @@
  */
 package Graphic;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,6 +26,8 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--GESTIONAR DONACIONES MATERIALES--");
+        crearButton.setEnabled(false);
+        modificarButton.setEnabled(false);
         try {
            conn=Primavera.Enlace(conn);
            String sqlinsertar="select nombre_patr from patrocinador";
@@ -69,7 +72,7 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
         idText = new javax.swing.JTextField();
         modificarButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        crearButton = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         cantidadText = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -101,6 +104,14 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setText("Patrocinador");
 
+        idText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                idTextFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                idTextFocusLost(evt);
+            }
+        });
         idText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idTextActionPerformed(evt);
@@ -123,11 +134,11 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton3.setText("Crear");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        crearButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        crearButton.setText("Crear");
+        crearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                crearButtonActionPerformed(evt);
             }
         });
 
@@ -179,7 +190,7 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(crearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(modificarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58)
@@ -266,7 +277,7 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(modificarButton)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(crearButton))
                 .addGap(22, 22, 22))
         );
 
@@ -309,7 +320,7 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
         if(idText.getText().equals("") 
                 | cantidadText.getText().equals("")
                 | diaText.getText().equals("") 
@@ -343,7 +354,7 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
             System.out.println(e);
         }
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_crearButtonActionPerformed
 
     private void cantidadTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidadTextActionPerformed
         // TODO add your handling code here:
@@ -360,6 +371,59 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
     private void anoTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anoTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_anoTextActionPerformed
+
+    private void idTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusLost
+        if (idText.getText().equals("")) {
+            idText.requestFocusInWindow();
+        } else {
+            try {
+                conn = Primavera.Enlace(conn);
+                String consulta = "select patrocinador.nombre_patr, subsistema.nombre_subs, material.nombre_material, donacion_material.cantidad_mat, donacion_material.fecha_donmat \n" +
+"                        from PATROCINADOR, SUBSISTEMA, MATERIAL, DONACION_MATERIAL \n" +
+"                        where DONACION_MATERIAL.ID_PATROCINADOR = PATROCINADOR.ID_PATROCINADOR \n" +
+"                        AND DONACION_MATERIAL.ID_SUBSISTEMA = SUBSISTEMA.ID_SUBSISTEMA \n" +
+"                        AND DONACION_MATERIAL.ID_MATERIAL = MATERIAL.ID_MATERIAL\n" +
+"                        AND DONACION_MATERIAL.ID_DONMATERIAL = ? ";
+                String sqlinsertar = consulta;
+                PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+                psta.setString(1,idText.getText());
+                ResultSet result = psta.executeQuery();
+                
+                if (result != null && result.next()) {
+                    patrocinadorCb.setSelectedItem(result.getString(1));
+                    subsistemaCb.setSelectedItem(result.getString(2));
+                    materialCb.setSelectedItem(result.getString(3));
+                    cantidadText.setText(result.getString(4));
+                    String dia = result.getString(7).substring(0, 2);
+                    diaText.setText(dia);
+                    String mes = result.getString(7).substring(3, 5);
+                    mesText.setText(mes);
+                    String ano = result.getString(7).substring(6);
+                    anoText.setText(ano);
+                    idText.setBackground(Color.LIGHT_GRAY);
+                    modificarButton.setEnabled(true);
+                    crearButton.setEnabled(false);
+                } else {
+                    patrocinadorCb.setSelectedItem(0);
+                    subsistemaCb.setSelectedItem(0);
+                    materialCb.setSelectedItem(0);
+                    cantidadText.setText("");
+                    diaText.setText("");
+                    mesText.setText("");
+                    anoText.setText("");
+                    idText.setBackground(Color.WHITE);
+                    modificarButton.setEnabled(false);
+                    crearButton.setEnabled(true);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_idTextFocusLost
+
+    private void idTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusGained
+        idText.setBackground(Color.WHITE);
+    }//GEN-LAST:event_idTextFocusGained
 
     /**
      * @param args the command line arguments
@@ -399,10 +463,10 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField anoText;
     private javax.swing.JTextField cantidadText;
+    private javax.swing.JButton crearButton;
     private javax.swing.JTextField diaText;
     private javax.swing.JTextField idText;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
