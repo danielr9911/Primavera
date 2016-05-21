@@ -5,6 +5,7 @@
  */
 package Graphic;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,8 +28,11 @@ public class GestionarPersonal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--GESTIONAR PERSONAL--");
-        //crearButton.setEnabled(false);
-        //modificarButton.setEnabled(false);
+        crearButton.setEnabled(false);
+        modificarButton.setEnabled(false);
+        estadoCb.addItem("ACTIVO");
+        estadoCb.addItem("INACTIVO");
+
         try {
             conn = Primavera.Enlace(conn);
             String sqlinsertar = "select nomb_tipopersona from tipo_persona";
@@ -162,6 +166,14 @@ public class GestionarPersonal extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel10.setText("Tipo");
 
+        idText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                idTextFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                idTextFocusLost(evt);
+            }
+        });
         idText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idTextActionPerformed(evt);
@@ -384,19 +396,19 @@ public class GestionarPersonal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
-       Primavera.update("personal", "nombre_pers", nombreText.getText(), "identificacion", idText.getText());
-       Primavera.update("personal", "telefono_pers", telefonoText.getText(), "identificacion", idText.getText());
-       Primavera.update("personal", "correo_pers", correoText.getText(), "identificacion", idText.getText());
-       Primavera.update("personal", "salario_pers", salarioText.getText(), "identificacion", idText.getText());
-       Primavera.update("personal", "id_patrocinador", tipoCb.getSelectedItem().toString(), "identificacion", idText.getText());
-       Primavera.update("personal", "id_carro", gsCb.getSelectedItem().toString(), "identificacion", idText.getText());
-       Primavera.update("personal", "id_tipomoneda", rhCb.getSelectedItem().toString(), "identificacion", idText.getText());
-       Primavera.update("personal", "id_tipomoneda", epsCb.getSelectedItem().toString(), "identificacion", idText.getText());
-       Primavera.update("personal", "id_tipomoneda", subsistemaCb.getSelectedItem().toString(), "identificacion", idText.getText());
-       Primavera.update("personal", "id_tipomoneda", estadoCb.getSelectedItem().toString(), "identificacion", idText.getText());
-       Primavera.update("personal", "id_tipomoneda", profesionCb.getSelectedItem().toString(), "identificacion", idText.getText());
-       JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
-       
+        Primavera.update("personal", "nombre_pers", nombreText.getText(), "identificacion", idText.getText());
+        Primavera.update("personal", "telefono_pers", telefonoText.getText(), "identificacion", idText.getText());
+        Primavera.update("personal", "correo_pers", correoText.getText(), "identificacion", idText.getText());
+        Primavera.update("personal", "salario_pers", salarioText.getText(), "identificacion", idText.getText());
+        Primavera.update("personal", "id_patrocinador", tipoCb.getSelectedItem().toString(), "identificacion", idText.getText());
+        Primavera.update("personal", "id_carro", gsCb.getSelectedItem().toString(), "identificacion", idText.getText());
+        Primavera.update("personal", "id_tipomoneda", rhCb.getSelectedItem().toString(), "identificacion", idText.getText());
+        Primavera.update("personal", "id_tipomoneda", epsCb.getSelectedItem().toString(), "identificacion", idText.getText());
+        Primavera.update("personal", "id_tipomoneda", subsistemaCb.getSelectedItem().toString(), "identificacion", idText.getText());
+        Primavera.update("personal", "id_tipomoneda", estadoCb.getSelectedItem().toString(), "identificacion", idText.getText());
+        Primavera.update("personal", "id_tipomoneda", profesionCb.getSelectedItem().toString(), "identificacion", idText.getText());
+        JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
+
     }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void idTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextActionPerformed
@@ -481,6 +493,69 @@ public class GestionarPersonal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_crearButtonActionPerformed
+
+    private void idTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusGained
+        idText.setBackground(Color.WHITE);
+    }//GEN-LAST:event_idTextFocusGained
+
+    private void idTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusLost
+        if (idText.getText().equals("")) {
+            idText.requestFocusInWindow();
+        } else {
+            try {
+                conn = Primavera.Enlace(conn);
+                String consulta = "SELECT PERSONAL.NOMBRE_PERS, PERSONAL.TELEFONO_PERS, PERSONAL.CORREO_PERS, PERSONAL.CORREO_PERS, TIPO_PERSONA.NOMB_TIPOPERSONA, TIPO_SANGRE.GS, TIPO_SANGRE.RH, PROFESION.NOMBRE_PROFESION, PERSONAL.SALARIO_PERS, EPS.NOMBRE_EPS, SUBSISTEMA.NOMBRE_SUBS, PERSONAL.ESTADO_PERS "
+                        + "  FROM PERSONAL, PROFESION, EPS, SUBSISTEMA, TIPO_PERSONA, TIPO_SANGRE "
+                        + "  WHERE PERSONAL.ID_PROFESION = PROFESION.ID_PROFESION "
+                        + "  AND PERSONAL.ID_EPS = EPS.ID_EPS "
+                        + "  AND PERSONAL.ID_SUBSISTEMA = SUBSISTEMA.ID_SUBSISTEMA "
+                        + "  AND PERSONAL.ID_TIPOPERSONA = TIPO_PERSONA.ID_TIPOPERSONA "
+                        + "  AND PERSONAL.TIPO_SANGRE = TIPO_SANGRE.ID_SANGRE "
+                        + "  AND PERSONAL.IDENTIFICACION = ? ";
+                String sqlinsertar = consulta;
+                PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+                psta.setString(1, idText.getText());
+                ResultSet result = psta.executeQuery();
+
+                if (result != null && result.next()) {
+                    nombreText.setText(result.getString(2));
+                    telefonoText.setText(result.getString(3));
+                    correoText.setText(result.getString(4));
+                    tipoCb.setSelectedItem(result.getString(5));
+                    gsCb.setSelectedItem(result.getString(6));
+                    rhCb.setSelectedItem(result.getString(7));
+                    profesionCb.setSelectedItem(result.getString(8));
+                    salarioText.setText(result.getString(9));
+                    epsCb.setSelectedItem(result.getString(10));
+                    subsistemaCb.setSelectedItem(result.getString(11));
+                    estadoCb.setSelectedItem(result.getString(12));
+                    System.out.println();
+                    idText.setBackground(Color.LIGHT_GRAY);
+                    estadoCb.setEnabled(true);
+                    modificarButton.setEnabled(true);
+                    crearButton.setEnabled(false);
+                } else {
+                    nombreText.setText("");
+                    telefonoText.setText("");
+                    correoText.setText("");
+                    tipoCb.setSelectedItem(0);
+                    gsCb.setSelectedItem(0);
+                    rhCb.setSelectedItem(0);
+                    profesionCb.setSelectedItem(0);
+                    salarioText.setText("");
+                    epsCb.setSelectedItem(0);
+                    subsistemaCb.setSelectedItem(0);
+                    estadoCb.setSelectedItem(0);
+                    estadoCb.setEnabled(false);
+                    idText.setBackground(Color.WHITE);
+                    modificarButton.setEnabled(false);
+                    crearButton.setEnabled(true);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_idTextFocusLost
 
     /**
      * @param args the command line arguments

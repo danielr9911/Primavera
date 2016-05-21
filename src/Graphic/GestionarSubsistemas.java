@@ -5,6 +5,8 @@
  */
 package Graphic;
 
+import static Graphic.GestionarDonacionMonetaria.conn;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +18,9 @@ import primavera.Primavera;
  * @author Daniel
  */
 public class GestionarSubsistemas extends javax.swing.JFrame {
-    static Connection conn=null;
+
+    static Connection conn = null;
+
     /**
      * Creates new form GestionarSubsistemas
      */
@@ -25,23 +29,25 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--GESTIONAR SUBSISTEMAS--");
+        crearButton.setEnabled(false);
+        modificarButton.setEnabled(false);
         estadoCb.addItem("ACTIVO");
         estadoCb.addItem("INACTIVO");
         try {
-           conn=Primavera.Enlace(conn);
-           String sqlinsertar="select nombre_carro from carrosolar";
-           PreparedStatement psta=conn.prepareStatement(sqlinsertar);
-           ResultSet rs = psta.executeQuery();
-           while(rs.next()){
-              carroCb.addItem(rs.getString(1));
-           }
-           sqlinsertar="select nombre_lab from laboratorios";
-           psta=conn.prepareStatement(sqlinsertar);
-           rs = psta.executeQuery();
-           while(rs.next()){
-              labCb.addItem(rs.getString(1));
-           }
-        } catch(Exception e){
+            conn = Primavera.Enlace(conn);
+            String sqlinsertar = "select nombre_carro from carrosolar";
+            PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+            ResultSet rs = psta.executeQuery();
+            while (rs.next()) {
+                carroCb.addItem(rs.getString(1));
+            }
+            sqlinsertar = "select nombre_lab from laboratorios";
+            psta = conn.prepareStatement(sqlinsertar);
+            rs = psta.executeQuery();
+            while (rs.next()) {
+                labCb.addItem(rs.getString(1));
+            }
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
@@ -63,7 +69,7 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jButton17 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
+        crearButton = new javax.swing.JButton();
         modificarButton = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         idText = new javax.swing.JTextField();
@@ -100,11 +106,11 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
             }
         });
 
-        jButton18.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton18.setText("Crear");
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
+        crearButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        crearButton.setText("Crear");
+        crearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
+                crearButtonActionPerformed(evt);
             }
         });
 
@@ -119,6 +125,14 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel10.setText("Estado");
 
+        idText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                idTextFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                idTextFocusLost(evt);
+            }
+        });
         idText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idTextjTextField1ActionPerformed(evt);
@@ -133,7 +147,7 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
                 .addGap(61, 61, 61)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(crearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addComponent(modificarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
@@ -188,7 +202,7 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton17)
-                    .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(crearButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(modificarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
@@ -220,42 +234,88 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton17jButton2ActionPerformed
 
     private void modificarButtonjButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonjButton3ActionPerformed
-       Primavera.update("subsistema", "nombre_subs", NombreText.getText(), "id_subsistema", idText.getText());
-       Primavera.update("subsistema", "id_carro", carroCb.getSelectedItem().toString(), "id_subsistema", idText.getText());
-       Primavera.update("subsistema", "id_laboratorio", labCb.getSelectedItem().toString(), "id_subsistema", idText.getText());
-       Primavera.update("subsistema", "estado_subs", estadoCb.getSelectedItem().toString(), "id_subsistema", idText.getText());
-       JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
+        Primavera.update("subsistema", "nombre_subs", NombreText.getText(), "id_subsistema", idText.getText());
+        Primavera.update("subsistema", "id_carro", carroCb.getSelectedItem().toString(), "id_subsistema", idText.getText());
+        Primavera.update("subsistema", "id_laboratorio", labCb.getSelectedItem().toString(), "id_subsistema", idText.getText());
+        Primavera.update("subsistema", "estado_subs", estadoCb.getSelectedItem().toString(), "id_subsistema", idText.getText());
+        JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
     }//GEN-LAST:event_modificarButtonjButton3ActionPerformed
 
     private void idTextjTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextjTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idTextjTextField1ActionPerformed
 
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+    private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
         try {
-           conn=Primavera.Enlace(conn);
-           String sqlinsertar="insert into SUBSISTEMA values (?,?,?,?,?)";
-           PreparedStatement psta=conn.prepareStatement(sqlinsertar);
-           psta.setString(1, idText.getText());
-           String patr = Primavera.getId("id_carro", "nombre_carro","carrosolar",carroCb.getSelectedItem().toString());
-           psta.setString(2, patr);
-           psta.setString(3, NombreText.getText());
-           String patr1 = Primavera.getId("id_laboratorio", "nombre_lab","laboratorios",labCb.getSelectedItem().toString());
-           psta.setString(5, patr1);
-           psta.setString(4, estadoCb.getSelectedItem().toString());
-           psta.execute();
-           psta.close();
-           idText.setText("");
-           NombreText.setText("");
-           estadoCb.setSelectedIndex(0);
-           carroCb.setSelectedIndex(0);
-           labCb.setSelectedIndex(0);
-           
-           JOptionPane.showMessageDialog(null, "Registro Guardado Satisfactoriamente");
-        }catch (Exception e){
+            conn = Primavera.Enlace(conn);
+            String sqlinsertar = "insert into SUBSISTEMA values (?,?,?,?,?)";
+            PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+            psta.setString(1, idText.getText());
+            String patr = Primavera.getId("id_carro", "nombre_carro", "carrosolar", carroCb.getSelectedItem().toString());
+            psta.setString(2, patr);
+            psta.setString(3, NombreText.getText());
+            String patr1 = Primavera.getId("id_laboratorio", "nombre_lab", "laboratorios", labCb.getSelectedItem().toString());
+            psta.setString(5, patr1);
+            psta.setString(4, estadoCb.getSelectedItem().toString());
+            psta.execute();
+            psta.close();
+            idText.setText("");
+            NombreText.setText("");
+            estadoCb.setSelectedIndex(0);
+            carroCb.setSelectedIndex(0);
+            labCb.setSelectedIndex(0);
+
+            JOptionPane.showMessageDialog(null, "Registro Guardado Satisfactoriamente");
+        } catch (Exception e) {
             System.out.println(e);
         }
-    }//GEN-LAST:event_jButton18ActionPerformed
+    }//GEN-LAST:event_crearButtonActionPerformed
+
+    private void idTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusGained
+        idText.setBackground(Color.WHITE);
+    }//GEN-LAST:event_idTextFocusGained
+
+    private void idTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusLost
+        if (idText.getText().equals("")) {
+            idText.requestFocusInWindow();
+        } else {
+            try {
+                conn = Primavera.Enlace(conn);
+                String consulta = "SELECT CARROSOLAR.NOMBRE_CARRO, SUBSISTEMA.NOMBRE_SUBS, LABORATORIOS.NOMBRE_LAB, SUBSISTEMA.ESTADO_SUBS "
+                        + "FROM CARROSOLAR, LABORATORIOS, SUBSISTEMA "
+                        + "WHERE SUBSISTEMA.ID_CARRO = CARROSOLAR.ID_CARRO "
+                        + "AND SUBSISTEMA.ID_LABORATORIO = LABORATORIOS.ID_LABORATORIO "
+                        + "AND SUBSISTEMA.ID_SUBSISTEMA = ?";
+                String sqlinsertar = consulta;
+                PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+                psta.setString(1, idText.getText());
+                ResultSet result = psta.executeQuery();
+
+                if (result != null && result.next()) {
+                    carroCb.setSelectedItem(result.getString(1));
+                    NombreText.setText(result.getString(2));
+                    estadoCb.setSelectedItem(result.getString(4));
+                    labCb.setSelectedItem(result.getString(3));
+                    System.out.println();
+                    idText.setBackground(Color.LIGHT_GRAY);
+                    modificarButton.setEnabled(true);
+                    crearButton.setEnabled(false);
+                    estadoCb.setEnabled(true);
+                } else {
+                    carroCb.setSelectedItem(0);
+                    NombreText.setText("");
+                    estadoCb.setSelectedItem(0);
+                    estadoCb.setEnabled(false);
+                    labCb.setSelectedItem(0);
+                    idText.setBackground(Color.WHITE);
+                    modificarButton.setEnabled(false);
+                    crearButton.setEnabled(true);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_idTextFocusLost
 
     /**
      * @param args the command line arguments
@@ -295,10 +355,10 @@ public class GestionarSubsistemas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField NombreText;
     private javax.swing.JComboBox<String> carroCb;
+    private javax.swing.JButton crearButton;
     private javax.swing.JComboBox<String> estadoCb;
     private javax.swing.JTextField idText;
     private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;

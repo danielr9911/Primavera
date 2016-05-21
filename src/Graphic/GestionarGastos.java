@@ -5,6 +5,7 @@
  */
 package Graphic;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,8 +26,8 @@ public class GestionarGastos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--GESTIONAR GASTOS--");
-        //crearButton.setEnabled(false);
-        //modificarButton.setEnabled(false);
+        crearButton.setEnabled(false);
+        modificarButton.setEnabled(false);
         
         try {
            conn=Primavera.Enlace(conn);
@@ -119,6 +120,14 @@ public class GestionarGastos extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel10.setText("Descripción");
 
+        idText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                idTextFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                idTextFocusLost(evt);
+            }
+        });
         idText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idTextjTextField1ActionPerformed(evt);
@@ -299,6 +308,57 @@ public class GestionarGastos extends javax.swing.JFrame {
         }   
        } 
     }//GEN-LAST:event_crearButtonActionPerformed
+
+    private void idTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusGained
+       idText.setBackground(Color.WHITE);
+    }//GEN-LAST:event_idTextFocusGained
+
+    private void idTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFocusLost
+        if (idText.getText().equals("")) {
+            idText.requestFocusInWindow();
+        } else {
+            try {
+                conn = Primavera.Enlace(conn);
+                String consulta = "select carrosolar.nombre_carro, gastos.cantidad_gasto, gastos.fecha_gasto, gastos.desc_gasto "
+                        + "from CARROSOLAR, GASTOS "
+                        + "where GASTOS.ID_CARRO = CARROSOLAR.ID_CARRO "
+                        + "AND GASTOS.ID_GASTO = ?";
+                String sqlinsertar = consulta;
+                PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+                psta.setString(1,idText.getText());
+                ResultSet result = psta.executeQuery();
+                
+                if (result != null && result.next()) {
+                    CarroCb.setSelectedItem(result.getString(1));
+                    cantidadText.setText(result.getString(2));
+                    descripcionText.setText(result.getString(3));
+                    /**String dia = result.getString(3).substring(0, 2);
+                    diaText.setText(dia);
+                    String mes = result.getString(4).substring(3, 5);
+                    mesText.setText(mes);
+                    String ano = result.getString(5).substring(6);
+                    añoText.setText(ano);
+                    * */
+                    idText.setBackground(Color.LIGHT_GRAY);
+                    modificarButton.setEnabled(true);
+                    crearButton.setEnabled(false);
+                } else {
+                    CarroCb.setSelectedItem(0);
+                    cantidadText.setText("");
+                    descripcionText.setText("");
+                    
+                    diaText.setText("");
+                    mesText.setText("");
+                    añoText.setText("");
+                    idText.setBackground(Color.WHITE);
+                    modificarButton.setEnabled(false);
+                    crearButton.setEnabled(true);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_idTextFocusLost
 
     /**
      * @param args the command line arguments
