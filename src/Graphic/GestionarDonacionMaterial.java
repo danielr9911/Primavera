@@ -17,7 +17,9 @@ import primavera.Primavera;
  * @author dsernae
  */
 public class GestionarDonacionMaterial extends javax.swing.JFrame {
-    static Connection conn=null;
+
+    static Connection conn = null;
+
     /**
      * Creates new form GestionarDonacionMaterial
      */
@@ -29,27 +31,27 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
         crearButton.setEnabled(false);
         modificarButton.setEnabled(false);
         try {
-           conn=Primavera.Enlace(conn);
-           String sqlinsertar="select nombre_patr from patrocinador";
-           PreparedStatement psta=conn.prepareStatement(sqlinsertar);
-           ResultSet rs = psta.executeQuery();
-           while(rs.next()){
-              patrocinadorCb.addItem(rs.getString(1));
-           }
-           sqlinsertar="select nombre_subs from subsistema";
-           psta=conn.prepareStatement(sqlinsertar);
-           rs = psta.executeQuery();
-           while(rs.next()){
-              subsistemaCb.addItem(rs.getString(1));
-           }
-           sqlinsertar="select nombre_material from material";
-           psta=conn.prepareStatement(sqlinsertar);
-           rs = psta.executeQuery();
-           while(rs.next()){
-              materialCb.addItem(rs.getString(1));
-           }
-           //System.out.println(Primavera.getId("id_patrocinador", "nombre_patr","PATROCINADOR","ADDICT"));
-        } catch(Exception e){
+            conn = Primavera.Enlace(conn);
+            String sqlinsertar = "select nombre_patr from patrocinador";
+            PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+            ResultSet rs = psta.executeQuery();
+            while (rs.next()) {
+                patrocinadorCb.addItem(rs.getString(1));
+            }
+            sqlinsertar = "select nombre_subs from subsistema";
+            psta = conn.prepareStatement(sqlinsertar);
+            rs = psta.executeQuery();
+            while (rs.next()) {
+                subsistemaCb.addItem(rs.getString(1));
+            }
+            sqlinsertar = "select nombre_material from material";
+            psta = conn.prepareStatement(sqlinsertar);
+            rs = psta.executeQuery();
+            while (rs.next()) {
+                materialCb.addItem(rs.getString(1));
+            }
+            //System.out.println(Primavera.getId("id_patrocinador", "nombre_patr","PATROCINADOR","ADDICT"));
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
@@ -176,7 +178,7 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
         });
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel11.setText("AAAA");
+        jLabel11.setText("AA");
 
         anoText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -213,11 +215,11 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(diaText, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(27, 27, 27)
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(mesText, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(22, 22, 22)
+                                .addGap(28, 28, 28)
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(anoText, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -306,12 +308,12 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
     }//GEN-LAST:event_idTextActionPerformed
 
     private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
-       Primavera.update("donacion_material", "cantidad_mat", cantidadText.getText(), "id_donmaterial", idText.getText());
-       Primavera.update("donacion_material", "id_patrocinador", patrocinadorCb.getSelectedItem().toString(), "id_donmaterial", idText.getText());
-       Primavera.update("donacion_material", "id_subsistema", subsistemaCb.getSelectedItem().toString(), "id_donmaterial", idText.getText());
-       Primavera.update("donacion_material", "id_material", materialCb.getSelectedItem().toString(), "id_donmaterial", idText.getText());
-       Primavera.update("donacion_material", "fecha_donmat", diaText.getText()+"/"+mesText.getText()+"/"+anoText.getText(), "id_donmaterial", idText.getText());
-       JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
+        Primavera.update("donacion_material", "cantidad_mat", cantidadText.getText(), "id_donmaterial", idText.getText());
+        Primavera.update("donacion_material", "id_patrocinador", patrocinadorCb.getSelectedItem().toString(), "id_donmaterial", idText.getText());
+        Primavera.update("donacion_material", "id_subsistema", subsistemaCb.getSelectedItem().toString(), "id_donmaterial", idText.getText());
+        Primavera.update("donacion_material", "id_material", materialCb.getSelectedItem().toString(), "id_donmaterial", idText.getText());
+        Primavera.update("donacion_material", "fecha_donmat", diaText.getText() + "/" + mesText.getText() + "/" + anoText.getText(), "id_donmaterial", idText.getText());
+        JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
     }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -321,38 +323,41 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
-        if(idText.getText().equals("") 
+        if (idText.getText().equals("")
                 | cantidadText.getText().equals("")
-                | diaText.getText().equals("") 
+                | diaText.getText().equals("")
                 | mesText.getText().equals("")
-                | anoText.getText().equals("")){
+                | anoText.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Por favor completa todas las casillas");
-        }else{
+        } else {
             try {
-           conn=Primavera.Enlace(conn);
-           String sqlinsertar="insert into Donacion_Material values (?,?,?,?,to_date(?,'DD/MM/RR'),?)";
-           PreparedStatement psta=conn.prepareStatement(sqlinsertar);
-           psta.setString(1, idText.getText());
-           String patr = Primavera.getId("id_patrocinador", "nombre_patr","patrocinador",patrocinadorCb.getSelectedItem().toString());
-           psta.setString(2, patr);
-           String subs = Primavera.getId("id_subsistema", "nombre_subs","subsistema",subsistemaCb.getSelectedItem().toString());
-           psta.setString(3, subs);
-           String mat = Primavera.getId("id_material", "nombre_material","material",materialCb.getSelectedItem().toString());
-           psta.setString(6, mat);
-           String date = diaText.getText()+"/"+mesText.getText()+"/"+anoText.getText();
-           psta.setString(5, date);
-           psta.setString(4,cantidadText.getText());
-           psta.execute();
-           psta.close();
-           idText.setText("");
-           cantidadText.setText("");
-           diaText.setText("");
-           mesText.setText("");
-           anoText.setText("");
-           JOptionPane.showMessageDialog(null, "Registro Guardado Satisfactoriamente");
-        }catch (Exception e){
-            System.out.println(e);
-        }
+                conn = Primavera.Enlace(conn);
+                String sqlinsertar = "insert into Donacion_Material values (?,?,?,?,to_date(?,'DD/MM/RR'),?)";
+                PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+                psta.setString(1, idText.getText());
+                String patr = Primavera.getId("id_patrocinador", "nombre_patr", "patrocinador", patrocinadorCb.getSelectedItem().toString());
+                psta.setString(2, patr);
+                String subs = Primavera.getId("id_subsistema", "nombre_subs", "subsistema", subsistemaCb.getSelectedItem().toString());
+                psta.setString(3, subs);
+                String mat = Primavera.getId("id_material", "nombre_material", "material", materialCb.getSelectedItem().toString());
+                psta.setString(6, mat);
+                String date = diaText.getText() + "/" + mesText.getText() + "/" + anoText.getText();
+                psta.setString(5, date);
+                psta.setString(4, cantidadText.getText());
+                psta.execute();
+                psta.close();
+                idText.setText("");
+                patrocinadorCb.setSelectedItem(0);
+                subsistemaCb.setSelectedItem(0);
+                materialCb.setSelectedItem(0);
+                cantidadText.setText("");
+                diaText.setText("");
+                mesText.setText("");
+                anoText.setText("");
+                JOptionPane.showMessageDialog(null, "Registro Guardado Satisfactoriamente");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }//GEN-LAST:event_crearButtonActionPerformed
 
@@ -378,27 +383,27 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
         } else {
             try {
                 conn = Primavera.Enlace(conn);
-                String consulta = "select patrocinador.nombre_patr, subsistema.nombre_subs, material.nombre_material, donacion_material.cantidad_mat, donacion_material.fecha_donmat \n" +
-"                        from PATROCINADOR, SUBSISTEMA, MATERIAL, DONACION_MATERIAL \n" +
-"                        where DONACION_MATERIAL.ID_PATROCINADOR = PATROCINADOR.ID_PATROCINADOR \n" +
-"                        AND DONACION_MATERIAL.ID_SUBSISTEMA = SUBSISTEMA.ID_SUBSISTEMA \n" +
-"                        AND DONACION_MATERIAL.ID_MATERIAL = MATERIAL.ID_MATERIAL\n" +
-"                        AND DONACION_MATERIAL.ID_DONMATERIAL = ? ";
+                String consulta = "select patrocinador.nombre_patr, subsistema.nombre_subs, material.nombre_material, donacion_material.cantidad_mat, donacion_material.fecha_donmat \n"
+                        + "                        from PATROCINADOR, SUBSISTEMA, MATERIAL, DONACION_MATERIAL \n"
+                        + "                        where DONACION_MATERIAL.ID_PATROCINADOR = PATROCINADOR.ID_PATROCINADOR \n"
+                        + "                        AND DONACION_MATERIAL.ID_SUBSISTEMA = SUBSISTEMA.ID_SUBSISTEMA \n"
+                        + "                        AND DONACION_MATERIAL.ID_MATERIAL = MATERIAL.ID_MATERIAL\n"
+                        + "                        AND DONACION_MATERIAL.ID_DONMATERIAL = ? ";
                 String sqlinsertar = consulta;
                 PreparedStatement psta = conn.prepareStatement(sqlinsertar);
-                psta.setString(1,idText.getText());
+                psta.setString(1, idText.getText());
                 ResultSet result = psta.executeQuery();
-                
+
                 if (result != null && result.next()) {
                     patrocinadorCb.setSelectedItem(result.getString(1));
                     subsistemaCb.setSelectedItem(result.getString(2));
                     materialCb.setSelectedItem(result.getString(3));
                     cantidadText.setText(result.getString(4));
-                    String dia = result.getString(7).substring(0, 2);
+                    String dia = result.getString(7).substring(8, 10);
                     diaText.setText(dia);
-                    String mes = result.getString(7).substring(3, 5);
+                    String mes = result.getString(7).substring(5, 7);
                     mesText.setText(mes);
-                    String ano = result.getString(7).substring(6);
+                    String ano = result.getString(7).substring(2, 4);
                     anoText.setText(ano);
                     idText.setBackground(Color.LIGHT_GRAY);
                     modificarButton.setEnabled(true);

@@ -26,6 +26,8 @@ public class GestionarTiposDeSangre extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("--PRIMAVERA--GESTIONAR TIPOS DE SANGRE--");
+        crearButton.setEnabled(false);
+        modificarButton.setEnabled(false);
     }
 
     /**

@@ -218,9 +218,18 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
 
         try {
             conn = Primavera.Enlace(conn);
-            String id = Primavera.getId("id_profesion", "nombre_profesion", "Profesion", profesionCb.getSelectedItem().toString());
+            String idProf = Primavera.getId("id_profesion", "nombre_profesion", "Profesion", profesionCb.getSelectedItem().toString());
             //System.out.println(id);
-            ResultSet rs = Primavera.selectAllFrom("personal", "id_profesion", id);
+            String consulta = "select PERSONAL.IDENTIFICACION, PERSONAL.NOMBRE_PERS, PERSONAL.TELEFONO_PERS, PERSONAL.CORREO_PERS, SUBSISTEMA.NOMBRE_SUBS, PERSONAL.ESTADO_PERS, TIPO_PERSONA.NOMB_TIPOPERSONA "
+                    + "FROM SUBSISTEMA, TIPO_PERSONA, PERSONAL "
+                    + "WHERE PERSONAL.ID_SUBSISTEMA = SUBSISTEMA.ID_SUBSISTEMA "
+                    + "AND PERSONAL.ID_TIPOPERSONA = TIPO_PERSONA.ID_TIPOPERSONA "
+                    + "AND PERSONAL.ID_PROFESION = ? ";
+
+            String sqlinsertar = consulta;
+            PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+            psta.setString(1, idProf);
+            ResultSet rs = psta.executeQuery();
             ResultSetMetaData rsMd = rs.getMetaData();
             // Se obtiene el número de columnas.
             int numeroColumnas = rsMd.getColumnCount();
@@ -236,22 +245,14 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
                 //System.out.println("Entro");
                 String[] fila = new String[numeroColumnas];
                 for (int i = 0; i < numeroColumnas; i++) {
-                    fila[i] = rs.getString(i + 1);
                     fila[0] = rs.getString(1);
-                    fila[1] = rs.getString(3);
-                    fila[2] = rs.getString(4);
-                    fila[3] = rs.getString(5);
-                    //ResultSet nombrSubs = Primavera.selectAllFrom("subsistema","id_subsistema",rs.getString(2));
-                    //if(nombrSubs.next()){
-                    //    fila[4] = nombrSubs.getString(3);
-                    //}
-                    fila[4] = rs.getString(2);
+                    fila[1] = rs.getString(2);
+                    fila[2] = rs.getString(3);
+                    fila[3] = rs.getString(4);
+                    fila[4] = rs.getString(5);
                     fila[5] = rs.getString(6);
-                    fila[6] = rs.getString(11);
-                    //ResultSet nombrTipoPers = Primavera.selectAllFrom("tipo_persona","id_tipopersona",rs.getString(11));
-                    //if(nombrTipoPers.next()){
-                    //    fila[6] = nombrTipoPers.getString(2);
-                    //}
+                    fila[6] = rs.getString(7);
+
                 }
                 modelo.addRow(fila);
             }
@@ -284,8 +285,19 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
         } else {
             try {
                 conn = Primavera.Enlace(conn);
-                String id = Primavera.getId("id_profesion", "nombre_profesion", "Profesion", profesionCb.getSelectedItem().toString());
-                ResultSet rs = Primavera.selectAllWhere("personal", "id_profesion", id, "id_tipopersona", "3");
+                String idProf = Primavera.getId("id_profesion", "nombre_profesion", "Profesion", profesionCb.getSelectedItem().toString());
+                //System.out.println(id);
+                String consulta = "select PERSONAL.IDENTIFICACION, PERSONAL.NOMBRE_PERS, PERSONAL.TELEFONO_PERS, PERSONAL.CORREO_PERS, SUBSISTEMA.NOMBRE_SUBS, PERSONAL.ESTADO_PERS, TIPO_PERSONA.NOMB_TIPOPERSONA "
+                        + "FROM SUBSISTEMA, TIPO_PERSONA, PERSONAL "
+                        + "WHERE PERSONAL.ID_SUBSISTEMA = SUBSISTEMA.ID_SUBSISTEMA "
+                        + "AND PERSONAL.ID_TIPOPERSONA = TIPO_PERSONA.ID_TIPOPERSONA "
+                        + "AND PERSONAL.ID_PROFESION = ? "
+                        + "AND PERSONAL.ID_TIPOPERSONA = '3'";
+
+                String sqlinsertar = consulta;
+                PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+                psta.setString(1, idProf);
+                ResultSet rs = psta.executeQuery();
                 ResultSetMetaData rsMd = rs.getMetaData();
                 // Se obtiene el número de columnas.
                 int numeroColumnas = rsMd.getColumnCount();
@@ -301,22 +313,14 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
                     //System.out.println("Entro");
                     String[] fila = new String[numeroColumnas];
                     for (int i = 0; i < numeroColumnas; i++) {
-                        fila[i] = rs.getString(i + 1);
                         fila[0] = rs.getString(1);
-                        fila[1] = rs.getString(3);
-                        fila[2] = rs.getString(4);
-                        fila[3] = rs.getString(5);
-                        //ResultSet nombrSubs = Primavera.selectAllFrom("subsistema","id_subsistema",rs.getString(2));
-                        //if(nombrSubs.next()){
-                        //    fila[4] = nombrSubs.getString(3);
-                        //}
-                        fila[4] = rs.getString(2);
+                        fila[1] = rs.getString(2);
+                        fila[2] = rs.getString(3);
+                        fila[3] = rs.getString(4);
+                        fila[4] = rs.getString(5);
                         fila[5] = rs.getString(6);
-                        fila[6] = rs.getString(11);
-                        //ResultSet nombrTipoPers = Primavera.selectAllFrom("tipo_persona","id_tipopersona",rs.getString(11));
-                        //if(nombrTipoPers.next()){
-                        //    fila[6] = nombrTipoPers.getString(2);
-                        //}
+                        fila[6] = rs.getString(7);
+
                     }
                     modelo.addRow(fila);
                 }
@@ -350,8 +354,20 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
         } else {
             try {
                 conn = Primavera.Enlace(conn);
-                String id = Primavera.getId("id_profesion", "nombre_profesion", "Profesion", profesionCb.getSelectedItem().toString());
-                ResultSet rs = Primavera.selectAllWhere("personal", "id_profesion", id, "id_tipopersona", "1");
+                String idProf = Primavera.getId("id_profesion", "nombre_profesion", "Profesion", profesionCb.getSelectedItem().toString());
+                //System.out.println(id);
+                String consulta = "select PERSONAL.IDENTIFICACION, PERSONAL.NOMBRE_PERS, PERSONAL.TELEFONO_PERS, PERSONAL.CORREO_PERS, SUBSISTEMA.NOMBRE_SUBS, PERSONAL.ESTADO_PERS, TIPO_PERSONA.NOMB_TIPOPERSONA "
+                        + "FROM SUBSISTEMA, TIPO_PERSONA, PERSONAL "
+                        + "WHERE PERSONAL.ID_SUBSISTEMA = SUBSISTEMA.ID_SUBSISTEMA "
+                        + "AND PERSONAL.ID_TIPOPERSONA = TIPO_PERSONA.ID_TIPOPERSONA "
+                        + "AND PERSONAL.ID_PROFESION = ? "
+                        + "AND (PERSONAL.ID_TIPOPERSONA = '1'"
+                        + "OR PERSONAL.ID_TIPOPERSONA = '2')";
+
+                String sqlinsertar = consulta;
+                PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+                psta.setString(1, idProf);
+                ResultSet rs = psta.executeQuery();
                 ResultSetMetaData rsMd = rs.getMetaData();
                 // Se obtiene el número de columnas.
                 int numeroColumnas = rsMd.getColumnCount();
@@ -367,22 +383,14 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
                     //System.out.println("Entro");
                     String[] fila = new String[numeroColumnas];
                     for (int i = 0; i < numeroColumnas; i++) {
-                        fila[i] = rs.getString(i + 1);
                         fila[0] = rs.getString(1);
-                        fila[1] = rs.getString(3);
-                        fila[2] = rs.getString(4);
-                        fila[3] = rs.getString(5);
-                        //ResultSet nombrSubs = Primavera.selectAllFrom("subsistema","id_subsistema",rs.getString(2));
-                        //if(nombrSubs.next()){
-                        //    fila[4] = nombrSubs.getString(3);
-                        //}
-                        fila[4] = rs.getString(2);
+                        fila[1] = rs.getString(2);
+                        fila[2] = rs.getString(3);
+                        fila[3] = rs.getString(4);
+                        fila[4] = rs.getString(5);
                         fila[5] = rs.getString(6);
-                        fila[6] = rs.getString(11);
-                        //ResultSet nombrTipoPers = Primavera.selectAllFrom("tipo_persona","id_tipopersona",rs.getString(11));
-                        //if(nombrTipoPers.next()){
-                        //    fila[6] = nombrTipoPers.getString(2);
-                        //}
+                        fila[6] = rs.getString(7);
+
                     }
                     modelo.addRow(fila);
                 }
@@ -416,8 +424,20 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
         } else {
             try {
                 conn = Primavera.Enlace(conn);
-                String id = Primavera.getId("id_profesion", "nombre_profesion", "Profesion", profesionCb.getSelectedItem().toString());
-                ResultSet rs = Primavera.selectAllWhere("personal", "id_profesion", id, "id_tipopersona", "4");
+                String idProf = Primavera.getId("id_profesion", "nombre_profesion", "Profesion", profesionCb.getSelectedItem().toString());
+                //System.out.println(id);
+                String consulta = "select PERSONAL.IDENTIFICACION, PERSONAL.NOMBRE_PERS, PERSONAL.TELEFONO_PERS, PERSONAL.CORREO_PERS, SUBSISTEMA.NOMBRE_SUBS, PERSONAL.ESTADO_PERS, TIPO_PERSONA.NOMB_TIPOPERSONA "
+                        + "FROM SUBSISTEMA, TIPO_PERSONA, PERSONAL "
+                        + "WHERE PERSONAL.ID_SUBSISTEMA = SUBSISTEMA.ID_SUBSISTEMA "
+                        + "AND PERSONAL.ID_TIPOPERSONA = TIPO_PERSONA.ID_TIPOPERSONA "
+                        + "AND PERSONAL.ID_PROFESION = ? "
+                        + "AND (PERSONAL.ID_TIPOPERSONA = '2'"
+                        + "OR PERSONAL.ID_TIPOPERSONA = '4')";
+
+                String sqlinsertar = consulta;
+                PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+                psta.setString(1, idProf);
+                ResultSet rs = psta.executeQuery();
                 ResultSetMetaData rsMd = rs.getMetaData();
                 // Se obtiene el número de columnas.
                 int numeroColumnas = rsMd.getColumnCount();
@@ -433,22 +453,14 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
                     //System.out.println("Entro");
                     String[] fila = new String[numeroColumnas];
                     for (int i = 0; i < numeroColumnas; i++) {
-                        fila[i] = rs.getString(i + 1);
                         fila[0] = rs.getString(1);
-                        fila[1] = rs.getString(3);
-                        fila[2] = rs.getString(4);
-                        fila[3] = rs.getString(5);
-                        //ResultSet nombrSubs = Primavera.selectAllFrom("subsistema","id_subsistema",rs.getString(2));
-                        //if(nombrSubs.next()){
-                        //    fila[4] = nombrSubs.getString(3);
-                        //}
-                        fila[4] = rs.getString(2);
+                        fila[1] = rs.getString(2);
+                        fila[2] = rs.getString(3);
+                        fila[3] = rs.getString(4);
+                        fila[4] = rs.getString(5);
                         fila[5] = rs.getString(6);
-                        fila[6] = rs.getString(11);
-                        //ResultSet nombrTipoPers = Primavera.selectAllFrom("tipo_persona","id_tipopersona",rs.getString(11));
-                        //if(nombrTipoPers.next()){
-                        //    fila[6] = nombrTipoPers.getString(2);
-                        //}
+                        fila[6] = rs.getString(7);
+
                     }
                     modelo.addRow(fila);
                 }

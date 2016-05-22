@@ -329,7 +329,7 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
         Primavera.update("donacion_monetaria", "id_patrocinador", patrocinadorCb.getSelectedItem().toString(), "id_monetaria", idText.getText());
         Primavera.update("donacion_monetaria", "id_carro", carroCb.getSelectedItem().toString(), "id_monetaria", idText.getText());
         Primavera.update("donacion_monetaria", "id_tipomoneda", divisaCb.getSelectedItem().toString(), "id_monetaria", idText.getText());
-        Primavera.update("donacion_monetaria", "fecha_mone", diaText.getText() + "/" + mesText.getText() + "/" + anoText.getText(), "id_monetaria", idText.getText());
+        //Primavera.update("donacion_monetaria", "fecha_mone", diaText.getText() + "/" + mesText.getText() + "/" + anoText.getText(), "id_monetaria", idText.getText());
         JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
     }//GEN-LAST:event_modificarButtonjButton3ActionPerformed
 
@@ -366,6 +366,9 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
             psta.execute();
             psta.close();
             idText.setText("");
+            patrocinadorCb.setSelectedIndex(0);
+            carroCb.setSelectedIndex(0);
+            divisaCb.setSelectedIndex(0);
             cantidadText.setText("");
             tasaText.setText("");
             cantidadCopText.setText("");
@@ -396,9 +399,9 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
                         + "AND DONACION_MONETARIA.ID_MONETARIA = ?";
                 String sqlinsertar = consulta;
                 PreparedStatement psta = conn.prepareStatement(sqlinsertar);
-                psta.setString(1,idText.getText());
+                psta.setString(1, idText.getText());
                 ResultSet result = psta.executeQuery();
-                
+
                 if (result != null && result.next()) {
                     patrocinadorCb.setSelectedItem(result.getString(1));
                     carroCb.setSelectedItem(result.getString(2));
@@ -406,20 +409,20 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
                     cantidadText.setText(result.getString(4));
                     tasaText.setText(result.getString(5));
                     cantidadCopText.setText(result.getString(6));
-                    System.out.println();
-                    String dia = result.getString(7).substring(0, 2);
+                    //System.out.println(result.getString(7));
+                    String dia = result.getString(7).substring(8, 10);
                     diaText.setText(dia);
-                    String mes = result.getString(7).substring(3, 5);
+                    String mes = result.getString(7).substring(5, 7);
                     mesText.setText(mes);
-                    String ano = result.getString(7).substring(6);
+                    String ano = result.getString(7).substring(2, 4);
                     anoText.setText(ano);
                     idText.setBackground(Color.LIGHT_GRAY);
                     modificarButton.setEnabled(true);
                     crearButton.setEnabled(false);
                 } else {
-                    patrocinadorCb.setSelectedItem(0);
-                    carroCb.setSelectedItem(0);
-                    divisaCb.setSelectedItem(0);
+                    patrocinadorCb.setSelectedIndex(0);
+                    carroCb.setSelectedIndex(0);
+                    divisaCb.setSelectedIndex(0);
                     cantidadText.setText("");
                     tasaText.setText("");
                     cantidadCopText.setText("");
