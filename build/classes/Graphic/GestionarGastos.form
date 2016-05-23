@@ -90,7 +90,7 @@
                                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                           <Component id="jLabel40" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="añoText" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="anoText" min="-2" pref="30" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="CarroCb" alignment="0" max="32767" attributes="0"/>
                                   </Group>
@@ -139,7 +139,7 @@
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="añoText" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="anoText" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="mesText" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="diaText" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -258,7 +258,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="cantidadText">
         </Component>
-        <Component class="javax.swing.JTextField" name="a&#xf1;oText">
+        <Component class="javax.swing.JTextField" name="anoText">
         </Component>
         <Component class="javax.swing.JTextField" name="mesText">
         </Component>
@@ -285,7 +285,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="AAAA"/>
+            <Property name="text" type="java.lang.String" value="AA"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">

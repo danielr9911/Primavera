@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Graphic;
 
 import java.awt.Color;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -180,11 +177,10 @@ public class AumentarSalarios extends javax.swing.JFrame {
         } else {
             try {
                 conn = Primavera.Enlace(conn);
-                String sqlinsertar = "EXEC AUMENTAR_SALARIO(?)";
-                PreparedStatement psta = conn.prepareStatement(sqlinsertar);
-                psta.setString(1, cantidadText.getText());
-                psta.execute();
-                psta.close();
+                CallableStatement cs = null;
+                cs = this.conn.prepareCall("{call AUMENTO(?)}");
+                cs.setString(1, cantidadText.getText());
+                cs.executeQuery();
                 cantidadText.setText("");
                 cantidadText.requestFocusInWindow();
                 JOptionPane.showMessageDialog(null, "Salarios aumentados satisfactoriamente");

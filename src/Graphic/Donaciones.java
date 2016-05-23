@@ -272,22 +272,40 @@ public class Donaciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void consultarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarButtonActionPerformed
+        ResultSet rs = null;
+        if (diaIniText.getText().equals("") && mesIniText.getText().equals("") && anoIniText.getText().equals("")
+                && diaFinText.getText().equals("") && mesFinText.getText().equals("") && anoFinText.getText().equals("")) {
+            String consulta = "SELECT * FROM VISTA_MONETARIAS";
+            try {
+                conn = Primavera.Enlace(conn);
+                String sqlinsertar = consulta;
+                PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+                rs = psta.executeQuery();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        } else {
+            try {
+                conn = Primavera.Enlace(conn);
+                String consulta = "select donacion_monetaria.id_monetaria, Patrocinador.nombre_patr, Carrosolar.nombre_carro, Donacion_monetaria.cantidad_cop, Donacion_monetaria.fecha_mone "
+                        + "from DONACION_MONETARIA, CARROSOLAR, PATROCINADOR "
+                        + "Where DONACION_MONETARIA.ID_CARRO = CARROSOLAR.ID_CARRO "
+                        + "AND DONACION_MONETARIA.ID_PATROCINADOR = PATROCINADOR.ID_PATROCINADOR "
+                        + "AND DONACION_MONETARIA.FECHA_MONE >= ? "
+                        + "AND DONACION_MONETARIA.FECHA_MONE <= ?";
+                String sqlinsertar = consulta;
+                String fechaIni = diaIniText.getText() + "/" + mesIniText.getText() + "/" + anoIniText.getText();
+                String fechaFin = diaFinText.getText() + "/" + mesFinText.getText() + "/" + anoFinText.getText();
+                PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+                psta.setString(1, fechaIni);
+                psta.setString(2, fechaFin);
+                rs = psta.executeQuery();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
         modelo = new DefaultTableModel();
         try {
-            conn = Primavera.Enlace(conn);
-            String consulta = "select donacion_monetaria.id_monetaria, Patrocinador.nombre_patr, Carrosolar.nombre_carro, Donacion_monetaria.cantidad_cop, Donacion_monetaria.fecha_mone "
-                    + "from DONACION_MONETARIA, CARROSOLAR, PATROCINADOR "
-                    + "Where DONACION_MONETARIA.ID_CARRO = CARROSOLAR.ID_CARRO "
-                    + "AND DONACION_MONETARIA.ID_PATROCINADOR = PATROCINADOR.ID_PATROCINADOR "
-                    + "AND DONACION_MONETARIA.FECHA_MONE >= ? "
-                    + "AND DONACION_MONETARIA.FECHA_MONE <= ?";
-            String sqlinsertar = consulta;
-            String fechaIni = diaIniText.getText() + "/" + mesIniText.getText() + "/" + anoIniText.getText();
-            String fechaFin = diaFinText.getText() + "/" + mesFinText.getText() + "/" + anoFinText.getText();
-            PreparedStatement psta = conn.prepareStatement(sqlinsertar);
-            psta.setString(1, fechaIni);
-            psta.setString(2, fechaFin);
-            ResultSet rs = psta.executeQuery();
             ResultSetMetaData rsMd = rs.getMetaData();
             // Se obtiene el número de columnas.
             int numeroColumnas = rsMd.getColumnCount();
@@ -313,18 +331,6 @@ public class Donaciones extends javax.swing.JFrame {
             conn.close();
             this.tablaAMostrar.setModel(modelo);
 
-            /**
-             * if (result != null && result.next()) {
-             * nombreText.setText(result.getString(2));
-             * placaText.setText(result.getString(3));
-             * estadoText.setText(result.getString(4));
-             * idText.setBackground(Color.GRAY);
-             * modificarButton.setEnabled(true); estadoText.setEnabled(true);
-             * crearButton.setEnabled(false); } else { nombreText.setText("");
-             * placaText.setText(""); estadoText.setText("ACTIVO");
-             * estadoText.setEnabled(false); modificarButton.setEnabled(false);
-             * crearButton.setEnabled(true); }
-             */
         } catch (Exception e) {
             System.out.println(e);
         }

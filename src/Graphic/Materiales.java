@@ -264,22 +264,41 @@ public class Materiales extends javax.swing.JFrame {
     }//GEN-LAST:event_diaIniTextActionPerformed
 
     private void consultarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarButtonActionPerformed
+        ResultSet rs = null;
+        if (diaIniText.getText().equals("") && mesIniText.getText().equals("") && anoIniText.getText().equals("")
+                && diaFinText.getText().equals("") && mesFinText.getText().equals("") && anoFinText.getText().equals("")) {
+            String consulta = "SELECT * FROM VISTA_MATERIALES";
+            try {
+                conn = Primavera.Enlace(conn);
+                String sqlinsertar = consulta;
+                PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+                rs = psta.executeQuery();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        } else {
+            try {
+                conn = Primavera.Enlace(conn);
+                String consulta = "select Donacion_material.ID_DONMATERIAL, Material.nombre_material,Donacion_material.cantidad_mat,Subsistema.nombre_subs, Donacion_material.fecha_donmat "
+                        + "from Donacion_material, Material, subsistema "
+                        + "Where Donacion_material.ID_DONMATERIAL = Material.ID_MATERIAL "
+                        + "AND Donacion_material.ID_SUBSISTEMA = subsistema.ID_SUBSISTEMA "
+                        + "AND Donacion_material.FECHA_DONMAT >= ? "
+                        + "AND Donacion_material.FECHA_DONMAT <= ? ";
+                String fechaIni = diaIniText.getText() + "/" + mesIniText.getText() + "/" + anoIniText.getText();
+                String fechaFin = diaFinText.getText() + "/" + mesFinText.getText() + "/" + anoFinText.getText();
+                String sqlinsertar = consulta;
+                PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+                psta.setString(1, fechaIni);
+                psta.setString(2, fechaFin);
+                rs = psta.executeQuery();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
         modelo = new DefaultTableModel();
         try {
-            conn = Primavera.Enlace(conn);
-            String consulta = "select Donacion_material.ID_DONMATERIAL, Material.nombre_material,Donacion_material.cantidad_mat,Subsistema.nombre_subs, Donacion_material.fecha_donmat " +
-                            "from Donacion_material, Material, subsistema " +
-                            "Where Donacion_material.ID_DONMATERIAL = Material.ID_MATERIAL " +
-                            "AND Donacion_material.ID_SUBSISTEMA = subsistema.ID_SUBSISTEMA " +
-                            "AND Donacion_material.FECHA_DONMAT >= ? " +
-                            "AND Donacion_material.FECHA_DONMAT <= ? ";
-            String fechaIni = diaIniText.getText()+"/"+mesIniText.getText()+"/"+anoIniText.getText();
-            String fechaFin= diaFinText.getText()+"/"+mesFinText.getText()+"/"+anoFinText.getText();
-            String sqlinsertar = consulta;
-            PreparedStatement psta = conn.prepareStatement(sqlinsertar);
-            psta.setString(1, fechaIni);
-            psta.setString(2, fechaFin);
-            ResultSet rs = psta.executeQuery();
+
             ResultSetMetaData rsMd = rs.getMetaData();
             // Se obtiene el número de columnas.
             int numeroColumnas = rsMd.getColumnCount();

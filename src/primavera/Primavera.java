@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package primavera;
 
 import Graphic.*;
@@ -31,7 +26,7 @@ public class Primavera {
      */
     public static void main(String[] args) {
         
-        System.out.println("Start");
+        System.out.println("Connecting..");
 
         MenuPrincipal vent = new MenuPrincipal();
         vent.setVisible(true);
@@ -51,7 +46,6 @@ public class Primavera {
     public static String getId(String campoId,String campoNombre,String tabla, String nombre) {
         String id= "1110";
         String consulta = "select "+campoId+" from "+tabla+" where "+campoNombre+" = ?";
-        //System.out.println(consulta);
         try {
            conn=Primavera.Enlace(conn);
            String sqlinsertar=consulta;
@@ -69,7 +63,6 @@ public class Primavera {
     
     public static ResultSet selectAllFrom(String tabla,String campoId, String id ){
         String consulta = "select * from "+tabla+" where "+campoId+" = ?";
-        //System.out.println(consulta);
         try {
            conn=Primavera.Enlace(conn);
            String sqlinsertar=consulta;
@@ -85,7 +78,6 @@ public class Primavera {
     
     public static ResultSet selectAllWhere(String tabla,String campoId, String id,String campoCond, String cond){
         String consulta = "select * from "+tabla+" where "+campoId+" = ? AND "+campoCond+" = ?";
-        //System.out.println(consulta);
         try {
            conn=Primavera.Enlace(conn);
            String sqlinsertar=consulta;
@@ -103,7 +95,6 @@ public class Primavera {
     public static boolean update(String tabla, String columnaUp, String value, String columnaId, String id){
         boolean updated = false;
         String consulta = "update "+tabla+" set "+columnaUp+" = ? where "+columnaId+" = ?";
-        //System.out.println(consulta);
         try {
            conn=Primavera.Enlace(conn);
            String sqlinsertar=consulta;

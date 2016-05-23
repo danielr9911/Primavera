@@ -63,7 +63,7 @@ public class GestionarGastos extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         idText = new javax.swing.JTextField();
         cantidadText = new javax.swing.JTextField();
-        añoText = new javax.swing.JTextField();
+        anoText = new javax.swing.JTextField();
         mesText = new javax.swing.JTextField();
         diaText = new javax.swing.JTextField();
         jLabel38 = new javax.swing.JLabel();
@@ -141,7 +141,7 @@ public class GestionarGastos extends javax.swing.JFrame {
         jLabel39.setText("MM");
 
         jLabel40.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel40.setText("AAAA");
+        jLabel40.setText("AA");
 
         descripcionText.setColumns(20);
         descripcionText.setRows(5);
@@ -185,7 +185,7 @@ public class GestionarGastos extends javax.swing.JFrame {
                                         .addGap(12, 12, 12)
                                         .addComponent(jLabel40)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(añoText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(anoText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(CarroCb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
@@ -221,7 +221,7 @@ public class GestionarGastos extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel37)
-                    .addComponent(añoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(anoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(mesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(diaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel39)
@@ -269,7 +269,7 @@ public class GestionarGastos extends javax.swing.JFrame {
        Primavera.update("gastos", "cantidad_gasto", cantidadText.getText(), "id_gasto", idText.getText());
        Primavera.update("gastos", "id_carro", CarroCb.getSelectedItem().toString(), "id_gasto", idText.getText());
        Primavera.update("gastos", "desc_gasto", descripcionText.getText(), "id_gasto", idText.getText());
-       Primavera.update("gastos", "fecha_gasto", diaText.getText()+"/"+mesText.getText()+"/"+añoText.getText(), "id_gasto", idText.getText());
+       Primavera.update("gastos", "fecha_gasto", diaText.getText()+"/"+mesText.getText()+"/"+anoText.getText(), "id_gasto", idText.getText());
        JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
     }//GEN-LAST:event_modificarButtonjButton3ActionPerformed
 
@@ -279,7 +279,7 @@ public class GestionarGastos extends javax.swing.JFrame {
 
     private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
          if(idText.getText().equals("") | cantidadText.getText().equals("")|
-                diaText.getText().equals("") | mesText.getText().equals("")| añoText.getText().equals("")| descripcionText.getText().equals("")){
+                diaText.getText().equals("") | mesText.getText().equals("")| anoText.getText().equals("")| descripcionText.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Por favor completa todas las casillas");
         }else{
           try {
@@ -290,7 +290,7 @@ public class GestionarGastos extends javax.swing.JFrame {
            String patr = Primavera.getId("id_carro", "nombre_carro","carrosolar",CarroCb.getSelectedItem().toString());
            psta.setString(2, patr);
            psta.setString(3, cantidadText.getText());
-           String date = diaText.getText()+"/"+mesText.getText()+"/"+añoText.getText();
+           String date = diaText.getText()+"/"+mesText.getText()+"/"+anoText.getText();
            psta.setString(5, date);
            psta.setString(4, descripcionText.getText());
            psta.execute();
@@ -299,7 +299,7 @@ public class GestionarGastos extends javax.swing.JFrame {
            cantidadText.setText("");
            diaText.setText("");
            mesText.setText("");
-           añoText.setText("");
+           anoText.setText("");
            descripcionText.setText("");
               
            JOptionPane.showMessageDialog(null, "Registro Guardado Satisfactoriamente");
@@ -331,14 +331,13 @@ public class GestionarGastos extends javax.swing.JFrame {
                 if (result != null && result.next()) {
                     CarroCb.setSelectedItem(result.getString(1));
                     cantidadText.setText(result.getString(2));
-                    descripcionText.setText(result.getString(3));
-                    /**String dia = result.getString(3).substring(0, 2);
+                    descripcionText.setText(result.getString(4));
+                    String dia = result.getString(3).substring(8, 10);
                     diaText.setText(dia);
-                    String mes = result.getString(4).substring(3, 5);
+                    String mes = result.getString(3).substring(5, 7);
                     mesText.setText(mes);
-                    String ano = result.getString(5).substring(6);
-                    añoText.setText(ano);
-                    * */
+                    String ano = result.getString(3).substring(2, 4);
+                    anoText.setText(ano);
                     idText.setBackground(Color.LIGHT_GRAY);
                     modificarButton.setEnabled(true);
                     crearButton.setEnabled(false);
@@ -349,7 +348,7 @@ public class GestionarGastos extends javax.swing.JFrame {
                     
                     diaText.setText("");
                     mesText.setText("");
-                    añoText.setText("");
+                    anoText.setText("");
                     idText.setBackground(Color.WHITE);
                     modificarButton.setEnabled(false);
                     crearButton.setEnabled(true);
@@ -397,7 +396,7 @@ public class GestionarGastos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CarroCb;
-    private javax.swing.JTextField añoText;
+    private javax.swing.JTextField anoText;
     private javax.swing.JTextField cantidadText;
     private javax.swing.JButton crearButton;
     private javax.swing.JTextArea descripcionText;

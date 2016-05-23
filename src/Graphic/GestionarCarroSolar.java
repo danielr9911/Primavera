@@ -218,12 +218,21 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelarButtonActionPerformed
 
     private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
-        
-            Primavera.update("carrosolar", "nombre_carro", nombreText.getText(), "id_carro", idText.getText());
-            Primavera.update("carrosolar", "placa_carro", placaText.getText(), "id_carro", idText.getText());
-            Primavera.update("carrosolar", "estado_carro", estadoComboBox.getSelectedItem().toString(), "id_carro", idText.getText());
-            JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
-        
+        try {
+            conn = Primavera.Enlace(conn);
+            CallableStatement cs = null;
+            cs = this.conn.prepareCall("{call UPDATE_CARRO(?,?)}");
+            cs.setString(1, nombreText.getText());
+            cs.setString(2, idText.getText());
+            ResultSet rs = cs.executeQuery();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        //Primavera.update("carrosolar", "nombre_carro", nombreText.getText(), "id_carro", idText.getText());
+        Primavera.update("carrosolar", "placa_carro", placaText.getText(), "id_carro", idText.getText());
+        Primavera.update("carrosolar", "estado_carro", estadoComboBox.getSelectedItem().toString(), "id_carro", idText.getText());
+        JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
+
     }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void idTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextActionPerformed
@@ -239,29 +248,29 @@ public class GestionarCarroSolar extends javax.swing.JFrame {
     }//GEN-LAST:event_placaTextActionPerformed
 
     private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
-        if(idText.getText().equals("") | nombreText.getText().equals("")|
-                placaText.getText().equals("") | estadoComboBox.getSelectedItem().toString().equals("")){
+        if (idText.getText().equals("") | nombreText.getText().equals("")
+                | placaText.getText().equals("") | estadoComboBox.getSelectedItem().toString().equals("")) {
             JOptionPane.showMessageDialog(null, "Por favor completa todas las casillas");
-        }else{
-        try {
-            conn = Primavera.Enlace(conn);
-            String sqlinsertar = "insert into CARROSOLAR values (?,?,?,?)";
-            PreparedStatement psta = conn.prepareStatement(sqlinsertar);
-            psta.setString(1, idText.getText());
-            psta.setString(2, nombreText.getText());
-            psta.setString(3, placaText.getText());
-            psta.setString(4, estadoComboBox.getSelectedItem().toString());
-            psta.execute();
-            psta.close();
-            idText.setText("");
-            nombreText.setText("");
-            placaText.setText("");
-            estadoComboBox.setSelectedIndex(0);
-            idText.requestFocusInWindow();
-            JOptionPane.showMessageDialog(null, "Registro guardado satisfactoriamente");
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        } else {
+            try {
+                conn = Primavera.Enlace(conn);
+                String sqlinsertar = "insert into CARROSOLAR values (?,?,?,?)";
+                PreparedStatement psta = conn.prepareStatement(sqlinsertar);
+                psta.setString(1, idText.getText());
+                psta.setString(2, nombreText.getText());
+                psta.setString(3, placaText.getText());
+                psta.setString(4, estadoComboBox.getSelectedItem().toString());
+                psta.execute();
+                psta.close();
+                idText.setText("");
+                nombreText.setText("");
+                placaText.setText("");
+                estadoComboBox.setSelectedIndex(0);
+                idText.requestFocusInWindow();
+                JOptionPane.showMessageDialog(null, "Registro guardado satisfactoriamente");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }//GEN-LAST:event_crearButtonActionPerformed
 

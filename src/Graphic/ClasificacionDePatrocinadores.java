@@ -282,16 +282,12 @@ public class ClasificacionDePatrocinadores extends javax.swing.JFrame {
             psta.setString(2, fechaFin);
             ResultSet rs = psta.executeQuery();
             ResultSetMetaData rsMd = rs.getMetaData();
-            // Se obtiene el número de columnas.
             int numeroColumnas = rsMd.getColumnCount();
             DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Patrocinador");
             modelo.addColumn("Cantidad total");
             modelo.addColumn("Estado");
-            
             while (rs.next()) {
-                
-                //System.out.println("Entro");
                 String[] fila = new String[numeroColumnas];
                 for (int i = 0; i < numeroColumnas; i++) {
                     fila[0] = rs.getString(1);
@@ -304,18 +300,6 @@ public class ClasificacionDePatrocinadores extends javax.swing.JFrame {
             conn.close();
             this.tablaAMostrar.setModel(modelo);
 
-            /**
-             * if (result != null && result.next()) {
-             * nombreText.setText(result.getString(2));
-             * placaText.setText(result.getString(3));
-             * estadoText.setText(result.getString(4));
-             * idText.setBackground(Color.GRAY);
-             * modificarButton.setEnabled(true); estadoText.setEnabled(true);
-             * crearButton.setEnabled(false); } else { nombreText.setText("");
-             * placaText.setText(""); estadoText.setText("ACTIVO");
-             * estadoText.setEnabled(false); modificarButton.setEnabled(false);
-             * crearButton.setEnabled(true); }
-             */
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -340,7 +324,6 @@ public class ClasificacionDePatrocinadores extends javax.swing.JFrame {
             psta.setString(2, fechaFin);
             ResultSet rs = psta.executeQuery();
             ResultSetMetaData rsMd = rs.getMetaData();
-            // Se obtiene el número de columnas.
             int numeroColumnas = rsMd.getColumnCount();
             DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Posicion");
@@ -349,7 +332,6 @@ public class ClasificacionDePatrocinadores extends javax.swing.JFrame {
             modelo.addColumn("Estado");
             int cont=1;
             while (rs.next()) {
-                //System.out.println("Entro");
                 String[] fila = new String[numeroColumnas+1];
                 for (int i = 0; i < numeroColumnas; i++) {
                     fila[0] = Integer.toString(cont);

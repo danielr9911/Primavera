@@ -329,7 +329,7 @@ public class GestionarDonacionMonetaria extends javax.swing.JFrame {
         Primavera.update("donacion_monetaria", "id_patrocinador", patrocinadorCb.getSelectedItem().toString(), "id_monetaria", idText.getText());
         Primavera.update("donacion_monetaria", "id_carro", carroCb.getSelectedItem().toString(), "id_monetaria", idText.getText());
         Primavera.update("donacion_monetaria", "id_tipomoneda", divisaCb.getSelectedItem().toString(), "id_monetaria", idText.getText());
-        //Primavera.update("donacion_monetaria", "fecha_mone", diaText.getText() + "/" + mesText.getText() + "/" + anoText.getText(), "id_monetaria", idText.getText());
+        Primavera.update("donacion_monetaria", "fecha_mone", diaText.getText() + "/" + mesText.getText() + "/" + anoText.getText(), "id_monetaria", idText.getText());
         JOptionPane.showMessageDialog(null, "Modificacion guardada satisfactoriamente");
     }//GEN-LAST:event_modificarButtonjButton3ActionPerformed
 

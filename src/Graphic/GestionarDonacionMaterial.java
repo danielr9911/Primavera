@@ -399,11 +399,11 @@ public class GestionarDonacionMaterial extends javax.swing.JFrame {
                     subsistemaCb.setSelectedItem(result.getString(2));
                     materialCb.setSelectedItem(result.getString(3));
                     cantidadText.setText(result.getString(4));
-                    String dia = result.getString(7).substring(8, 10);
+                    String dia = result.getString(5).substring(8, 10);
                     diaText.setText(dia);
-                    String mes = result.getString(7).substring(5, 7);
+                    String mes = result.getString(5).substring(5, 7);
                     mesText.setText(mes);
-                    String ano = result.getString(7).substring(2, 4);
+                    String ano = result.getString(5).substring(2, 4);
                     anoText.setText(ano);
                     idText.setBackground(Color.LIGHT_GRAY);
                     modificarButton.setEnabled(true);

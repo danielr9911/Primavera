@@ -197,18 +197,7 @@ public class ConsultarIngresoPersonal extends javax.swing.JFrame {
             conn.close();
             this.tablaAMostrar.setModel(modelo);
 
-            /**
-             * if (result != null && result.next()) {
-             * nombreText.setText(result.getString(2));
-             * placaText.setText(result.getString(3));
-             * estadoText.setText(result.getString(4));
-             * idText.setBackground(Color.GRAY);
-             * modificarButton.setEnabled(true); estadoText.setEnabled(true);
-             * crearButton.setEnabled(false); } else { nombreText.setText("");
-             * placaText.setText(""); estadoText.setText("ACTIVO");
-             * estadoText.setEnabled(false); modificarButton.setEnabled(false);
-             * crearButton.setEnabled(true); }
-             */
+            
         } catch (Exception e) {
             System.out.println(e);
         }

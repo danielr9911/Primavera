@@ -231,7 +231,6 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
             psta.setString(1, idProf);
             ResultSet rs = psta.executeQuery();
             ResultSetMetaData rsMd = rs.getMetaData();
-            // Se obtiene el número de columnas.
             int numeroColumnas = rsMd.getColumnCount();
             DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Identificacion");
@@ -242,7 +241,6 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
             modelo.addColumn("Estado");
             modelo.addColumn("Tipo");
             while (rs.next()) {
-                //System.out.println("Entro");
                 String[] fila = new String[numeroColumnas];
                 for (int i = 0; i < numeroColumnas; i++) {
                     fila[0] = rs.getString(1);
@@ -252,26 +250,12 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
                     fila[4] = rs.getString(5);
                     fila[5] = rs.getString(6);
                     fila[6] = rs.getString(7);
-
                 }
                 modelo.addRow(fila);
             }
             rs.close();
             conn.close();
             this.tablaAMostrar.setModel(modelo);
-
-            /**
-             * if (result != null && result.next()) {
-             * nombreText.setText(result.getString(2));
-             * placaText.setText(result.getString(3));
-             * estadoText.setText(result.getString(4));
-             * idText.setBackground(Color.GRAY);
-             * modificarButton.setEnabled(true); estadoText.setEnabled(true);
-             * crearButton.setEnabled(false); } else { nombreText.setText("");
-             * placaText.setText(""); estadoText.setText("ACTIVO");
-             * estadoText.setEnabled(false); modificarButton.setEnabled(false);
-             * crearButton.setEnabled(true); }
-             */
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -286,7 +270,7 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
             try {
                 conn = Primavera.Enlace(conn);
                 String idProf = Primavera.getId("id_profesion", "nombre_profesion", "Profesion", profesionCb.getSelectedItem().toString());
-                //System.out.println(id);
+
                 String consulta = "select PERSONAL.IDENTIFICACION, PERSONAL.NOMBRE_PERS, PERSONAL.TELEFONO_PERS, PERSONAL.CORREO_PERS, SUBSISTEMA.NOMBRE_SUBS, PERSONAL.ESTADO_PERS, TIPO_PERSONA.NOMB_TIPOPERSONA "
                         + "FROM SUBSISTEMA, TIPO_PERSONA, PERSONAL "
                         + "WHERE PERSONAL.ID_SUBSISTEMA = SUBSISTEMA.ID_SUBSISTEMA "
@@ -299,7 +283,6 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
                 psta.setString(1, idProf);
                 ResultSet rs = psta.executeQuery();
                 ResultSetMetaData rsMd = rs.getMetaData();
-                // Se obtiene el número de columnas.
                 int numeroColumnas = rsMd.getColumnCount();
                 DefaultTableModel modelo = new DefaultTableModel();
                 modelo.addColumn("Identificacion");
@@ -310,7 +293,6 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
                 modelo.addColumn("Estado");
                 modelo.addColumn("Tipo");
                 while (rs.next()) {
-                    //System.out.println("Entro");
                     String[] fila = new String[numeroColumnas];
                     for (int i = 0; i < numeroColumnas; i++) {
                         fila[0] = rs.getString(1);
@@ -320,27 +302,12 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
                         fila[4] = rs.getString(5);
                         fila[5] = rs.getString(6);
                         fila[6] = rs.getString(7);
-
                     }
                     modelo.addRow(fila);
                 }
                 rs.close();
                 conn.close();
                 this.tablaAMostrar.setModel(modelo);
-
-                /**
-                 * if (result != null && result.next()) {
-                 * nombreText.setText(result.getString(2));
-                 * placaText.setText(result.getString(3));
-                 * estadoText.setText(result.getString(4));
-                 * idText.setBackground(Color.GRAY);
-                 * modificarButton.setEnabled(true);
-                 * estadoText.setEnabled(true); crearButton.setEnabled(false); }
-                 * else { nombreText.setText(""); placaText.setText("");
-                 * estadoText.setText("ACTIVO"); estadoText.setEnabled(false);
-                 * modificarButton.setEnabled(false);
-                 * crearButton.setEnabled(true); }
-                 */
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -355,7 +322,7 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
             try {
                 conn = Primavera.Enlace(conn);
                 String idProf = Primavera.getId("id_profesion", "nombre_profesion", "Profesion", profesionCb.getSelectedItem().toString());
-                //System.out.println(id);
+
                 String consulta = "select PERSONAL.IDENTIFICACION, PERSONAL.NOMBRE_PERS, PERSONAL.TELEFONO_PERS, PERSONAL.CORREO_PERS, SUBSISTEMA.NOMBRE_SUBS, PERSONAL.ESTADO_PERS, TIPO_PERSONA.NOMB_TIPOPERSONA "
                         + "FROM SUBSISTEMA, TIPO_PERSONA, PERSONAL "
                         + "WHERE PERSONAL.ID_SUBSISTEMA = SUBSISTEMA.ID_SUBSISTEMA "
@@ -369,7 +336,6 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
                 psta.setString(1, idProf);
                 ResultSet rs = psta.executeQuery();
                 ResultSetMetaData rsMd = rs.getMetaData();
-                // Se obtiene el número de columnas.
                 int numeroColumnas = rsMd.getColumnCount();
                 DefaultTableModel modelo = new DefaultTableModel();
                 modelo.addColumn("Identificacion");
@@ -380,7 +346,6 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
                 modelo.addColumn("Estado");
                 modelo.addColumn("Tipo");
                 while (rs.next()) {
-                    //System.out.println("Entro");
                     String[] fila = new String[numeroColumnas];
                     for (int i = 0; i < numeroColumnas; i++) {
                         fila[0] = rs.getString(1);
@@ -390,27 +355,12 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
                         fila[4] = rs.getString(5);
                         fila[5] = rs.getString(6);
                         fila[6] = rs.getString(7);
-
                     }
                     modelo.addRow(fila);
                 }
                 rs.close();
                 conn.close();
                 this.tablaAMostrar.setModel(modelo);
-
-                /**
-                 * if (result != null && result.next()) {
-                 * nombreText.setText(result.getString(2));
-                 * placaText.setText(result.getString(3));
-                 * estadoText.setText(result.getString(4));
-                 * idText.setBackground(Color.GRAY);
-                 * modificarButton.setEnabled(true);
-                 * estadoText.setEnabled(true); crearButton.setEnabled(false); }
-                 * else { nombreText.setText(""); placaText.setText("");
-                 * estadoText.setText("ACTIVO"); estadoText.setEnabled(false);
-                 * modificarButton.setEnabled(false);
-                 * crearButton.setEnabled(true); }
-                 */
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -425,7 +375,7 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
             try {
                 conn = Primavera.Enlace(conn);
                 String idProf = Primavera.getId("id_profesion", "nombre_profesion", "Profesion", profesionCb.getSelectedItem().toString());
-                //System.out.println(id);
+
                 String consulta = "select PERSONAL.IDENTIFICACION, PERSONAL.NOMBRE_PERS, PERSONAL.TELEFONO_PERS, PERSONAL.CORREO_PERS, SUBSISTEMA.NOMBRE_SUBS, PERSONAL.ESTADO_PERS, TIPO_PERSONA.NOMB_TIPOPERSONA "
                         + "FROM SUBSISTEMA, TIPO_PERSONA, PERSONAL "
                         + "WHERE PERSONAL.ID_SUBSISTEMA = SUBSISTEMA.ID_SUBSISTEMA "
@@ -439,7 +389,6 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
                 psta.setString(1, idProf);
                 ResultSet rs = psta.executeQuery();
                 ResultSetMetaData rsMd = rs.getMetaData();
-                // Se obtiene el número de columnas.
                 int numeroColumnas = rsMd.getColumnCount();
                 DefaultTableModel modelo = new DefaultTableModel();
                 modelo.addColumn("Identificacion");
@@ -450,7 +399,6 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
                 modelo.addColumn("Estado");
                 modelo.addColumn("Tipo");
                 while (rs.next()) {
-                    //System.out.println("Entro");
                     String[] fila = new String[numeroColumnas];
                     for (int i = 0; i < numeroColumnas; i++) {
                         fila[0] = rs.getString(1);
@@ -468,19 +416,6 @@ public class ConsultaPorProfesion extends javax.swing.JFrame {
                 conn.close();
                 this.tablaAMostrar.setModel(modelo);
 
-                /**
-                 * if (result != null && result.next()) {
-                 * nombreText.setText(result.getString(2));
-                 * placaText.setText(result.getString(3));
-                 * estadoText.setText(result.getString(4));
-                 * idText.setBackground(Color.GRAY);
-                 * modificarButton.setEnabled(true);
-                 * estadoText.setEnabled(true); crearButton.setEnabled(false); }
-                 * else { nombreText.setText(""); placaText.setText("");
-                 * estadoText.setText("ACTIVO"); estadoText.setEnabled(false);
-                 * modificarButton.setEnabled(false);
-                 * crearButton.setEnabled(true); }
-                 */
             } catch (Exception e) {
                 System.out.println(e);
             }
